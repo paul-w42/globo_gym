@@ -1,0 +1,20 @@
+{
+  "name": "paulwood/328/globogym",
+  "authors": [
+    {
+      "name": "Paul Woods",
+      "email": "woods.paul@student.greenriver.edu"
+    },
+    {
+      "name": "Stewart Lovell",
+      "email": "lovell.stewart@student.greenriver.edu"
+    },
+    {
+      "name": "Jasmine David",
+      "email": "david.jasmine@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}

@@ -1,0 +1,36 @@
+/*
+ * Paul Woods, Jasmine David, Stewart Lovell
+ * Team: Step 3
+ *
+ * Base Stylesheet take from application project
+ */
+div.gray {
+    background-color: #F9F9F9;
+}
+
+div.darker_gray {
+    background-color: #CBCBCB;
+}
+
+img.full {
+    border-radius: 35px;
+    max-height: 1024px;
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button[type=submit] {
+    background-color: #92C24A;
+    border-color: #A8DB5C;
+}
+
+button[type=submit]:hover {
+    background-color: #86B144;
+    border-color: #8DB352;
+}
+
+input[type=button]:hover {
+    background-color: #86B144;
+    border-color: #8DB352;
+}
