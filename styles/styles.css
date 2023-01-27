@@ -20,7 +20,7 @@ img.full {
     margin-right: auto;
 }
 
-button[type=submit] {
+/*button[type=submit] {
     background-color: #92C24A;
     border-color: #A8DB5C;
 }
@@ -33,26 +33,37 @@ button[type=submit]:hover {
 input[type=button]:hover {
     background-color: #86B144;
     border-color: #8DB352;
+}*/
+
+.navbar-nav > li.right-border {
+    border-right: 1px solid white;
 }
 
 .nav-link {
     color:white;
-    font-size: 2em;
-}
-
-.nav-link .active {
-    color: white;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 .nav-link:hover {
     color:purple;
 }
 
-.active {
+.current {
     color:purple;
 }
 
 .navbar-brand {
     max-height: 100px;
+}
+
+.btn-primary{
+    background-color: purple;
+    border-color: purple;
+    max-width: 7em;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border-color: white;
+    color: purple;
 }
