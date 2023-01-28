@@ -21,6 +21,25 @@ $f3->route('GET /', function() {
     echo $view->render('views/home.html');
 });
 
+// Define Home page route
+$f3->route('GET /home', function() {
+    $view = new Template();
+    echo $view->render('views/home.html');
+});
+
+// Define About Us page route
+$f3->route('GET /about', function() {
+    $view = new Template();
+    echo $view->render('views/about.html');
+});
+
+// Define Memberships page route
+$f3->route('GET /memberships', function() {
+    $view = new Template();
+    echo $view->render('views/memberships.html');
+});
+
+
 // Run Fat-Free
 $f3->run();                 // -> is the object operator, equiv to . in java
 
