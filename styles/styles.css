@@ -65,9 +65,14 @@ input[type=button]:hover {
     max-width: 7em;
 }
 
+.my-button:not(:disabled):not(:disabled):active {
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+}
+
 .btn-primary:hover {
     background-color: white;
-    border-color: white;
+    border-color: rebeccapurple;
     color: rebeccapurple;
 }
 
@@ -105,7 +110,7 @@ input[type=button]:hover {
 
 #overlay .btn:hover {
     background-color: white;
-    border-color: white;
+    border-color: rebeccapurple;
     color: rebeccapurple;
 }
 
