@@ -84,6 +84,7 @@ input[type=button]:hover {
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     color: white;
+    text-shadow: 1px 1px black;
     font-weight: bold;
     padding: 12px 24px;
     border: none;
