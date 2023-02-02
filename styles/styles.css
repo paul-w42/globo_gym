@@ -1,8 +1,10 @@
 /*
- * Paul Woods, Jasmine David, Stewart Lovell
  * Team: Step 3
+ * Authors: Paul Woods, Jasmine David, Stewart Lovell
+ * SDEV 328: Final Project v1
+ * File: styles.css
  *
- * Base Stylesheet take from application project
+ * Description: css styles for Globo Gym website
  */
 
 
@@ -96,7 +98,7 @@ input[type=button]:hover {
 #overlay .btn {
 
     position: absolute;
-    top: 55%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -104,6 +106,8 @@ input[type=button]:hover {
     color: white;
     border: none;
     max-width: 10em;
+    font-weight: bold;
+    letter-spacing: .05em;
 
     box-shadow: 0px 0px 20px 0 rgb(0, 0, 0), 0 0px 20px 0 rgb(0, 0, 0);
 
@@ -119,4 +123,13 @@ input[type=button]:hover {
 span {
     color: rebeccapurple;
     font-weight: bold;
+}
+
+/* footer styles */
+.footer h5 {
+    font-family: "Arial Black", serif;
+}
+.footer, .footer a{
+    background-color: #E3E3E3;
+    text-decoration: none;
 }
