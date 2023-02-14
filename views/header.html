@@ -36,23 +36,23 @@
 
                             <!-- home page -->
                             <li class="nav-item">
-                                <a class="nav-link {{@one}}" href="home">HOME</a>
+                                <a class="nav-link {{@one}} <check if="isset(@one)">disabled</check>" href="home">HOME</a>
                             </li>
                             <!-- about us page -->
                             <li class="nav-item">
-                                <a class="nav-link {{@two}}" href="about">ABOUT US</a>
+                                <a class="nav-link {{@two}} <check if="isset(@two)">disabled</check>" href="about">ABOUT US</a>
                             </li>
                             <!-- memberships page-->
                             <li class="nav-item right-border">
-                                <a class="nav-link {{@three}}" href="memberships">MEMBERSHIPS</a>
+                                <a class="nav-link {{@three}} <check if="isset(@three)">disabled</check>" href="memberships">MEMBERSHIPS</a>
                             </li>
                             <!-- join page-->
                             <li class="nav-item">
-                                <a class="nav-link {{@four}}" href="#">JOIN</a>
+                                <a class="nav-link {{@four}} <check if="isset(@four)">disabled</check>" href="#">JOIN</a>
                             </li>
                             <!-- log in page-->
                             <li class="nav-item">
-                                <a class="my-button nav-link btn btn-primary rounded-pill" href="#">LOGIN</a>
+                                <a class="my-button nav-link btn btn-primary rounded-pill" href="login">LOGIN</a>
                             </li>
                         </ul>
                     </div>
