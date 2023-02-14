@@ -7,6 +7,10 @@
  * Description: css styles for Globo Gym website
  */
 
+a.disabled {
+    pointer-events: none;
+    color: rebeccapurple !important;
+}
 
 div.gray {
     background-color: #F9F9F9;
