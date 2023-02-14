@@ -42,5 +42,5 @@ insert into membership_levels (level_name, level_price_month, level_price_year) 
 
 insert into members
     (first_name, last_name, login_name, login_password, join_date, email, phone, balance, visits, membership_level)
-    values ('Jane', 'Doe', 'jdoe', 'password', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12);
+    values ('Jane', 'Doe', 'jdoe', 'password', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12, 1);
 
