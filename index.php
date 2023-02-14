@@ -10,6 +10,8 @@ error_reporting(E_ALL);
 
 // Require the autoload file
 require_once("vendor/autoload.php");
+require_once("model/validate.php");
+require_once("/home/paulwood/db-globogym.php");  // paul woods
 
 // Create an instance of the Base class
 $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
@@ -20,6 +22,37 @@ $f3->route('GET /', function() {
     $view = new Template();
     echo $view->render('views/home.html');
 });
+
+// Login page
+$f3->route('GET|POST /login', function($f3) {      // pass in f3 so is visible in function
+
+    // var_dump($_POST);
+    // can paste info once after using var-dump above
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $valid = true;
+        // if data is valid
+
+        // Log user in
+        if ($valid) {
+            $_SESSION['condiments'] = $_POST['condiments'];
+
+            // redirect to summary page
+            $f3->reroute('summary');
+        }
+
+    }
+
+    // Add meals to F3 hive
+    //$f3->set('condiments', getCondiments());
+
+    // instantiate a view
+    $view = new Template();
+    echo $view->render('views/login.html');
+});
+
+
 
 // Define Home page route
 $f3->route('GET /home', function() {
@@ -42,4 +75,3 @@ $f3->route('GET /memberships', function() {
 
 // Run Fat-Free
 $f3->run();                 // -> is the object operator, equiv to . in java
-
