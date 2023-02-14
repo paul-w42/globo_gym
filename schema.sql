@@ -5,7 +5,7 @@ drop table if exists members;
 
 create table membership_levels (
     membership_levels_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    level_description varchar(50) NOT NULL,
+    level_name varchar(50) NOT NULL,
     level_price_month decimal(10,2),
     level_price_year decimal(10,2)
 );
@@ -35,3 +35,12 @@ create table admin_permissions (
     add_member BOOLEAN,
     suspend_member BOOLEAN
 );
+
+insert into membership_levels (level_name, level_price_month, level_price_year) values ('Bronze', 70.00, 700.00);
+insert into membership_levels (level_name, level_price_month, level_price_year) values ('Silver', 90.00, 900.00);
+insert into membership_levels (level_name, level_price_month, level_price_year) values ('Gold', 120.00, 1200.00);
+
+insert into members
+    (first_name, last_name, login_name, login_password, join_date, email, phone, balance, visits, membership_level)
+    values ('Jane', 'Doe', 'jdoe', 'password', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12);
+
