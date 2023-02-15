@@ -31,15 +31,18 @@ $f3->route('GET|POST /login', function($f3) {      // pass in f3 so is visible i
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        $valid = true;
-        // if data is valid
+        $_SESSION['username'] = $_POST['username'];
+        $password = $_POST['password'];
+        $valid = validateLogin($_SESSION['username'], $password);
 
         // Log user in
         if ($valid) {
-            $_SESSION['condiments'] = $_POST['condiments'];
-
-            // redirect to summary page
-            $f3->reroute('summary');
+            // redirect to account page
+            $view = new Template();
+            echo $view->render('views/account.html');
+            $f3->reroute('account');
+        } else {
+            $f3->set('errors["login"]', 'You entered invalid login information, please try again');
         }
 
     }
@@ -71,7 +74,6 @@ $f3->route('GET /memberships', function() {
     $view = new Template();
     echo $view->render('views/memberships.html');
 });
-
 
 // Run Fat-Free
 $f3->run();                 // -> is the object operator, equiv to . in java

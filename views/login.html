@@ -16,16 +16,23 @@
     <div class="row mt-5">
         <div class="col-12 col-md-4 mx-auto">
             <label class="control-label text-center me-4 mt-2  fw-bold" for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username">
+            <input type="text" class="form-control" name="username" id="username"
+            <check if="{{ isset(@SESSION['username']) }}">
+                value="{{ @SESSION['username'] }}"
+            </check>>
         </div>
     </div>
 
     <div class="row mt-2">
         <div class="col-12 col-md-4 mx-auto">
-            <label class="control-label text-center me-4 mt-2 fw-bold" for="username">Password</label>
-            <input type="password" class="form-control" name="username" id="password">
+            <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password">
+            <check if="{{ isset(@errors['login']) }}">
+                <span class="danger">{{ @errors['login'] }}</span>
+            </check>
         </div>
     </div>
+
 
     <div class="row">
         <div class="col-12 col-md-4 mx-auto mt-3">
