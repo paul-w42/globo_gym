@@ -15,13 +15,13 @@ create table members (
      member_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
      first_name varchar(30) NOT NULL,
      last_name varchar(30) NOT NULL,
-     login_name varchar(30) NOT NULL,
+     user_name varchar(30) NOT NULL,
      login_password varchar(64) NOT NULL,
      join_date DATE NOT NULL,
      email varchar(75),
      phone varchar(20),
      balance decimal(10,2) DEFAULT 0,
-     membership_level int NOT NULL,   /* separate table */
+     membership_level int,   /* separate table */
         CONSTRAINT fk_m_membership_level FOREIGN KEY (membership_level) REFERENCES membership_levels(membership_levels_id)
 );
 
