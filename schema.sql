@@ -21,7 +21,7 @@ create table members (
      email varchar(75),
      phone varchar(20),
      balance decimal(10,2) DEFAULT 0,
-     membership_level int NOT NULL,   /* separate table */
+     membership_level int,   /* separate table */
         CONSTRAINT fk_m_membership_level FOREIGN KEY (membership_level) REFERENCES membership_levels(membership_levels_id)
 );
 
