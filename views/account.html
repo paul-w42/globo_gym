@@ -14,23 +14,30 @@
     <div class="row mt-5">
         <div class="col-12 col-md-4 mx-auto">
             <!--
-            User's name
+            Jasmine, these were our ideas for what could be displayed on the account page (you can leave the non design stuff for us)
+            User's real name
+            username
+            "Visited today" button (increments the visits value in the database)
+            view current plan
+            email
+            phone number
+            join date
+            balance
             password edit
-
+            change plan
             -->
         </div>
     </div>
 
     <div class="row mt-2">
         <div class="col-12 col-md-4 mx-auto">
-            <label class="control-label text-center me-4 mt-2 fw-bold" for="username">Password</label>
-            <input type="password" class="form-control" name="username" id="password">
+            <p>{{ @SESSION['username'] }}</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-12 col-md-4 mx-auto mt-3">
-            <button class="btn btn-primary" type="submit">Login</button>
+
         </div>
     </div>
 </div>

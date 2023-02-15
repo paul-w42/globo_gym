@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 // Require the autoload file
 require_once("vendor/autoload.php");
 require_once("model/validate.php");
-require_once("/home/paulwood/db-globogym.php");  // paul woods
+//require_once("/home/paulwood/db-globogym.php");  // paul woods
 
 // Create an instance of the Base class
 $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
@@ -37,9 +37,8 @@ $f3->route('GET|POST /login', function($f3) {      // pass in f3 so is visible i
 
         // Log user in
         if ($valid) {
+
             // redirect to account page
-            $view = new Template();
-            echo $view->render('views/account.html');
             $f3->reroute('account');
         } else {
             $f3->set('errors["login"]', 'You entered invalid login information, please try again');
@@ -73,6 +72,12 @@ $f3->route('GET /about', function() {
 $f3->route('GET /memberships', function() {
     $view = new Template();
     echo $view->render('views/memberships.html');
+});
+
+// Define an account page route
+$f3->route('GET /account', function() {
+    $view = new Template();
+    echo $view->render('views/account.html');
 });
 
 // Run Fat-Free
