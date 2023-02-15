@@ -16,7 +16,7 @@ create table members (
      first_name varchar(30) NOT NULL,
      last_name varchar(30) NOT NULL,
      login_name varchar(30) NOT NULL,
-     login_password varchar(30) NOT NULL,
+     login_password varchar(64) NOT NULL,
      join_date DATE NOT NULL,
      email varchar(75),
      phone varchar(20),
@@ -37,12 +37,20 @@ create table admin_permissions (
     suspend_member BOOLEAN
 );
 
+create table visits (
+    visits_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    member_id int NOT NULL,
+        CONSTRAINT fk_m_members FOREIGN KEY (member_id) REFERENCES members(member_id),
+    visit_date DATE NOT NULL
+);
+
 insert into membership_levels (level_name, level_price_month, level_price_year) values ('Bronze', 70.00, 700.00);
 insert into membership_levels (level_name, level_price_month, level_price_year) values ('Silver', 90.00, 900.00);
 insert into membership_levels (level_name, level_price_month, level_price_year) values ('Gold', 120.00, 1200.00);
 
+/* sha1('password') == '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8' */
 insert into members
     (first_name, last_name, login_name, login_password, join_date, email, phone, balance, visits, membership_level)
-    values ('Jane', 'Doe', 'jdoe', 'password', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12, 1);
+    values ('Jane', 'Doe', 'jdoe', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12, 1);
 
 
