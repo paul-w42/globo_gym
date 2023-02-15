@@ -8,6 +8,8 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+session_start();
+
 // Require the autoload file
 require_once("vendor/autoload.php");
 require_once("model/validate.php");
@@ -18,13 +20,13 @@ $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
 
 
 // Define a default route
-$f3->route('GET /', function() {
+$f3->route('GET /', function () {
     $view = new Template();
     echo $view->render('views/home.html');
 });
 
 // Login page
-$f3->route('GET|POST /login', function($f3) {      // pass in f3 so is visible in function
+$f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible in function
 
     // var_dump($_POST);
     // can paste info once after using var-dump above
@@ -55,27 +57,40 @@ $f3->route('GET|POST /login', function($f3) {      // pass in f3 so is visible i
 });
 
 
-
 // Define Home page route
-$f3->route('GET /home', function() {
+$f3->route('GET /home', function () {
     $view = new Template();
     echo $view->render('views/home.html');
 });
 
 // Define About Us page route
-$f3->route('GET /about', function() {
+$f3->route('GET /about', function () {
     $view = new Template();
     echo $view->render('views/about.html');
 });
 
 // Define Memberships page route
-$f3->route('GET /memberships', function() {
+$f3->route('GET|POST /memberships', function ($f3) {
+
+    // If the form has been posted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (validPackage($_POST['membership_level'])) {
+            $_SESSION['package'] = $_POST['membership_level'];
+            $f3->reroute('join');
+        }
+    }
     $view = new Template();
     echo $view->render('views/memberships.html');
 });
 
+// Define a join page route
+$f3->route('GET|POST /join', function () {
+    $view = new Template();
+    echo $view->render('views/join.html');
+});
+
 // Define an account page route
-$f3->route('GET /account', function() {
+$f3->route('GET /account', function () {
     $view = new Template();
     echo $view->render('views/account.html');
 });

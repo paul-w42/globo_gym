@@ -1,0 +1,92 @@
+<!--
+    Team: Step 3
+    Authors: Paul Woods, Stewart Lovell, and Jasmine David
+    SDEV 328: Final Project v1
+    File: join.html
+
+    Description: Page for the user to start the membership process
+-->
+
+
+<include href="views/header.html" with="title='Join'"></include>
+<!--
+Jasmine, these are our ideas for the join page, you can leave any non design work for us
+-->
+<div class="container-fluid">
+    <form action="#" method="post" class="form-horizontal">
+
+        <div class="row mt-5">
+            <div class="col-12 col-md-4 mx-auto">
+                <check if="{{ isset(@SESSION['package']) }}">
+                    You have chosen the {{ @SESSION['package'] }} package
+                </check>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="first">First name</label>
+                <input type="text" class="form-control" name="first" id="first"
+                <check if="{{ isset(@SESSION['first']) }}">
+                    value="{{ @SESSION['first'] }}"
+                </check>>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Last name</label>
+                <input type="text" class="form-control" name="last" id="last"
+                <check if="{{ isset(@SESSION['last']) }}">
+                    value="{{ @SESSION['last'] }}"
+                </check>>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Email</label>
+                <input type="email" class="form-control" name="email" id="email"
+                <check if="{{ isset(@SESSION['email']) }}">
+                    value="{{ @SESSION['email'] }}"
+                </check>>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Phone</label>
+                <input type="text" class="form-control" name="phone" id="phone"
+                <check if="{{ isset(@SESSION['phone']) }}">
+                    value="{{ @SESSION['phone'] }}"
+                </check>>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="first">Username</label>
+                <input type="text" class="form-control" name="username" id="username"
+                <check if="{{ isset(@SESSION['username']) }}">
+                    value="{{ @SESSION['username'] }}"
+                </check>>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+                <check if="{{ isset(@errors['login']) }}">
+                    <span class="danger">{{ @errors['login'] }}</span>
+                </check>
+            </div>
+        </div>
+        <div class="container text-center my-5">
+            <button type="submit" class="col-12 my-button btn btn-primary btn-lg rounded-pill">JOIN NOW</button>
+        </div>
+
+
+    </form>
+</div>
+
+<!-- footer -->
+<include href="views/footer.html"></include>
+
+</body>
+</html>
