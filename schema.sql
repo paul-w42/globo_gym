@@ -15,7 +15,7 @@ create table members (
      member_id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
      first_name varchar(30) NOT NULL,
      last_name varchar(30) NOT NULL,
-     login_name varchar(30) NOT NULL,
+     user_name varchar(30) NOT NULL,
      login_password varchar(64) NOT NULL,
      join_date DATE NOT NULL,
      email varchar(75),
