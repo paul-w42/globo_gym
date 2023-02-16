@@ -13,7 +13,8 @@ session_start();
 // Require the autoload file
 require_once("vendor/autoload.php");
 require_once("model/validate.php");
-//require_once("/home/paulwood/db-globogym.php");  // paul woods
+require_once("model/data-layer.php");
+require_once("/home/paulwood/db-globogym.php");  // paul woods
 
 // Create an instance of the Base class
 $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
@@ -21,6 +22,7 @@ $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
 
 // Define a default route
 $f3->route('GET /', function () {
+    session_destroy();      // TODO: Remove before production, testing purposes only. Means of manually destroying session.
     $view = new Template();
     echo $view->render('views/home.html');
 });
@@ -84,9 +86,44 @@ $f3->route('GET|POST /memberships', function ($f3) {
 });
 
 // Define a join page route
-$f3->route('GET|POST /join', function () {
+$f3->route('GET|POST /join', function ($f3) {
+
+    //echo 'PHP Version ' . phpversion() . '<br>';
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        $fname = $_POST['first'];
+        $lname = $_POST['last'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $password2 = $_POST['password2'];
+
+        validName($fname, "first", "First Name");
+        validName($lname, "last", "Last Name");
+        validUsername($username);
+        validEmail($email);
+        validPhone($phone);
+        validPassword($password, $password2);
+
+        // TODO: Test for existing customer username / email
+        // 1st test password, 'mypassword'
+
+        // if no errors, redirect to mailing_lists page
+        if (empty($f3->get('errors'))) {
+
+            // save data to database
+            addCustomer($fname, $lname, $password, $email, $phone, $username);
+
+            // redirect to summary page
+            $f3->reroute('account');
+        }
+    }
+
     $view = new Template();
     echo $view->render('views/join.html');
+
 });
 
 // Define an account page route

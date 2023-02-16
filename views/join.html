@@ -8,28 +8,32 @@
 -->
 
 
-<include href="views/header.html" with="title='Join'"></include>
+<include href="views/header.html" with="title='Join - Globo Gym', four='current'"></include>
 <!--
 Jasmine, these are our ideas for the join page, you can leave any non design work for us
 -->
 <div class="container-fluid">
     <form action="#" method="post" class="form-horizontal">
 
+
+        <check if="{{ isset(@SESSION['package']) }}">
         <div class="row mt-5">
             <div class="col-12 col-md-4 mx-auto">
-                <check if="{{ isset(@SESSION['package']) }}">
                     You have chosen the {{ @SESSION['package'] }} package
-                </check>
             </div>
         </div>
+        </check>
 
-        <div class="row">
+        <div class="row <check if="{{ !isset(@SESSION['package']) }}"> mt-5</check>">
             <div class="col-12 col-md-4 mx-auto">
                 <label class="control-label text-center me-4 mt-2  fw-bold" for="first">First name</label>
                 <input type="text" class="form-control" name="first" id="first"
                 <check if="{{ isset(@SESSION['first']) }}">
                     value="{{ @SESSION['first'] }}"
                 </check>>
+                <check if="{{ isset(@errors['first']) }}">
+                    <span class="danger">{{ @errors['first'] }}</span>
+                </check>
             </div>
         </div>
         <div class="row">
@@ -39,6 +43,9 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
                 <check if="{{ isset(@SESSION['last']) }}">
                     value="{{ @SESSION['last'] }}"
                 </check>>
+                <check if="{{ isset(@errors['last']) }}">
+                    <span class="danger">{{ @errors['last'] }}</span>
+                </check>
             </div>
         </div>
         <div class="row">
@@ -48,6 +55,9 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
                 <check if="{{ isset(@SESSION['email']) }}">
                     value="{{ @SESSION['email'] }}"
                 </check>>
+                <check if="{{ isset(@errors['email']) }}">
+                    <span class="danger">{{ @errors['email'] }}</span>
+                </check>
             </div>
         </div>
         <div class="row">
@@ -57,6 +67,9 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
                 <check if="{{ isset(@SESSION['phone']) }}">
                     value="{{ @SESSION['phone'] }}"
                 </check>>
+                <check if="{{ isset(@errors['phone']) }}">
+                    <span class="danger">{{ @errors['phone'] }}</span>
+                </check>
             </div>
         </div>
         <div class="row">
@@ -66,15 +79,24 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
                 <check if="{{ isset(@SESSION['username']) }}">
                     value="{{ @SESSION['username'] }}"
                 </check>>
+                <check if="{{ isset(@errors['username']) }}">
+                    <span class="danger">{{ @errors['username'] }}</span>
+                </check>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-4 mx-auto">
                 <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password">
-                <check if="{{ isset(@errors['login']) }}">
-                    <span class="danger">{{ @errors['login'] }}</span>
+                <check if="{{ isset(@errors['password']) }}">
+                    <span class="danger">{{ @errors['password'] }}</span>
                 </check>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2 fw-bold" for="password2">Confirm Password</label>
+                <input type="password" class="form-control" name="password2" id="password2">
             </div>
         </div>
         <div class="container text-center my-5">
