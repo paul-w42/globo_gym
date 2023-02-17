@@ -13,15 +13,16 @@
 
         global $cnxn;
 
-        $sql = "insert into customers (first_name, last_name, user_name, login_password, join_date, email, phone) 
+        $sql = "insert into members (first_name, last_name, user_name, login_password, join_date, email, phone) 
             values (?, ?, ?, ?, ?, ?, ?)";
 
-        $stmt = mysqli_prepare($cnxn, $sql);
-
+        $password = sha1($password);
         $joinDate = date('Y-m-d'); // https://www.php.net/manual/en/function.date.php#85692
 
-        mysqli_stmt_bind_param($stmt,"sssssss", $fname, $lname, $username, $password, $joinDate, $email, $phone);
-        mysqli_stmt_execute($stmt);
+        $stmt = $cnxn->prepare($sql);
+        $stmt->bind_param("sssssss", $fname, $lname, $username, $password, $joinDate, $email, $phone);
+
+        $stmt->execute();
 
         $returnID = 0;
 

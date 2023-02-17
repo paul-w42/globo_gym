@@ -1,7 +1,12 @@
-/* version 1 */
+/*
+    version 2, altered field names in members
+
+    version 1
+   */
 drop table if exists membership_levels;
 drop table if exists admin_permissions;
 drop table if exists members;
+drop table if exists visits;
 
 
 create table membership_levels (
@@ -49,7 +54,7 @@ insert into membership_levels (level_name, level_price_month, level_price_year) 
 
 /* sha1('password') == '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8' */
 insert into members
-    (first_name, last_name, login_name, login_password, join_date, email, phone, balance, visits, membership_level)
-    values ('Jane', 'Doe', 'jdoe', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 12, 1);
+    (first_name, last_name, user_name, login_password, join_date, email, phone, balance, membership_level)
+    values ('Jane', 'Doe', 'jdoe', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 1);
 
 

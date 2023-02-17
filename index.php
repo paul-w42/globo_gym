@@ -108,7 +108,7 @@ $f3->route('GET|POST /join', function ($f3) {
         validPassword($password, $password2);
 
         // TODO: Test for existing customer username / email
-        // 1st test password, 'mypassword'
+        // 1st test password, 'password1'
 
         // if no errors, redirect to mailing_lists page
         if (empty($f3->get('errors'))) {
