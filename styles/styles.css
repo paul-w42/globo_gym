@@ -129,6 +129,13 @@ span {
     font-weight: bold;
 }
 
+/* Account page styles */
+/* remove margin bottom and top for p */
+.account {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /* footer styles */
 .footer h5 {
     font-family: "Arial Black", serif;
