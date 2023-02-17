@@ -10,38 +10,40 @@
 
 <include href="views/header.html" with="title='Login - Globo Gym'"></include>
 <!-- change 'one' above to 'two', etc. for different pages -->
-<div class="container-fluid">
-<form action="#" method="post" class="form-horizontal">
+<div class="container-fluid my-5">
+    <form action="#" method="post" class="form-horizontal">
 
-    <div class="row mt-5">
-        <div class="col-12 col-md-4 mx-auto">
-            <label class="control-label text-center me-4 mt-2  fw-bold" for="username">Username</label>
-            <input type="text" class="form-control" name="username" id="username"
-            <check if="{{ isset(@SESSION['username']) }}">
-                value="{{ @SESSION['username'] }}"
-            </check>>
+        <div class="row">
+            <h1 class="text-center mb-3 col-12"><b>Login</b></h1>
         </div>
-    </div>
-
-    <div class="row mt-2">
-        <div class="col-12 col-md-4 mx-auto">
-            <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
-            <input type="password" class="form-control" name="password" id="password">
-            <check if="{{ isset(@errors['login']) }}">
-                <span class="danger">{{ @errors['login'] }}</span>
-            </check>
+        <!-- Member Username -->
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2  fw-bold" for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username"
+                <check if="{{ isset(@SESSION['username']) }}">
+                    value="{{ @SESSION['username'] }}"
+                </check>>
+            </div>
         </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-12 col-md-4 mx-auto mt-3">
-            <button class="btn btn-primary" type="submit">Login</button>
+        <!-- Member Password -->
+        <div class="row mt-2">
+            <div class="col-12 col-md-4 mx-auto">
+                <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+                <check if="{{ isset(@errors['login']) }}">
+                    <span class="danger">{{ @errors['login'] }}</span>
+                </check>
+            </div>
         </div>
-    </div>
+        <!-- Log In Button-->
+        <div class="row">
+            <div class="col-12 col-md-4 mx-auto mt-4 text-center">
+                <button class="btn btn-primary rounded-pill w-100" type="submit">LOG IN</button>
+            </div>
+        </div>
 
-
-</form>
+    </form>
 </div>
 
 <!-- footer -->
