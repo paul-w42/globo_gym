@@ -14,19 +14,24 @@
 all the fields were hardcoded in, need to use session variables? to fill them in when user logs in or creates account
 --->
 
+<exclude>
+    This data returned from db as $result, ...
+    first_name, last_name, join_date, email, phone, membership_level, balance
+    Saved $result to session ... $_SESSION['member_info'] = $result;
+</exclude>
 
 <div class="container-fluid mt-5 mb-5">
     <div class="row text-center">
         <!-- User: First and Last Name -->
         <!-- Need change NAME to session variable -->
-        <h1><b>John Doe</b></h1>
+        <h1><b>{{ @SESSION['member_info']['first_name'] }} {{ @SESSION['member_info']['last_name'] }}</b></h1>
     </div>
 
     <!-- Member Join Date -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
             <!-- Need change DATE JOINED to session variable -->
-            <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">Member Since 11/11/11</h4>
+            <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">Member Since {{ @SESSION['member_info']['join_date']}}</h4>
         </div>
     </div>
 
@@ -34,7 +39,11 @@ all the fields were hardcoded in, need to use session variables? to fill them in
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
             <!-- Need change MEMBERSHIP LEVEL to session variable -->
-            <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">Gold Membership</h4>
+            <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">
+                <check if="{{ isset(@SESSION['member_info']['membership_level']) }}">
+                    <true></true>
+                    <false>Not currently a Paying Member</false>
+                </check></h4>
         </div>
     </div>
 
@@ -54,8 +63,7 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                     <!-- Member Username -->
                     <p class="account">USERNAME</p>
                     <!-- Need change USERNAME to session variable -->
-                    <p class="account text-secondary">jdoe</p>
-                    <!--                <p class="account text-secondary">{{ @SESSION['username'] }}</p>-->
+                    <p class="account text-secondary">{{ @SESSION['username'] }}</p>
                 </div>
                 <div class="row">
                     <!-- Member Password -->
@@ -74,13 +82,13 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                     <!-- Member Email -->
                     <p class="account">EMAIL</p>
                     <!-- Need change EMAIL to session variable -->
-                    <p class="text-secondary">email@email.com</p>
+                    <p class="text-secondary">{{ @SESSION['member_info']['email'] }}</p>
                 </div>
                 <div class="row">
                     <!-- Member Phone -->
                     <p class="account">PHONE</p>
                     <!-- Need change PHONE NUMBER to session variable -->
-                    <p class="text-secondary">(555)555-5555</p>
+                    <p class="text-secondary">{{ @SESSION['member_info']['phone'] }}</p>
                 </div>
             </div>
 
@@ -110,7 +118,7 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                 <div class="row">
                     <!-- Member Balance -->
                     <!-- Need change BALANCE amount to session variable -->
-                    <p>Your Balance is: <u>$300</u></p>
+                    <p>Your Balance is: <u>${{ @SESSION['member_info']['balance'] }}</u></p>
                 </div>
             </div>
         </div>

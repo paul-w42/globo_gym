@@ -3,7 +3,6 @@
     Authors: Paul Woods, Stewart Lovell, and Jasmine David
     SDEV 328: Final Project v1
     File: home.html
-
     Description: Globo Gym Website Home page that describes gym amenities.
 -->
 
@@ -14,29 +13,37 @@
 <div class="container-fluid my-5">
     <form action="#" method="post" class="form-horizontal">
 
+
+        <check if="{{ @SESSION['account_created'] }}">
+            <div class="row mt-5">
+                <h3 class="col-12 mx-5 pb-3 text-center">Account successfully created.  Please login to continue.</h3>
+            </div>
+        </check>
+
+
         <div class="row">
             <h1 class="text-center mb-3 col-12"><b>Login</b></h1>
         </div>
-<!--        &lt;!&ndash; Member Username &ndash;&gt;-->
-<!--        <div class="row">-->
-<!--            <div class="col-12 col-md-4 mx-auto">-->
-<!--                <label class="control-label text-center me-4 mt-2  fw-bold" for="username">Username</label>-->
-<!--                <input type="text" class="form-control" name="username" id="username"-->
-<!--                <check if="{{ isset(@SESSION['username']) }}">-->
-<!--                    value="{{ @SESSION['username'] }}"-->
-<!--                </check>>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Member Password &ndash;&gt;-->
-<!--        <div class="row mt-2">-->
-<!--            <div class="col-12 col-md-4 mx-auto">-->
-<!--                <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>-->
-<!--                <input type="password" class="form-control" name="password" id="password">-->
-<!--                <check if="{{ isset(@errors['login']) }}">-->
-<!--                    <span class="danger">{{ @errors['login'] }}</span>-->
-<!--                </check>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--        &lt;!&ndash; Member Username &ndash;&gt;-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-12 col-md-4 mx-auto">-->
+        <!--                <label class="control-label text-center me-4 mt-2  fw-bold" for="username">Username</label>-->
+        <!--                <input type="text" class="form-control" name="username" id="username"-->
+        <!--                <check if="{{ isset(@SESSION['username']) }}">-->
+        <!--                    value="{{ @SESSION['username'] }}"-->
+        <!--                </check>>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        &lt;!&ndash; Member Password &ndash;&gt;-->
+        <!--        <div class="row mt-2">-->
+        <!--            <div class="col-12 col-md-4 mx-auto">-->
+        <!--                <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>-->
+        <!--                <input type="password" class="form-control" name="password" id="password">-->
+        <!--                <check if="{{ isset(@errors['login']) }}">-->
+        <!--                    <span class="danger">{{ @errors['login'] }}</span>-->
+        <!--                </check>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
 
         <!-- Member Username -->
