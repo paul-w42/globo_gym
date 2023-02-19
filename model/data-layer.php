@@ -38,10 +38,59 @@
         return $returnID;
     }
 
+    /*
+     * validateLogin(username, password),  validates the user login information against
+     * the database.  Returns the members ID if valid, null otherwise.
+     *
+     * Uses bind_result(...)
+     */
+    function validateLogin($username, $password) {
+
+        global $cnxn;
+
+        $password = sha1($password);
+
+        $sql = "SELECT member_id FROM members WHERE user_name = ? AND login_password = ?";
+
+        $stmt = $cnxn->prepare($sql);
+        $stmt->bind_param("ss", $username, $password);   // can change values and re-do this line x times
+
+        $stmt->execute();
+        //$member_id = 0;
+        $stmt->bind_result($col1);  // $col1 is declared here as a reference, no need to declare earlier
+        $stmt->fetch();
+        return $col1;
+    }
 
     /*
-     * Example function from prior project using prepared statement
+     * Loads user information from the database when visiting the account page.
+     * Returns the result/row back to the calling function, packaged as an associative array.
+     * i.e. $firstName = $row['first_name'];
      */
+    function loadMemberInformation($memberID) {
+
+        global $cnxn;
+
+        $memberID = intval($memberID);
+
+        $sql = "SELECT first_name, last_name, join_date, email, phone, balance, membership_level FROM members WHERE member_id = ?";
+
+        $stmt = $cnxn->prepare($sql);
+
+        $stmt->bind_param("i", $memberID);   // can change values and re-do this line x times
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+
+        // $firstName = $row['first_name'];
+    }
+
+
+/*
+ * Example function from prior project using prepared statement
+ */
+/*
     function customerExists($fname, $email, $phone) {
 
         global $cnxn;
@@ -66,3 +115,4 @@
 
         return $customerID;
     }
+*/

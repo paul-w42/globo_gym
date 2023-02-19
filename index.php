@@ -35,14 +35,19 @@ $f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        // Remove the welcome message after 1st creating an account if set
+        if (isset($_SESSION['account_created'])) {
+            unset($_SESSION['account_created']);
+        }
+
         $_SESSION['username'] = $_POST['username'];
-        $password = $_POST['password'];
-        $valid = validateLogin($_SESSION['username'], $password);
+
+        $valid = validateLogin($_SESSION['username'], $_POST['password']);
 
         // Log user in
         if ($valid) {
-
             // redirect to account page
+            $_SESSION['member_id'] = $valid;
             $f3->reroute('account');
         } else {
             $f3->set('errors["login"]', 'You entered invalid login information, please try again');
@@ -116,8 +121,10 @@ $f3->route('GET|POST /join', function ($f3) {
             // save data to database
             addCustomer($fname, $lname, $password, $email, $phone, $username);
 
+            $_SESSION['account_created'] = 1;
+
             // redirect to summary page
-            $f3->reroute('account');
+            $f3->reroute('login');
         }
     }
 
@@ -127,7 +134,20 @@ $f3->route('GET|POST /join', function ($f3) {
 });
 
 // Define an account page route
-$f3->route('GET /account', function () {
+$f3->route('GET /account', function ($f3) {
+
+    // Load account information
+    // We have $_SESSION['username'] and $_SESSION['member_id']
+    $result = loadMemberInformation($_SESSION['member_id']);
+
+    if ($result) {
+        $_SESSION['member_info'] = $result;
+    } else {
+        // Invalid result, perhaps no member_id in session - reroute back to login page
+        // Note, this is the only way I made the above fail, was to kill a logged in session
+        $f3->reroute('login');
+    }
+
     $view = new Template();
     echo $view->render('views/account.html');
 });
