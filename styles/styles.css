@@ -144,3 +144,14 @@ span {
     background-color: #E3E3E3;
     text-decoration: none;
 }
+
+/* About page carousel styles */
+/* fixed height for carousel images */
+.carousel-item {
+    height: 370px;
+    overflow: hidden;
+    width: 100%;
+}
+.carousel-item img {
+    width: 100%;
+}

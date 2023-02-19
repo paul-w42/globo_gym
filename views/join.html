@@ -9,9 +9,14 @@
 
 
 <include href="views/header.html" with="title='Join - Globo Gym', four='current'"></include>
+
+
 <!--
-Jasmine, these are our ideas for the join page, you can leave any non design work for us
+PAUL AND STEWART:
+I added a BIRTH DATE field - need to add this to database and also maybe some validation (ie: member needs to be 18+ and
+also prevent user from selecting date in the future)?
 -->
+
 
 <!--- container for Join membership header and membership selection  --->
 <div class="container-fluid mt-5">
@@ -33,34 +38,38 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
 
 <!--- container for Join membership form  --->
 <div class="container-fluid mx-auto w-50 mb-4">
-    <div class="row <check if="{{ !isset(@SESSION['package']) }}"> mt-5</check>">
+    <div class="row my-3 <check if="{{ !isset(@SESSION['package']) }}"> mt-5</check>">
     <!-- First Name field -->
     <div class="col-12 col-md-6 mx-auto">
-        <label class="control-label text-center me-3 mt-2 fw-bold" for="first">First name</label>
-        <input type="text" class="form-control" name="first" id="first"
-        <check if="{{ isset(@SESSION['first']) }}">
-            value="{{ @SESSION['first'] }}"
-        </check>>
-        <check if="{{ isset(@errors['first']) }}">
-            <span class="danger">{{ @errors['first'] }}</span>
-        </check>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="first" id="first"
+            <check if="{{ isset(@SESSION['first']) }}">
+                value="{{ @SESSION['first'] }}"
+            </check>>
+            <check if="{{ isset(@errors['first']) }}">
+                <span class="danger">{{ @errors['first'] }}</span>
+            </check>
+            <label class="control-label" for="first">First name</label>
+        </div>
     </div>
     <!-- Last Name field -->
     <div class="col-12 col-md-6 mx-auto">
-        <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Last name</label>
-        <input type="text" class="form-control" name="last" id="last"
-        <check if="{{ isset(@SESSION['last']) }}">
-            value="{{ @SESSION['last'] }}"
-        </check>>
-        <check if="{{ isset(@errors['last']) }}">
-            <span class="danger">{{ @errors['last'] }}</span>
-        </check>
+        <div class="form-floating">
+            <input type="text" class="form-control" name="last" id="last"
+            <check if="{{ isset(@SESSION['last']) }}">
+                value="{{ @SESSION['last'] }}"
+            </check>>
+            <check if="{{ isset(@errors['last']) }}">
+                <span class="danger">{{ @errors['last'] }}</span>
+            </check>
+            <label class="control-label" for="last">Last name</label>
+        </div>
     </div>
 </div>
-    <div class="row">
-        <!-- Email field -->
-        <div class="col-12 col-md-12 mx-auto">
-            <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Email</label>
+<div class="row my-3">
+    <!-- Email field -->
+    <div class="col-12 col-md-12 mx-auto">
+        <div class="form-floating">
             <input type="email" class="form-control" name="email" id="email"
             <check if="{{ isset(@SESSION['email']) }}">
                 value="{{ @SESSION['email'] }}"
@@ -68,12 +77,14 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
             <check if="{{ isset(@errors['email']) }}">
                 <span class="danger">{{ @errors['email'] }}</span>
             </check>
+            <label class="control-label" for="last">Email</label>
         </div>
     </div>
-    <div class="row">
-        <!-- Phone field -->
-        <div class="col-12 col-md-6 mx-auto">
-            <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Phone</label>
+</div>
+<div class="row my-3">
+    <!-- Phone field -->
+    <div class="col-12 col-md-6 mx-auto">
+        <div class="form-floating">
             <input type="text" class="form-control" name="phone" id="phone"
             <check if="{{ isset(@SESSION['phone']) }}">
                 value="{{ @SESSION['phone'] }}"
@@ -81,21 +92,25 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
             <check if="{{ isset(@errors['phone']) }}">
                 <span class="danger">{{ @errors['phone'] }}</span>
             </check>
+            <label class="control-label" for="last">Phone</label>
         </div>
-        <!-- Birthdate field -->
-        <!-- TODO: NEED TO ADD ERROR MESSAGE FOR BIRTHDATE FIELD -->
-        <div class="col-12 col-md-6 mx-auto">
-            <label class="control-label text-center me-4 mt-2  fw-bold" for="last">Birth Date</label>
+    </div>
+    <!-- Birthdate field -->
+    <!-- TODO: NEED TO ADD BIRTHDATE INTO THE DATABASE AND ALSO MAYBE VALIDATION (ie: member needs to be 18+ and prevent user from selecting date in future)? -->
+    <div class="col-12 col-md-6 mx-auto">
+        <div class="form-floating">
             <input type="date" class="form-control" name="bday" id="bday"
             <check if="{{ isset(@SESSION['bday']) }}">
                 value="{{ @SESSION['bday'] }}"
             </check>>
+            <label class="control-label" for="last">Birth Date</label>
         </div>
     </div>
-    <div class="row">
-        <!-- Username field -->
-        <div class="col-12 col-md-12 mx-auto">
-            <label class="control-label text-center me-4 mt-2  fw-bold" for="first">Username</label>
+</div>
+<div class="row my-3">
+    <!-- Username field -->
+    <div class="col-12 col-md-12 mx-auto">
+        <div class="form-floating">
             <input type="text" class="form-control" name="username" id="username"
             <check if="{{ isset(@SESSION['username']) }}">
                 value="{{ @SESSION['username'] }}"
@@ -103,29 +118,35 @@ Jasmine, these are our ideas for the join page, you can leave any non design wor
             <check if="{{ isset(@errors['username']) }}">
                 <span class="danger">{{ @errors['username'] }}</span>
             </check>
+            <label class="control-label" for="first">Username</label>
         </div>
     </div>
-    <div class="row">
-        <!-- Password field -->
-        <div class="col-12 col-md-6 mx-auto">
-            <label class="control-label text-center me-4 mt-2 fw-bold" for="password">Password</label>
+</div>
+<div class="row my-3">
+    <!-- Password field -->
+    <div class="col-12 col-md-6 mx-auto">
+        <div class="form-floating">
             <input type="password" class="form-control" name="password" id="password">
             <check if="{{ isset(@errors['password']) }}">
                 <span class="danger">{{ @errors['password'] }}</span>
             </check>
+            <label class="control-label" for="password">Password</label>
         </div>
-        <div class="col-12 col-md-6 mx-auto">
-            <label class="control-label text-center me-4 mt-2 fw-bold" for="password2">Confirm Password</label>
+    </div>
+    <div class="col-12 col-md-6 mx-auto">
+        <div class="form-floating">
             <input type="password" class="form-control" name="password2" id="password2">
+            <label class="control-label" for="password2">Confirm Password</label>
         </div>
     </div>
-    <div class="container text-center my-5">
-        <button type="submit" class="col-12 my-button btn btn-primary btn-lg rounded-pill">JOIN NOW</button>
-    </div>
-    </form>
+</div>
+<div class="container text-center my-5">
+    <button type="submit" class="col-12 my-button btn btn-primary btn-lg rounded-pill"><b>JOIN NOW</b></button>
+</div>
+</form>
 
 </div>
-</div>
+
 
 <!-- footer -->
 <include href="views/footer.html"></include>
