@@ -1,4 +1,6 @@
 /*
+    version 3, working on membership_levels, and added membership_pay_period to members
+
     version 2, altered field names in members
 
     version 1
@@ -27,7 +29,8 @@ create table members (
      phone varchar(20),
      balance decimal(10,2) DEFAULT 0,
      membership_level int,   /* separate table */
-        CONSTRAINT fk_m_membership_level FOREIGN KEY (membership_level) REFERENCES membership_levels(membership_levels_id)
+        CONSTRAINT fk_m_membership_level FOREIGN KEY (membership_level) REFERENCES membership_levels(membership_levels_id),
+     membership_pay_period int default 0    /* 0 = month, 1 = year */
 );
 
 create table admin_permissions (
@@ -55,6 +58,6 @@ insert into membership_levels (level_name, level_price_month, level_price_year) 
 /* sha1('password') == '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8' */
 insert into members
     (first_name, last_name, user_name, login_password, join_date, email, phone, balance, membership_level)
-    values ('Jane', 'Doe', 'jdoe', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 1);
+    values ('Jane', 'Doe', 'jdoe', 'e38ad214943daad1d64c102faec29de4afe9da3d', '2022-12-01', 'jane@email.com', '206-555-1212', 248.00, 1);
 
 

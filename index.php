@@ -35,6 +35,14 @@ $f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible 
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+        if (isset($_SESSION['member_info'])) {
+            unset($_SESSION['member_info']);
+        }
+
+        if (isset($_SESSION['membership_level'])) {
+            unset($_SESSION['membership_level']);
+        }
+
         // Remove the welcome message after 1st creating an account if set
         if (isset($_SESSION['account_created'])) {
             unset($_SESSION['account_created']);
@@ -46,6 +54,7 @@ $f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible 
 
         // Log user in
         if ($valid) {
+            echo "member_id = " . $valid . "<br>";
             // redirect to account page
             $_SESSION['member_id'] = $valid;
             $f3->reroute('account');
@@ -118,8 +127,24 @@ $f3->route('GET|POST /join', function ($f3) {
         // if no errors, redirect to mailing_lists page
         if (empty($f3->get('errors'))) {
 
+            $membership = null;
+            // add customer package information if set ...
+            if (isset($_SESSION['package'])) {
+                $membership = $_SESSION['package'];
+            }
+
+            if ($membership == 'bronze') {
+                $membership = 1;
+            }
+            else if ($membership == 'silver') {
+                $membership = 2;
+            }
+            else if ($membership == 'gold') {
+                $membership = 3;
+            }
+
             // save data to database
-            addCustomer($fname, $lname, $password, $email, $phone, $username);
+            addCustomer($fname, $lname, $password, $email, $phone, $username, $membership);
 
             $_SESSION['account_created'] = 1;
 
@@ -141,7 +166,18 @@ $f3->route('GET /account', function ($f3) {
     $result = loadMemberInformation($_SESSION['member_id']);
 
     if ($result) {
+
         $_SESSION['member_info'] = $result;
+
+        // verify membership pricing is loaded
+        if (!isset($_SESSION['membership_level'])) {
+            // addressed same as membership info, array of arrays
+            // i.e. $_SESSION['membership_level']['level_name'], level_price_month, and level_price_year
+            $_SESSION['membership_level'] = loadMembershipLevel($result['membership_level']);
+        }
+
+
+
     } else {
         // Invalid result, perhaps no member_id in session - reroute back to login page
         // Note, this is the only way I made the above fail, was to kill a logged in session

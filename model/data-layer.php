@@ -9,18 +9,22 @@
      * s = string
      * b = blob
     */
-    function addCustomer($fname, $lname, $password, $email, $phone, $username) {
+    function addCustomer($fname, $lname, $password, $email, $phone, $username, $membership) {
 
         global $cnxn;
 
-        $sql = "insert into members (first_name, last_name, user_name, login_password, join_date, email, phone) 
-            values (?, ?, ?, ?, ?, ?, ?)";
+//        if ($membership == null) {
+//            $membership = -1;
+//        }
+
+        $sql = "insert into members (first_name, last_name, user_name, login_password, join_date, email, phone, membership_level) 
+            values (?, ?, ?, ?, ?, ?, ?, ?)";
 
         $password = sha1($password);
         $joinDate = date('Y-m-d'); // https://www.php.net/manual/en/function.date.php#85692
 
         $stmt = $cnxn->prepare($sql);
-        $stmt->bind_param("sssssss", $fname, $lname, $username, $password, $joinDate, $email, $phone);
+        $stmt->bind_param("sssssssi", $fname, $lname, $username, $password, $joinDate, $email, $phone, $membership);
 
         $stmt->execute();
 
@@ -37,6 +41,7 @@
 
         return $returnID;
     }
+
 
     /*
      * validateLogin(username, password),  validates the user login information against
@@ -84,6 +89,23 @@
         return $result->fetch_assoc();
 
         // $firstName = $row['first_name'];
+    }
+
+    function loadMembershipLevel($membershipID) {
+        global $cnxn;
+
+        $sql = "SELECT level_name, level_price_month, level_price_year FROM membership_levels 
+                       WHERE membership_levels_id = ?";
+
+        $stmt = $cnxn->prepare($sql);
+
+        $stmt->bind_param("i", $membershipID);   // can change values and re-do this line x times
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        //return $result;     // cycle through each row to gather required info
+                            // https://www.php.net/manual/en/mysqli-result.fetch-assoc.php
+        return $result->fetch_assoc();
     }
 
 

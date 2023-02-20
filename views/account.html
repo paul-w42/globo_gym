@@ -40,10 +40,11 @@ all the fields were hardcoded in, need to use session variables? to fill them in
         <div class="col-12 col-md-4 mx-auto text-center">
             <!-- Need change MEMBERSHIP LEVEL to session variable -->
             <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">
-                <check if="{{ isset(@SESSION['member_info']['membership_level']) }}">
-                    <true></true>
+                <check if="{{ isset(@SESSION['membership_level']['level_name']) }}">
+                    <true>{{ @SESSION['membership_level']['level_name'] }} Level</true>
                     <false>Not currently a Paying Member</false>
-                </check></h4>
+                </check>
+            </h4>
         </div>
     </div>
 
@@ -115,6 +116,16 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                         </form>
                     </div>
                 </div>
+
+                <check if="{{ isset(@SESSION['member_info']['membership_level']) && @SESSION['member_info']['membership_level'] > 0 }} ">
+                <div class="row">
+                    <p>Your payment is <check if="{{ isset(@SESSION['membership_level']) && @SESSION['member_info']['membership_pay_period'] == 0 }} ">
+
+                            <true>$ {{ @SESSION['membership_level']['level_price_month'] }} per month</true>
+                            <false>$ {{ @SESSION['membership_level']['level_price_year'] }} per year</false></check></p>
+
+                    <exclude>['level_name'], level_price_month, and level_price_year</exclude>
+                </div></check>
                 <div class="row">
                     <!-- Member Balance -->
                     <!-- Need change BALANCE amount to session variable -->
