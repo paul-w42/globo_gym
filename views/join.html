@@ -29,8 +29,8 @@ also prevent user from selecting date in the future)?
         <!-- Print user membership selection -->
         <check if="{{ isset(@SESSION['package']) }}">
             <div class="row mt-3">
-                <div style="font-family: Baskerville" class="col-12 h4 text-center col-md-4 mx-auto">
-                    You have chosen the <u>{{ ucfirst(@SESSION['package']) }}</u> package
+                <div style="font-family: Courier New, monospace" class="col-12 h4 text-center col-md-4 mx-auto">
+                    You have chosen the <u><b>{{ ucfirst(@SESSION['package']) }}</b></u> package
                 </div>
             </div>
         </check>
