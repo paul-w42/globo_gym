@@ -121,8 +121,8 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                 <div class="row">
                     <p>Your payment is <check if="{{ isset(@SESSION['membership_level']) && @SESSION['member_info']['membership_pay_period'] == 0 }} ">
 
-                            <true>$ {{ @SESSION['membership_level']['level_price_month'] }} per month</true>
-                            <false>$ {{ @SESSION['membership_level']['level_price_year'] }} per year</false></check></p>
+                            <true>${{ @SESSION['membership_level']['level_price_month'] }} per month</true>
+                            <false>${{ @SESSION['membership_level']['level_price_year'] }} per year</false></check></p>
 
                     <exclude>['level_name'], level_price_month, and level_price_year</exclude>
                 </div></check>
