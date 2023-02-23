@@ -90,7 +90,7 @@ $f3->route('GET|POST /memberships', function ($f3) {
 
     // If the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (validPackage($_POST['membership_level'])) {
+        if (Validate::validPackage($_POST['membership_level'])) {
             $_SESSION['package'] = $_POST['membership_level'];
             $f3->reroute('join');
         }
@@ -114,12 +114,12 @@ $f3->route('GET|POST /join', function ($f3) {
         $password = $_POST['password'];
         $password2 = $_POST['password2'];
 
-        validName($fname, "first", "First Name");
-        validName($lname, "last", "Last Name");
-        validUsername($username);
-        validEmail($email);
-        validPhone($phone);
-        validPassword($password, $password2);
+        Validate::validName($fname, "first", "First Name");
+        Validate::validName($lname, "last", "Last Name");
+        Validate::validUsername($username);
+        Validate::validEmail($email);
+        Validate::validPhone($phone);
+        Validate::validPassword($password, $password2);
 
         // TODO: Test for existing customer username / email
         // 1st test password, 'password1'
