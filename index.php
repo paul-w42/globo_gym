@@ -12,8 +12,6 @@ session_start();
 
 // Require the autoload file
 require_once("vendor/autoload.php");
-require_once("model/validate.php");
-require_once("model/data-layer.php");
 require_once("/home/paulwood/db-globogym.php");  // paul woods
 
 // Create an instance of the Base class

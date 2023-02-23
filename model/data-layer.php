@@ -1,7 +1,10 @@
 <?php
 
+require '/home/paulwood/db-globogym.php';
 
-    require '/home/paulwood/db-globogym.php';
+class DataLayer
+{
+
     /*
      * For mysqli bind_param, type specification vars
      * i = int
@@ -9,7 +12,8 @@
      * s = string
      * b = blob
     */
-    function addCustomer($fname, $lname, $password, $email, $phone, $username, $membership) {
+    static function addCustomer($fname, $lname, $password, $email, $phone, $username, $membership)
+    {
 
         global $cnxn;
 
@@ -30,7 +34,7 @@
 
         $returnID = 0;
 
-        if(mysqli_stmt_affected_rows($stmt) > 0) {
+        if (mysqli_stmt_affected_rows($stmt) > 0) {
             $returnID = mysqli_insert_id($cnxn);
         }
 
@@ -49,7 +53,8 @@
      *
      * Uses bind_result(...)
      */
-    function validateLogin($username, $password) {
+    static function validateLogin($username, $password)
+    {
 
         global $cnxn;
 
@@ -72,7 +77,8 @@
      * Returns the result/row back to the calling function, packaged as an associative array.
      * i.e. $firstName = $row['first_name'];
      */
-    function loadMemberInformation($memberID) {
+    static function loadMemberInformation($memberID)
+    {
 
         global $cnxn;
 
@@ -91,7 +97,8 @@
         // $firstName = $row['first_name'];
     }
 
-    function loadMembershipLevel($membershipID) {
+    static function loadMembershipLevel($membershipID)
+    {
         global $cnxn;
 
         $sql = "SELECT level_name, level_price_month, level_price_year FROM membership_levels 
@@ -104,37 +111,38 @@
         $stmt->execute();
         $result = $stmt->get_result();
         //return $result;     // cycle through each row to gather required info
-                            // https://www.php.net/manual/en/mysqli-result.fetch-assoc.php
+        // https://www.php.net/manual/en/mysqli-result.fetch-assoc.php
         return $result->fetch_assoc();
     }
 
 
-/*
- * Example function from prior project using prepared statement
- */
-/*
-    function customerExists($fname, $email, $phone) {
+    /*
+     * Example function from prior project using prepared statement
+     */
+    /*
+        function customerExists($fname, $email, $phone) {
 
-        global $cnxn;
+            global $cnxn;
 
-        $sql = "SELECT max(customer_id) AS customer_id FROM customers WHERE 
-                first_name=? AND (email=? OR phone=?)";
+            $sql = "SELECT max(customer_id) AS customer_id FROM customers WHERE
+                    first_name=? AND (email=? OR phone=?)";
 
-        $stmt = $cnxn->prepare($sql);
-        $stmt->bind_param("sss", $fname, $email, $phone);   // can change values and re-do this line n times
+            $stmt = $cnxn->prepare($sql);
+            $stmt->bind_param("sss", $fname, $email, $phone);   // can change values and re-do this line n times
 
-        $stmt->execute();
+            $stmt->execute();
 
-        $customerID = 0;
+            $customerID = 0;
 
-        $stmt->bind_result($customer_id);
+            $stmt->bind_result($customer_id);
 
-        if ($stmt->fetch()) {
-            $customerID = $customer_id;
+            if ($stmt->fetch()) {
+                $customerID = $customer_id;
+            }
+
+            //echo "customerExists(), returning customerID: " . $customerID . "<br>\n";
+
+            return $customerID;
         }
-
-        //echo "customerExists(), returning customerID: " . $customerID . "<br>\n";
-
-        return $customerID;
-    }
-*/
+    */
+}
