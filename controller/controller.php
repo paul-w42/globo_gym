@@ -45,7 +45,7 @@ class Controller
         } else {
             // Invalid result, perhaps no member_id in session - reroute back to login page
             // Note, this is the only way I made the above fail, was to kill a logged in session
-            $f3->reroute('login');
+            $this->_f3->reroute('login');
         }
 
         $view = new Template();
@@ -77,7 +77,7 @@ class Controller
             // 1st test password, 'password1'
 
             // if no errors, redirect to mailing_lists page
-            if (empty($f3->get('errors'))) {
+            if (empty($this->_f3->get('errors'))) {
 
                 $membership = null;
                 // add customer package information if set ...
@@ -101,7 +101,7 @@ class Controller
                 $_SESSION['account_created'] = 1;
 
                 // redirect to summary page
-                $f3->reroute('login');
+                $this->_f3->reroute('login');
             }
         }
 
@@ -115,7 +115,7 @@ class Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (Validate::validPackage($_POST['membership_level'])) {
                 $_SESSION['package'] = $_POST['membership_level'];
-                $f3->reroute('join');
+                $this->_f3->reroute('join');
             }
         }
         $view = new Template();
@@ -154,9 +154,9 @@ class Controller
                 echo "member_id = " . $valid . "<br>";
                 // redirect to account page
                 $_SESSION['member_id'] = $valid;
-                $f3->reroute('account');
+                $this->_f3->reroute('account');
             } else {
-                $f3->set('errors["login"]', 'You entered invalid login information, please try again');
+                $this->_f3->set('errors["login"]', 'You entered invalid login information, please try again');
             }
 
         }
