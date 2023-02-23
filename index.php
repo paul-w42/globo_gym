@@ -48,7 +48,7 @@ $f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible 
 
         $_SESSION['username'] = $_POST['username'];
 
-        $valid = validateLogin($_SESSION['username'], $_POST['password']);
+        $valid = DataLayer::validateLogin($_SESSION['username'], $_POST['password']);
 
         // Log user in
         if ($valid) {
@@ -142,7 +142,7 @@ $f3->route('GET|POST /join', function ($f3) {
             }
 
             // save data to database
-            addCustomer($fname, $lname, $password, $email, $phone, $username, $membership);
+            DataLayer::addCustomer($fname, $lname, $password, $email, $phone, $username, $membership);
 
             $_SESSION['account_created'] = 1;
 
@@ -161,7 +161,7 @@ $f3->route('GET /account', function ($f3) {
 
     // Load account information
     // We have $_SESSION['username'] and $_SESSION['member_id']
-    $result = loadMemberInformation($_SESSION['member_id']);
+    $result = DataLayer::loadMemberInformation($_SESSION['member_id']);
 
     if ($result) {
 
@@ -171,7 +171,7 @@ $f3->route('GET /account', function ($f3) {
         if (!isset($_SESSION['membership_level'])) {
             // addressed same as membership info, array of arrays
             // i.e. $_SESSION['membership_level']['level_name'], level_price_month, and level_price_year
-            $_SESSION['membership_level'] = loadMembershipLevel($result['membership_level']);
+            $_SESSION['membership_level'] = DataLayer::loadMembershipLevel($result['membership_level']);
         }
 
 
