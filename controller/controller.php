@@ -10,20 +10,20 @@ class Controller
         $this->_f3 = $f3;
     }
 
-    function default()
+    function default(): void
     {
         session_destroy();      // TODO: Remove before production, testing purposes only. Means of manually destroying session.
         $view = new Template();
         echo $view->render('views/home.html');
     }
 
-    function home()
+    function home(): void
     {
         $view = new Template();
         echo $view->render('views/home.html');
     }
 
-    function account()
+    function account(): void
     {
         // Load account information
         // We have $_SESSION['username'] and $_SESSION['member_id']
@@ -52,7 +52,7 @@ class Controller
         echo $view->render('views/account.html');
     }
 
-    function join()
+    function join(): void
     {
         //echo 'PHP Version ' . phpversion() . '<br>';
 
@@ -109,7 +109,7 @@ class Controller
         echo $view->render('views/join.html');
     }
 
-    function memberships()
+    function memberships(): void
     {
         // If the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -122,13 +122,13 @@ class Controller
         echo $view->render('views/memberships.html');
     }
 
-    function aboutUs()
+    function aboutUs(): void
     {
         $view = new Template();
         echo $view->render('views/about.html');
     }
 
-    function login()
+    function login(): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
