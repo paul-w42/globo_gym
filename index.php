@@ -56,5 +56,15 @@ $f3->route('GET /account', function ($f3) {
     $GLOBALS['con']->account();
 });
 
+// Define Admin - dashboard page route
+$f3->route('GET /admin_dashboard', function ($f3) {
+    $GLOBALS['con']->dashboard();
+});
+
+// Define Admin - member page route
+$f3->route('GET /admin_members', function ($f3) {
+    $GLOBALS['con']->members();
+});
+
 // Run Fat-Free
 $f3->run();                 // -> is the object operator, equiv to . in java

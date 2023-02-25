@@ -168,4 +168,17 @@ class Controller
         $view = new Template();
         echo $view->render('views/login.html');
     }
+
+
+    function dashboard(): void
+    {
+        $view = new Template();
+        echo $view->render('views/admin_dashboard.html');
+    }
+
+    function members(): void
+    {
+        $view = new Template();
+        echo $view->render('views/admin_members.html');
+    }
 }
