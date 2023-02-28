@@ -52,7 +52,7 @@ $f3->route('GET|POST /join', function ($f3) {
 });
 
 // Define an account page route
-$f3->route('GET /account', function ($f3) {
+$f3->route('GET|POST /account', function ($f3) {
     $GLOBALS['con']->account();
 });
 

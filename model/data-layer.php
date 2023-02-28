@@ -46,6 +46,20 @@ class DataLayer
         return $returnID;
     }
 
+    static function addCustomerMembership($memberID, $memberLevel)
+    {
+
+        global $cnxn;
+
+        $sql = "update members set membership_level = ?, balance = " .
+            "(select level_price_month from membership_levels where membership_levels_id = ?) where member_id = ?";
+
+        $stmt = $cnxn->prepare($sql);
+
+        $stmt->bind_param("iii", $memberLevel, $memberLevel, $memberID);
+
+        $stmt->execute();
+    }
 
     /*
      * validateLogin(username, password),  validates the user login information against

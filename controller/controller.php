@@ -34,13 +34,31 @@ class Controller
             $_SESSION['member_info'] = $result;
 
             // verify membership pricing is loaded
-            if (!isset($_SESSION['membership_level'])) {
+            if (!isset($_SESSION['membership_level']))
+            {
                 // addressed same as membership info, array of arrays
                 // i.e. $_SESSION['membership_level']['level_name'], level_price_month, and level_price_year
                 $_SESSION['membership_level'] = DataLayer::loadMembershipLevel($result['membership_level']);
             }
 
+            // addCustomerMembership($memberID, $memberLevel)
+            if (isset($_POST['membership_level']))
+            {
+                if ($_POST['membership_level'] == 'Bronze')
+                {
+                    DataLayer::addCustomerMembership($_SESSION['member_id'], 1);
+                }
+                else if ($_POST['membership_level'] == 'Silver')
+                {
+                    DataLayer::addCustomerMembership($_SESSION['member_id'], 2);
+                }
+                else if ($_POST['membership_level'] == 'Gold')
+                {
+                    DataLayer::addCustomerMembership($_SESSION['member_id'], 3);
+                }
 
+                $this->_f3->reroute('account');
+            }
 
         } else {
             // Invalid result, perhaps no member_id in session - reroute back to login page
