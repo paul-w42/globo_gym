@@ -1,0 +1,85 @@
+<!--
+    Team: Step 3
+    Authors: Paul Woods, Stewart Lovell, and Jasmine David
+    SDEV 328: Final Project
+    File: admin_dashboard.html
+
+    Description: Admin Dashboard page
+-->
+
+<include href="views/header.html" with="title='Admin - Dashboard'"></include>
+
+<!---
+       NOTES:
+       * not sure what other stats to feature on Admin Dashboard Stats - stats are hardcoded in, need to change to actual
+         database stats later
+       * admin menu looks messed up on mobile because of fixed position - not sure how to fix this...
+       * the chart currently featured on the page is just an image (this is for testing purposes)
+--->
+
+<div class="container my-5 w-50">
+    <!--- Admin Dashboard -->
+    <div class="row">
+        <h1 class="text-center mb-5 col-12"><b>Admin <br>Dashboard</b></h1>
+    </div>
+</div>
+
+<div class="container mb-5 px-5">
+    <div class="row mx-5">
+        <!-- Admin Menu - position-fixed, scrolls with page / looks messed up on mobile due to this? -->
+        <div class="col-12 col-md-2 mx-auto ">
+            <div class="row position-fixed rounded-2 shadow p-4 text-center border border-light rounded-5">
+
+                <div class="h-100">
+                    <h5 style="font-family: Courier New, monospace;">Menu</h5>
+                    <hr class="my-2">
+                    <h6><a style="letter-spacing: .1rem;" href="admin_dashboard" class="active no_underline p-2">Dashboard</a></h6>
+                    <h6><a style="letter-spacing: .1rem;" href="admin_members" class="no_underline p-2">Members</a></h6>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Stats -->
+        <div class="col-12 col-md-10 px-0 px-md-5">
+            <div class="row text-center p-0 p-md-3 shadow rounded-2 border-secondary">
+                <div class="col-md-3 col-12 px-3">
+                    <h5><b>Total Members</b></h5>
+                    <p>1,298,0292</p>
+                </div>
+                <div class="col-md-3 col-12 px-3">
+                    <h5><b>Total Revenue</b></h5>
+                    <p>$4,000,000.00</p>
+                </div>
+                <div class="col-md-3 col-12 px-3">
+                    <h5><b>Something</b></h5>
+                    <p>???</p>
+                </div>
+                <div class="col-md-3 col-12 px-3">
+                    <h5><b>Something</b></h5>
+                    <p>???</p>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard chart -->
+            <div class="row mt-3">
+                <div class="col-12 text-center p-3 rounded-2 shadow border-secondary">
+                    <!-- TODO: @jasmine - use javascript to display this -->
+                    <p>
+                        ADD CHART HERE - display total members, new members, total visits, total revenue; organized by week, month, year
+                    </p>
+                    <!-- DUMMY CHART - to see how page looks with graphic -->
+                    <h4>DUMMY CHART:</h4>
+                    <img class="img-fluid"  src="https://octave.sourceforge.io/octave/function/images/bar_101.png" width="650px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- footer -->
+<include href="views/footer.html"></include>
+
+
+</body>
+</html>

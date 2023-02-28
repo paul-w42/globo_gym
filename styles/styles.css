@@ -14,7 +14,7 @@
 /*}*/
 
 /* font for content on pages - Courier New */
-body p, span, .col div, .col ul, .col li {
+body p, span, .col div, .col ul, .col li, table {
     font-family: "Courier New", monospace;
 }
 
@@ -185,3 +185,26 @@ span {
 .carousel-item img {
     width: 100%;
 }
+
+/* admin dashboard styles */
+.no_underline {
+    text-decoration: none !important;
+    color: black;
+    font-family: "Courier New", monospace;
+}
+
+.no_underline:hover, a:hover {
+    color: dimgrey;
+}
+
+.active {
+    color: rebeccapurple;
+    font-weight: bold;
+}
+
+
+table a {
+    color: rebeccapurple;
+}
+
+

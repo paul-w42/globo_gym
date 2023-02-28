@@ -39,7 +39,7 @@ all the fields were hardcoded in, need to use session variables? to fill them in
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
             <!-- Need change MEMBERSHIP LEVEL to session variable -->
-            <h4 style="font-weight: normal; font-family: Baskerville" class="text-secondary">
+            <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">
                 <check if="{{ isset(@SESSION['membership_level']['level_name']) }}">
                     <true>{{ @SESSION['membership_level']['level_name'] }} Level</true>
                     <false>Not currently a Paying Member</false>
@@ -169,7 +169,6 @@ all the fields were hardcoded in, need to use session variables? to fill them in
 <!-- footer -->
 <include href="views/footer.html"></include>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
