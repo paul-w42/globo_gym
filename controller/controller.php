@@ -42,6 +42,7 @@ class Controller
             }
 
             // addCustomerMembership($memberID, $memberLevel)
+            // TODO: Fix addition of fee to balance, prorate, and do not wipe out current balance
             if (isset($_POST['membership_level']))
             {
                 if ($_POST['membership_level'] == 'Bronze')
