@@ -123,14 +123,13 @@ all the fields were hardcoded in, need to use session variables? to fill them in
 
                             <true>${{ @SESSION['membership_level']['level_price_month'] }} per month</true>
                             <false>${{ @SESSION['membership_level']['level_price_year'] }} per year</false></check></p>
-
-                    <exclude>['level_name'], level_price_month, and level_price_year</exclude>
-                </div></check>
+                </div>
                 <div class="row">
                     <!-- Member Balance -->
                     <!-- Need change BALANCE amount to session variable -->
                     <p>Your Balance is: <u>${{ @SESSION['member_info']['balance'] }}</u></p>
                 </div>
+                </check>
             </div>
         </div>
 
