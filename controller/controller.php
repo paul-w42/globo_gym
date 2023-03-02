@@ -170,7 +170,7 @@ class Controller
 
             // Log user in
             if ($valid) {
-                echo "member_id = " . $valid . "<br>";
+                // echo "member_id = " . $valid . "<br>";
                 // redirect to account page
                 $_SESSION['member_id'] = $valid;
                 $this->_f3->reroute('account');
