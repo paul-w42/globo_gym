@@ -71,7 +71,9 @@ input[type=button]:hover {
     max-width: 7em;
 }
 
-.my-button:not(:disabled):not(:disabled):active {
+/* prevents button from turning blue when active / clicked on */
+.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
+.account-buttons:not(:disabled):not(:disabled):active{
     background-color: rebeccapurple;
     border-color: rebeccapurple;
 }

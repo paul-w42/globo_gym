@@ -95,13 +95,8 @@ input[type=button]:hover {
 }
 
 /* prevents button from turning blue when active / clicked on */
-.my-button:not(:disabled):not(:disabled):active {
-    background-color: rebeccapurple;
-    border-color: rebeccapurple;
-}
-
-/* prevents button from turning blue when active / clicked on */
-.admin-buttons:not(:disabled):not(:disabled):active {
+.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
+.account-buttons:not(:disabled):not(:disabled):active{
     background-color: rebeccapurple;
     border-color: rebeccapurple;
 }
