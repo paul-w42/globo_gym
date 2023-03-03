@@ -94,10 +94,19 @@ input[type=button]:hover {
     helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
 }
 
+/* prevents button from turning blue when active / clicked on */
 .my-button:not(:disabled):not(:disabled):active {
     background-color: rebeccapurple;
     border-color: rebeccapurple;
 }
+
+/* prevents button from turning blue when active / clicked on */
+[type=button]:not(:disabled):not(:disabled):active {
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+}
+
+
 
 .btn-primary:hover {
     background-color: white;
