@@ -11,10 +11,12 @@
 
 <!---
        NOTES:
-       * not sure what other stats to feature on Admin Dashboard Stats - stats are hardcoded in, need to change to actual
+       * not sure what other stats to feature on Admin Dashboard Stats??? - stats are hardcoded in, need to change to actual
          database stats later
        * admin menu looks messed up on mobile because of fixed position - not sure how to fix this...
-       * the chart currently featured on the page is just an image (this is for testing purposes)
+       * the charts need actual data from the database - added a "to-do" in the places where we need to insert
+         the data for the charts
+       * script for the chart is currently inline (will put code in separate file when we're done testing)
 --->
 
 <div class="container my-5 w-50">
@@ -63,13 +65,280 @@
             <!-- Admin Dashboard chart -->
             <div class="row mt-3">
                 <div class="col-12 text-center p-3 rounded-2 shadow border-secondary">
-                    <!-- TODO: @jasmine - use javascript to display this -->
-                    <p>
-                        ADD CHART HERE - display total members, new members, total visits, total revenue; organized by week, month, year
-                    </p>
-                    <!-- DUMMY CHART - to see how page looks with graphic -->
-                    <h4>DUMMY CHART:</h4>
-                    <img class="img-fluid"  src="https://octave.sourceforge.io/octave/function/images/bar_101.png" width="650px">
+                    <!-- google chart script -->
+                    <script src="https://www.gstatic.com/charts/loader.js"></script>
+                    <div class="col-12 my-3">
+                        <!-- admin.html chart buttons - toggles through diff charts-->
+                        <input class="btn btn-primary" type='button' id='b1' value='Members' />
+                        <input style="max-width: 8em" class="btn btn-primary mx-auto" type='button' id='b4' value='New Members' />
+                        <input class="btn btn-primary" type='button' id='b2' value='Visits' />
+                        <input class="btn btn-primary" type='button' id='b3' value='Revenue' />
+                    </div>
+                    <!-- admin.html chart -->
+                    <div class="img-responsive mx-auto" id="globogym_chart" style="height:400px;width:100%;max-width:700px"></div>
+
+
+                    <!-- admin.html chart script -->
+                    <script>
+                        google.charts.load('current', {
+                            packages: ['corechart']
+                        }).then(function() {
+                            var memberButton = document.getElementById('b1');
+                            var visitButton = document.getElementById('b2');
+                            var revenueButton = document.getElementById('b3');
+                            var newMemberButton = document.getElementById('b4');
+
+
+
+                            // switch to total members chart when clicked
+                            memberButton.onclick = function() {
+                                drawMemberChart('LineChart');
+                            }
+
+                            // switch to total new members chart when clicked
+                            newMemberButton.onclick = function() {
+                                drawNewMemberChart('ColumnChart');
+                            }
+
+                            // switch to total visits chart when clicked
+                            visitButton.onclick = function() {
+                                drawVisitsChart('LineChart');
+                            }
+
+                            // switch to total revenue chart when clicked
+                            revenueButton.onclick = function() {
+                                drawRevenueChart('LineChart');
+                            }
+
+                            // default/active chart
+                            drawMemberChart('LineChart');
+                        });
+
+                        // code for member chart
+                        function drawMemberChart(chartType) {
+                            var chart = new google.visualization.ChartWrapper({
+                                containerId: 'globogym_chart'
+                            });
+
+                            // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
+                            var data = google.visualization.arrayToDataTable([
+                                ['Month', 'Members'],
+                                ['Jan',7],['Feb',8],['Mar',8],['Apr',9],['May',9],
+                                ['Jun',9],['Jul',10],['Aug',11],
+                                ['Sept',14],['Oct',14],['Nov',9],['Dec',10]
+                            ]);
+
+                            // chart title/headers and styling
+                            var options = {
+                                // title
+                                title: 'Total Members in 2022',
+                                titleTextStyle: {
+                                    fontName: 'Arial',
+                                    fontSize: 20,
+                                    bold: true,
+                                    italic: false,
+                                },
+                                // x axis
+                                hAxis: {
+                                    title: 'Month',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                    direction:1,
+                                    slantedText:true,
+                                    slantedTextAngle:50,
+                                },
+                                // y axis
+                                vAxis: {
+                                    title: 'Members',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                },
+                                // line
+                                series: {
+                                    0: {
+                                        color: '#663399',
+                                    },
+                                },
+                                legend: 'none',
+                            };
+
+                            chart.setOptions(options);
+                            chart.setChartType(chartType);
+                            chart.setDataTable(data);
+                            chart.draw();
+                        }
+
+                        // code for new members chart
+                        function drawNewMemberChart(chartType) {
+                            var chart = new google.visualization.ChartWrapper({
+                                containerId: 'globogym_chart'
+                            });
+
+                            // chart data -- TODO: need to add database monthly NEW MEMBERS data here (put database data in the number, not the month)
+                            var data = google.visualization.arrayToDataTable([
+                                ['Month', 'New Members'],
+                                ['Jan',7],['Feb',8],['Mar',8],['Apr',9],['May',9],
+                                ['Jun',9],['Jul',10],['Aug',11],
+                                ['Sept',14],['Oct',14],['Nov',9],['Dec',10]
+                            ]);
+
+                            // chart title/headers and styling
+                            var options = {
+                                // title
+                                title: 'Total New Members in 2022',
+                                titleTextStyle: {
+                                    fontName: 'Arial',
+                                    fontSize: 20,
+                                    bold: true,
+                                    italic: false,
+                                },
+                                // x axis
+                                hAxis: {
+                                    title: 'Month',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                    direction:1,
+                                    slantedText:true,
+                                    slantedTextAngle:50,
+                                },
+                                // y axis
+                                vAxis: {
+                                    title: 'New Members',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                },
+                                // line
+                                series: {
+                                    0: {
+                                        color: '#663399',
+                                    },
+                                },
+                                legend: 'none',
+                            };
+
+                            chart.setOptions(options);
+                            chart.setChartType(chartType);
+                            chart.setDataTable(data);
+                            chart.draw();
+                        }
+
+                        // code for visits chart
+                        function drawVisitsChart(chartType) {
+                            var chart = new google.visualization.ChartWrapper({
+                                containerId: 'globogym_chart'
+                            });
+
+                            // chart data -- TODO: need to add database monthly TOTAL VISITS data here (put database data in the number, not the month)
+                            var data = google.visualization.arrayToDataTable([
+                                ['Month', 'Visits'],
+                                ['Jan',7],['Feb',8],['Mar',8],['Apr',9],['May',9],
+                                ['Jun',9],['Jul',10],['Aug',11],
+                                ['Sept',14],['Oct',14],['Nov',15],['Dec',15]
+                            ]);
+
+                            // chart title/headers and styling
+                            var options = {
+                                // title
+                                title: 'Total Visits in 2022',
+                                titleTextStyle: {
+                                    fontName: 'Arial',
+                                    fontSize: 20,
+                                    bold: true,
+                                    italic: false,
+                                },
+                                // x axis
+                                hAxis: {
+                                    title: 'Month',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                    direction:1,
+                                    slantedText:true,
+                                    slantedTextAngle:50,
+                                },
+                                // y axis
+                                vAxis: {
+                                    title: 'Visits',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                },
+                                // line
+                                series: {
+                                    0: {
+                                        color: '#663399',
+                                    },
+                                },
+                                legend: 'none',
+                            };
+
+                            chart.setOptions(options);
+                            chart.setChartType(chartType);
+                            chart.setDataTable(data);
+                            chart.draw();
+                        }
+
+                        // code for revenue chart
+                        function drawRevenueChart(chartType) {
+                            var chart = new google.visualization.ChartWrapper({
+                                containerId: 'globogym_chart'
+                            });
+
+                            // chart data -- TODO: need to add database monthly TOTAL REVENUE data here (put database data in the number, not the month)
+                            var data = google.visualization.arrayToDataTable([
+                                ['Month', 'Revenue'],
+                                ['Jan',4],['Feb',5],['Mar',7],['Apr',7],['May',7],
+                                ['Jun',6],['Jul',8],['Aug',8],
+                                ['Sept',9],['Oct',10],['Nov',11],['Dec',12]
+                            ]);
+
+                            // chart title/headers and styling
+                            var options = {
+                                // title
+                                title: 'Total Revenue in 2022',
+                                titleTextStyle: {
+                                    fontName: 'Arial',
+                                    fontSize: 20,
+                                    bold: true,
+                                    italic: false,
+                                },
+                                // x axis
+                                hAxis: {
+                                    title: 'Month',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                    direction:1,
+                                    slantedText:true,
+                                    slantedTextAngle:50,
+                                },
+                                // y axis
+                                vAxis: {
+                                    title: 'Revenue',
+                                    titleTextStyle: {
+                                        italic: false,
+                                    },
+                                },
+                                // line
+                                series: {
+                                    0: {
+                                        color: '#663399',
+                                    },
+                                },
+                                legend: 'none',
+
+                            };
+
+                            chart.setOptions(options);
+                            chart.setChartType(chartType);
+                            chart.setDataTable(data);
+                            chart.draw();
+                        }
+                    </script>
                 </div>
             </div>
         </div>
