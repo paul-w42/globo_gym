@@ -92,6 +92,7 @@ class Controller
             Validate::validPhone($phone);
             Validate::validPassword($password, $password2);
 
+
             // TODO: Test for existing customer username / email
             // 1st test password, 'password1'
 
@@ -116,9 +117,9 @@ class Controller
 
                 // save data to database
                 if ($membership > 0){
-                    $customer = new Member($membership);
+                    $customer = new Member($membership, $fname, $lname, $username, $password, $email, $phone, 0);
                 } else {
-                    $customer = new User();
+                    $customer = new User($fname, $lname, $username, $password, $email, $phone, 0);
                 }
                 $GLOBALS['dataLayer']->addCustomer($customer);
 
