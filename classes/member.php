@@ -20,11 +20,10 @@ class Member extends User
      * @param $_email
      * @param $_phone
      * @param $_balance
-     * @param $_joinDate
      */
-    function __construct($_membershipLevel, $_membershipPayPeriod, $_fName = "", $_lName = "", $_uName = "", $_password = "", $_email = "", $_phone = "", $_balance = "", $_joinDate = "")
+    function __construct($_membershipLevel, $_fName = "", $_lName = "", $_uName = "", $_password = "", $_email = "", $_phone = "", $_balance = "", $_membershipPayPeriod=0)
     {
-        parent::__construct($_fName, $_lName, $_uName, $_password, $_email, $_phone, $_balance, $_joinDate);
+        parent::__construct($_fName, $_lName, $_uName, $_password, $_email, $_phone, $_balance);
         $this->_membershipLevel = $_membershipLevel;
         $this->_membershipPayPeriod = $_membershipPayPeriod;
     }
@@ -64,6 +63,5 @@ class Member extends User
     {
         $this->_membershipPayPeriod = $membershipPayPeriod;
     }
-
 
 }

@@ -26,9 +26,8 @@ class User
      * @param $_email
      * @param $_phone
      * @param $_balance
-     * @param $_joinDate
      */
-    public function __construct($_fName="", $_lName="", $_uName="", $_password="", $_email="", $_phone="", $_balance="", $_joinDate="")
+    public function __construct($_fName="", $_lName="", $_uName="", $_password="", $_email="", $_phone="", $_balance="")
     {
         $this->_fName = $_fName;
         $this->_lName = $_lName;
@@ -37,7 +36,7 @@ class User
         $this->_email = $_email;
         $this->_phone = $_phone;
         $this->_balance = $_balance;
-        $this->_joinDate = $_joinDate;
+        $this->_joinDate = date('Y-m-d');
     }
 
     /**
