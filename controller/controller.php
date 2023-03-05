@@ -120,7 +120,7 @@ class Controller
                 } else {
                     $customer = new User();
                 }
-                DataLayer::addCustomer($customer);
+                $GLOBALS['dataLayer']->addCustomer($customer);
 
                 $_SESSION['account_created'] = 1;
 

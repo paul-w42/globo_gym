@@ -19,6 +19,7 @@ $f3 = Base::instance();     // i.e. Base f3 = new Base() in java
 
 // Instantiate a controller object
 $con = new Controller($f3);
+$dataLayer = new DataLayer();
 
 // Define a default route
 $f3->route('GET /', function () {
