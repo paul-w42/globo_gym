@@ -95,7 +95,7 @@ class Controller
             // TODO: Test for existing customer username / email
             // 1st test password, 'password1'
 
-            // if no errors, redirect to mailing_lists page
+            // if no errors, redirect to account page
             if (empty($this->_f3->get('errors'))) {
 
                 $membership = null;
@@ -115,7 +115,12 @@ class Controller
                 }
 
                 // save data to database
-                DataLayer::addCustomer($fname, $lname, $password, $email, $phone, $username, $membership);
+                if ($membership > 0){
+                    $customer = new Member($membership);
+                } else {
+                    $customer = new User();
+                }
+                DataLayer::addCustomer($customer);
 
                 $_SESSION['account_created'] = 1;
 
@@ -151,7 +156,7 @@ class Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if (isset($_SESSION['member_info'])) {
+            /*if (isset($_SESSION['member_info'])) {
                 unset($_SESSION['member_info']);
             }
 
@@ -162,7 +167,7 @@ class Controller
             // Remove the welcome message after 1st creating an account if set
             if (isset($_SESSION['account_created'])) {
                 unset($_SESSION['account_created']);
-            }
+            }*/
 
             $_SESSION['username'] = $_POST['username'];
 

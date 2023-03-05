@@ -1,6 +1,6 @@
 <?php
 
-require '/home/paulwood/db-globogym.php';
+require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-globogym.php');
 
 class DataLayer
 {
@@ -12,41 +12,55 @@ class DataLayer
      * s = string
      * b = blob
     */
-    static function addCustomer($fname, $lname, $password, $email, $phone, $username, $membership)
+    // Database connection object
+    private $_dbh;
+
+    function __construct()
     {
+        try {
+            // Instantiate a PDO object
+            $this->_dbh = new PDO(DB_DRIVER, USERNAME, PASSWORD);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
-        global $cnxn;
+    // converted to use pdo
+    function addCustomer($customer)
+    {
+        $sql = "insert into members (first_name, last_name, user_name, login_password, join_date, email, phone, membership_level)
+            values (:fName, :lName, :uName, :password, :joinDate, :email, :phone, :membershipLevel)";
 
-//        if ($membership == null) {
-//            $membership = -1;
-//        }
+        $password = sha1($customer->getPassword());
 
-        $sql = "insert into members (first_name, last_name, user_name, login_password, join_date, email, phone, membership_level) 
-            values (?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $this->_dbh->prepare($sql);
+        $fName = $customer->getFName();
+        $lName = $customer->getLName();
+        $uName = $customer->getUName();
+        $joinDate = $customer->getJoinDate();
+        $email = $customer->getEmail();
+        $phone = $customer->getPhone();
+        $stmt->bindParam(':fName', $fName);
+        $stmt->bindParam(':lName', $lName);
+        $stmt->bindParam(':uName', $uName);
+        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':joinDate', $joinDate);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':phone', $phone);
 
-        $password = sha1($password);
-        $joinDate = date('Y-m-d'); // https://www.php.net/manual/en/function.date.php#85692
-
-        $stmt = $cnxn->prepare($sql);
-        $stmt->bind_param("sssssssi", $fname, $lname, $username, $password, $joinDate, $email, $phone, $membership);
+        if ($customer instanceof Member)
+        {
+            $membershipLevel = $customer->getMembershipLevel();
+        } else {
+            $membershipLevel = -1;
+        }
+        $stmt->bindParam(':membershipLevel', $membershipLevel);
 
         $stmt->execute();
 
-        $returnID = 0;
-
-        if (mysqli_stmt_affected_rows($stmt) > 0) {
-            $returnID = mysqli_insert_id($cnxn);
-        }
-
-        //mysqli_stmt_close($stmt);
-        //mysqli_close($cnxn);
-
-        //echo "AddCustomer(), Returning New CustomerID: " . $returnID . "<br>\n";
-
-        return $returnID;
     }
 
-    static function addCustomerMembership($memberID, $memberLevel)
+    function addCustomerMembership($memberID, $memberLevel)
     {
 
         global $cnxn;
@@ -67,7 +81,7 @@ class DataLayer
      *
      * Uses bind_result(...)
      */
-    static function validateLogin($username, $password)
+    function validateLogin($username, $password)
     {
 
         global $cnxn;
@@ -91,7 +105,7 @@ class DataLayer
      * Returns the result/row back to the calling function, packaged as an associative array.
      * i.e. $firstName = $row['first_name'];
      */
-    static function loadMemberInformation($memberID)
+    function loadMemberInformation($memberID)
     {
 
         global $cnxn;
@@ -111,7 +125,7 @@ class DataLayer
         // $firstName = $row['first_name'];
     }
 
-    static function loadMembershipLevel($membershipID)
+    function loadMembershipLevel($membershipID)
     {
         global $cnxn;
 
