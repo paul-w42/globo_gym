@@ -2,7 +2,7 @@
 
 /**
  * Member class for the Globo Gym website, will be created when an existing user subscribes to a membership,
- * or a new user chooses a membership plan upon account creation
+ * or a new user chooses a membership plan upon account creation and the account does not have admin privileges
  */
 class Member extends User
 {

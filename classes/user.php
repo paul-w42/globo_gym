@@ -3,6 +3,7 @@
 /**
  * User class for the Globo Gym website, this class will be used when
  * the user decides to make an account without subscribing to a membership plan
+ * and that is not an admin account
  */
 class User
 {

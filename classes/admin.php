@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Admin class for the Globo Gym website, will be created when the user logs into an admin account
+ * Admin class for the Globo Gym website, will be created when the user logs into or
+ * creates a new account that has admin privileges
  */
 class Admin extends User
 {
