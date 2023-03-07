@@ -1,53 +1,46 @@
-<!--
+<exclude><!--
     Team: Step 3
     Authors: Paul Woods, Stewart Lovell, and Jasmine David
     SDEV 328: Final Project v1
     File: account.html
 
+    Note: All session info / stored in user object 'member_info'
+
     Description: User account page
--->
+--></exclude>
 
 <include href="views/header_account.html" with="title='Account'"></include>
-<!-- change 'one' above to 'two', etc. for different pages -->
-
-<!--- PAUL AND STEWART:
-all the fields were hardcoded in, need to use session variables? to fill them in when user logs in or creates account
---->
-
-<exclude>
-    This data returned from db as $result, ...
-    first_name, last_name, join_date, email, phone, membership_level, balance
-    Saved $result to session ... $_SESSION['member_info'] = $result;
-</exclude>
 
 <div class="container-fluid mt-5 mb-5">
     <div class="row text-center">
         <!-- User: First and Last Name -->
-        <!-- Need change NAME to session variable -->
-        <h1><b>{{ @SESSION['member_info']['first_name'] }} {{ @SESSION['member_info']['last_name'] }}</b></h1>
+        <h1><b>{{ @SESSION['member_info']->getFName() }} {{ @SESSION['member_info']->getLName() }}</b></h1>
     </div>
 
     <!-- Member Join Date -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
-            <!-- Need change DATE JOINED to session variable -->
-            <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">Member Since {{ @SESSION['member_info']['join_date']}}</h4>
+            <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">Member Since {{ @SESSION['member_info']->getJoinDate()}}</h4>
         </div>
     </div>
+    </p>
 
     <!-- Membership Level -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
-            <!-- Need change MEMBERSHIP LEVEL to session variable -->
             <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">
-                <check if="{{ isset(@SESSION['membership_level']['level_name']) }}">
-                    <true>{{ @SESSION['membership_level']['level_name'] }} Level</true>
-                    <false>Not currently a Paying Member</false>
+                <check if="{{ method_exists(@SESSION['member_info'], 'getAdminID') }}"><exclude><!-- IS AN ADMIN --></exclude>
+                    <true>Administrator Account</true>
+                    <false>
+                    <check if="{{ method_exists(@SESSION['member_info'], 'getMembershipLevelName') &&  @SESSION['member_info']->getMembershipLevelName() != null }}">
+                        <true>{{ @SESSION['member_info']->getMembershipLevelName() }} Level</true>
+                        <false>Not currently a Paying Member</false>
+                    </check>
+                    </false>
                 </check>
             </h4>
         </div>
     </div>
-
     <!-- Check In Button -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto mt-2 text-center">
@@ -63,8 +56,7 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                 <div class="row mb-3">
                     <!-- Member Username -->
                     <p class="account">USERNAME</p>
-                    <!-- Need change USERNAME to session variable -->
-                    <p class="account text-secondary">{{ @SESSION['username'] }}</p>
+                    <p class="account text-secondary">{{ @SESSION['member_info']->getUName() }}</p>
                 </div>
                 <div class="row">
                     <!-- Member Password -->
@@ -73,27 +65,21 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                     <!-- collapsible for CHANGE password -->
                     <div id="change_password" class="collapse mb-3">
                         <form action="#" method="post">
-                            <label for=“current_password”><b>Current Password</b></label><br>
-                            <input class="mt-1 mb-2" type="password" name=“current_password” id=“current_password”><br>
-                            <label for=“new_password”><b>New Password</b></label><br>
-                            <input class="mt-1 mb-2" type="password" name=“new_password” id=“new_password”><br>
-                            <label for=“new_password_confirm”><b>Confirm New Password</b></label><br>
-                            <input class="mt-1 mb-2" type="password" name=“new_password_confirm” id=“new_password_confirm”><br>
-                            <button class="account-buttons btn btn-primary mt-1" type="submit">Change</button>
+                            <label for=“new_password”>New Password</label><br>
+                            <input type="password" name=“password” id=“new_password”>
+                            <button class="account-buttons btn btn-primary" type="submit">Change</button>
                         </form>
                     </div>
                 </div>
                 <div class="row">
                     <!-- Member Email -->
                     <p class="account">EMAIL</p>
-                    <!-- Need change EMAIL to session variable -->
-                    <p class="text-secondary">{{ @SESSION['member_info']['email'] }}</p>
+                    <p class="text-secondary">{{ @SESSION['member_info']->getEmail() }}</p>
                 </div>
                 <div class="row">
                     <!-- Member Phone -->
                     <p class="account">PHONE</p>
-                    <!-- Need change PHONE NUMBER to session variable -->
-                    <p class="text-secondary">{{ @SESSION['member_info']['phone'] }}</p>
+                    <p class="text-secondary">{{ @SESSION['member_info']->getPhone() }}</p>
                 </div>
             </div>
 
@@ -121,59 +107,24 @@ all the fields were hardcoded in, need to use session variables? to fill them in
                     </div>
                 </div>
 
-                <check if="{{ isset(@SESSION['member_info']['membership_level']) && @SESSION['member_info']['membership_level'] > 0 }} ">
-                <div class="row">
-                    <p>Your payment is <check if="{{ isset(@SESSION['membership_level']) && @SESSION['member_info']['membership_pay_period'] == 0 }} ">
-
-                            <true>${{ @SESSION['membership_level']['level_price_month'] }} per month</true>
-                            <false>${{ @SESSION['membership_level']['level_price_year'] }} per year</false></check></p>
-                </div>
-                <div class="row">
-                    <!-- Member Balance -->
-                    <!-- Need change BALANCE amount to session variable -->
-                    <p>Your Balance is: <u>${{ @SESSION['member_info']['balance'] }}</u></p>
-                </div>
-                </check>
+                <check if="{{ (method_exists(@SESSION['member_info'], 'getMembershipLevel')) && (@SESSION['member_info']->getMembershipLevel() > 0) }} ">
+                    <div class="row">
+                        <p>Your payment is <check if="{{ @SESSION['member_info']->getMembershipPayPeriod() == 0 }} ">
+                                <true>${{ @SESSION['member_info']->getMembershipPriceMonth() }} per month</true>
+                                <false>${{ @SESSION['member_info']->getMembershipPriceYear() }} per year</false></check></p>
+                    </div>
+                    <div class="row">
+                        <!-- Member Balance -->
+                        <p>Your Balance is: <u>${{ @SESSION['member_info']->getBalance() }}</u></p>
+                    </div>
+                    </check>
             </div>
         </div>
-
-        <!--    <div class="row mt-5">-->
-        <!--        <div class="col-12 col-md-4 mx-auto">-->
-        <!--            &lt;!&ndash;-->
-        <!--            Jasmine, these were our ideas for what could be displayed on the account page (you can leave the non design stuff for us)-->
-        <!--            User's real name-->
-        <!--            username-->
-        <!--            "Visited today" button (increments the visits value in the database)-->
-        <!--            view current plan-->
-        <!--            email-->
-        <!--            phone number-->
-        <!--            join date-->
-        <!--            balance-->
-        <!--            password edit-->
-        <!--            change plan-->
-        <!--            &ndash;&gt;-->
-        <!--        </div>-->
-        <!--    </div>-->
-
-        <!--    <div class="row mt-2">-->
-        <!--        <div class="col-12 col-md-4 mx-auto">-->
-        <!--            {{ @SESSION['username'] }}-->
-        <!--        </div>-->
-        <!--    </div>-->
-
-        <!--    <div class="row">-->
-        <!--        <div class="col-12 col-md-4 mx-auto mt-3">-->
-
-        <!--        </div>-->
-        <!--    </div>-->
     </div>
 </div>
 
-
 <!-- footer -->
 <include href="views/footer.html"></include>
-
-
 
 </body>
 </html>

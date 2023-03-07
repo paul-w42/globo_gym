@@ -12,7 +12,10 @@ class Controller
 
     function default(): void
     {
+
+        session_unset();
         session_destroy();      // TODO: Remove before production, testing purposes only. Means of manually destroying session.
+
         $view = new Template();
         echo $view->render('views/home.html');
     }
@@ -138,9 +141,9 @@ class Controller
                 unset($_SESSION['account_created']);
             }*/
 
-            $_SESSION['username'] = $_POST['username'];
+            //$_SESSION['username'] = $_POST['username'];
 
-            $valid = $GLOBALS['dataLayer']->validateLogin($_SESSION['username'], $_POST['password']);
+            $valid = $GLOBALS['dataLayer']->validateLogin($_POST['username'], $_POST['password']);
 
             // Log user in
             if ($valid) {

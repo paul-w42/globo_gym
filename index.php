@@ -8,11 +8,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
 
 // Require the autoload file
 require_once("vendor/autoload.php");
-require_once("/home/paulwood/db-globogym.php");  // paul woods
+//require_once("/home/paulwood/db-globogym.php");  // paul woods
+
+session_start();
 
 // Create an instance of the Base class
 $f3 = Base::instance();     // i.e. Base f3 = new Base() in java

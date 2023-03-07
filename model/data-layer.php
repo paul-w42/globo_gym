@@ -4,7 +4,16 @@ require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-globogym.php');
 
 /*
  * SQL Insert to add member as Admin
- * insert into admin_permissions (member_id, edit_member_details, add_member, suspend_member, view_gym_memberships, view_member_details) values (4, 1,1,1,1,1);
+    insert into admin_permissions (member_id, edit_member_details, add_member, suspend_member, view_gym_memberships, view_member_details) values (4, 1,1,1,1,1);
+ *
+ * SQL to verify login and retrieve user info
+   select m.member_id AS id, m.first_name AS fname, m.last_name AS lname, m.join_date AS joinDate,
+    m.email AS email, m.phone AS phone, m.balance AS balance, m.membership_level AS memberLevel,
+    admin_permissions.admin_id AS adminID, membership_levels.level_name AS levelName,
+    membership_levels.level_price_month AS priceMonth, membership_levels.level_price_year
+    AS priceYear, m.membership_pay_period AS payPeriod FROM members m LEFT JOIN admin_permissions
+    ON admin_permissions.member_id = m.member_id LEFT JOIN membership_levels ON m.membership_level =
+    membership_levels.membership_levels_id WHERE m.user_name = ? AND m.login_password = ?
  */
 
 
@@ -94,9 +103,16 @@ class DataLayer
         $sql = "select m.member_id AS id, m.first_name AS fname, m.last_name AS lname, " .
                 "m.join_date AS joinDate, m.email AS email, m.phone AS phone, m.balance " .
                 "AS balance, m.membership_level AS memberLevel, admin_permissions.admin_id " .
-                "AS adminID FROM members m LEFT JOIN admin_permissions ON " .
-                "admin_permissions.member_id = m.member_id WHERE m.user_name = ? AND " .
+                "AS adminID, membership_levels.level_name AS levelName, " .
+                "membership_levels.level_price_month " .
+                "AS priceMonth, membership_levels.level_price_year AS priceYear, " .
+                "m.membership_pay_period AS payPeriod FROM members m LEFT JOIN " .
+                "admin_permissions ON admin_permissions.member_id = m.member_id LEFT JOIN " .
+                "membership_levels ON m.membership_level = " .
+                "membership_levels.membership_levels_id WHERE m.user_name = ? AND " .
                 "m.login_password = ?";
+
+        // Just added priceMonth, priceYear, payPeriod,
 
         $stmt = $this->_dbh->prepare($sql);
         $stmt->bindValue(1, $username);
@@ -106,22 +122,46 @@ class DataLayer
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $msg = $username . ', ';
+
         // we have a row returned
         if (isset($result['id'])) {
+
             $account;
+            /*
+             * These two statements will wreck the page, BUT they will display the full SQL query - useful
+            $stmt->debugDumpParams();
+            ob_end_flush();
+            */
+
+
+            $msg = $msg . '<br>';
 
             // admin account
-            if (isset($result['adminID'])) {
+            //if (isset($result['adminID'])) {
+            if ($result['adminID'] != null) {
+
+                echo 'processed as an admin<br>';
                 $account = new Admin($result['adminID']);
+                $msg = $msg . 'ADMIN, ';
             }
             // paying member
             else if ($result['memberLevel'] != -1) {
                 $account = new Member($result['memberLevel']);
+                $account->setMembershipLevelName($result['levelName']);
+                $account->setMembershipPriceMonth($result['priceMonth']);
+                $account->setMembershipPriceYear($result['priceYear']);
+                $account->setMembershipPayPeriod($result['payPeriod']);
+                $account->setMembershipLevel($result['memberLevel']);
+                $msg = $msg . 'Paying Member, ';
             }
             // non-subscribing member
             else {
+                $msg = $msg . 'Non-Paying Member, ';
                 $account = new User();
             }
+
+            echo 'setting user values now.<br>';
 
             $account->setMemberID($result['id']);
             $account->setFName($result['fname']);
@@ -130,14 +170,22 @@ class DataLayer
             $account->setEmail($result['email']);
             $account->setPhone($result['phone']);
             $account->setBalance($result['balance']);
-            $account->setMembershipLevel($result['memberLevel']);
             $account->setUName($username);
             $account->setPassword($password);
 
+            echo 'finished setting user values.<br>';
+
             $_SESSION['member_info'] = $account;
+
+            $_SESSION['debug_msg'] = $msg;
+
+
+
+            //ob_end_flush();       // force echo output, does crash page though
 
             return true;
         }
+
 
         return false;
     }

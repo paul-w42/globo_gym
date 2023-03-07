@@ -9,6 +9,12 @@ class Member extends User
     private $_membershipLevel;
     private $_membershipPayPeriod;
 
+    private $_membershipLevelName;
+
+    private $_membershipPriceMonth;
+
+    private $_membershipPriceYear;
+
     /**
      * Constructor for the Member class
      * @param $_membershipLevel
@@ -26,6 +32,56 @@ class Member extends User
         parent::__construct($_fName, $_lName, $_uName, $_password, $_email, $_phone, $_balance);
         $this->_membershipLevel = $_membershipLevel;
         $this->_membershipPayPeriod = $_membershipPayPeriod;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMembershipPriceMonth()
+    {
+        return $this->_membershipPriceMonth;
+    }
+
+    /**
+     * @param mixed $membershipPriceMonth
+     */
+    public function setMembershipPriceMonth($membershipPriceMonth): void
+    {
+        $this->_membershipPriceMonth = $membershipPriceMonth;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMembershipPriceYear()
+    {
+        return $this->_membershipPriceYear;
+    }
+
+    /**
+     * @param mixed $membershipPriceYear
+     */
+    public function setMembershipPriceYear($membershipPriceYear): void
+    {
+        $this->_membershipPriceYear = $membershipPriceYear;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getMembershipLevelName()
+    {
+        return $this->_membershipLevelName;
+    }
+
+    /**
+     * @param mixed $membershipLevelName
+     */
+    public function setMembershipLevelName($membershipLevelName): void
+    {
+        $this->_membershipLevelName = $membershipLevelName;
     }
 
     /**
