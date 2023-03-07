@@ -2,6 +2,12 @@
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-globogym.php');
 
+/*
+ * SQL Insert to add member as Admin
+ * insert into admin_permissions (member_id, edit_member_details, add_member, suspend_member, view_gym_memberships, view_member_details) values (4, 1,1,1,1,1);
+ */
+
+
 class DataLayer
 {
 
@@ -79,25 +85,61 @@ class DataLayer
      * validateLogin(username, password),  validates the user login information against
      * the database.  Returns the members ID if valid, null otherwise.
      *
-     * Uses bind_result(...)
      */
     function validateLogin($username, $password)
     {
 
-        global $cnxn;
-
         $password = sha1($password);
 
-        $sql = "SELECT member_id FROM members WHERE user_name = ? AND login_password = ?";
+        $sql = "select m.member_id AS id, m.first_name AS fname, m.last_name AS lname, " .
+                "m.join_date AS joinDate, m.email AS email, m.phone AS phone, m.balance " .
+                "AS balance, m.membership_level AS memberLevel, admin_permissions.admin_id " .
+                "AS adminID FROM members m LEFT JOIN admin_permissions ON " .
+                "admin_permissions.member_id = m.member_id WHERE m.user_name = ? AND " .
+                "m.login_password = ?";
 
-        $stmt = $cnxn->prepare($sql);
-        $stmt->bind_param("ss", $username, $password);   // can change values and re-do this line x times
+        $stmt = $this->_dbh->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->bindValue(2, $password);
 
         $stmt->execute();
-        //$member_id = 0;
-        $stmt->bind_result($col1);  // $col1 is declared here as a reference, no need to declare earlier
-        $stmt->fetch();
-        return $col1;
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // we have a row returned
+        if (isset($result['id'])) {
+            $account;
+
+            // admin account
+            if (isset($result['adminID'])) {
+                $account = new Admin($result['adminID']);
+            }
+            // paying member
+            else if ($result['memberLevel'] != -1) {
+                $account = new Member($result['memberLevel']);
+            }
+            // non-subscribing member
+            else {
+                $account = new User();
+            }
+
+            $account->setMemberID($result['id']);
+            $account->setFName($result['fname']);
+            $account->setLName($result['lname']);
+            $account->setJoinDate($result['joinDate']);
+            $account->setEmail($result['email']);
+            $account->setPhone($result['phone']);
+            $account->setBalance($result['balance']);
+            $account->setMembershipLevel($result['memberLevel']);
+            $account->setUName($username);
+            $account->setPassword($password);
+
+            $_SESSION['member_info'] = $account;
+
+            return true;
+        }
+
+        return false;
     }
 
     /*

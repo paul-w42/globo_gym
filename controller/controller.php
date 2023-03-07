@@ -27,43 +27,11 @@ class Controller
     {
         // Load account information
         // We have $_SESSION['username'] and $_SESSION['member_id']
-        $result = DataLayer::loadMemberInformation($_SESSION['member_id']);
 
-        if ($result) {
+        // TODO: Remove loadMemberInformation from data-layer.php
+        //$result = DataLayer::loadMemberInformation($_SESSION['member_id']);
 
-            $_SESSION['member_info'] = $result;
-
-            // verify membership pricing is loaded
-            if (!isset($_SESSION['membership_level']))
-            {
-                // addressed same as membership info, array of arrays
-                // i.e. $_SESSION['membership_level']['level_name'], level_price_month, and level_price_year
-                $_SESSION['membership_level'] = DataLayer::loadMembershipLevel($result['membership_level']);
-            }
-
-            // addCustomerMembership($memberID, $memberLevel)
-            // TODO: Fix addition of fee to balance, prorate, and do not wipe out current balance
-            if (isset($_POST['membership_level']))
-            {
-                if ($_POST['membership_level'] == 'Bronze')
-                {
-                    DataLayer::addCustomerMembership($_SESSION['member_id'], 1);
-                }
-                else if ($_POST['membership_level'] == 'Silver')
-                {
-                    DataLayer::addCustomerMembership($_SESSION['member_id'], 2);
-                }
-                else if ($_POST['membership_level'] == 'Gold')
-                {
-                    DataLayer::addCustomerMembership($_SESSION['member_id'], 3);
-                }
-
-                $this->_f3->reroute('account');
-            }
-
-        } else {
-            // Invalid result, perhaps no member_id in session - reroute back to login page
-            // Note, this is the only way I made the above fail, was to kill a logged in session
+        if (!isset($_SESSION['member_info'])) {
             $this->_f3->reroute('login');
         }
 
@@ -172,13 +140,10 @@ class Controller
 
             $_SESSION['username'] = $_POST['username'];
 
-            $valid = DataLayer::validateLogin($_SESSION['username'], $_POST['password']);
+            $valid = $GLOBALS['dataLayer']->validateLogin($_SESSION['username'], $_POST['password']);
 
             // Log user in
             if ($valid) {
-                // echo "member_id = " . $valid . "<br>";
-                // redirect to account page
-                $_SESSION['member_id'] = $valid;
                 $this->_f3->reroute('account');
             } else {
                 $this->_f3->set('errors["login"]', 'You entered invalid login information, please try again');

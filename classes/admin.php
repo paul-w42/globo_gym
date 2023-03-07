@@ -11,7 +11,7 @@ class Admin extends User
 
     /**
      * Constructor for the Admin class
-     * @param $_adminID
+     * @param $_adminID                 // adminID comes from the admin_permissions table, there is a separate userID
      * @param string $_fName
      * @param string $_lName
      * @param string $_uName
