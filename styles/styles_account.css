@@ -7,6 +7,21 @@
  * Description: css styles for Globo Gym website - account pages
  */
 
+/* General styles */
+/* prevents button from turning blue when active / clicked on */
+.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
+.account-buttons:not(:disabled):not(:disabled):active{
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border-color: rebeccapurple;
+    color: rebeccapurple;
+}
+
+/* Nav Bar styles */
 a.disabled {
     pointer-events: none;
     color: rebeccapurple !important;
@@ -27,21 +42,6 @@ img.full {
     margin-left: auto;
     margin-right: auto;
 }
-
-/*button[type=submit] {
-    background-color: #92C24A;
-    border-color: #A8DB5C;
-}
-
-button[type=submit]:hover {
-    background-color: #86B144;
-    border-color: #8DB352;
-}
-
-input[type=button]:hover {
-    background-color: #86B144;
-    border-color: #8DB352;
-}*/
 
 .navbar-nav > li.right-border {
     border-right: 1px solid white;
@@ -71,91 +71,46 @@ input[type=button]:hover {
     max-width: 7em;
 }
 
-/* prevents button from turning blue when active / clicked on */
-.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
-.account-buttons:not(:disabled):not(:disabled):active{
-    background-color: rebeccapurple;
-    border-color: rebeccapurple;
-}
 
-.btn-primary:hover {
-    background-color: white;
-    border-color: rebeccapurple;
-    color: rebeccapurple;
-}
-
-/* home page image overlay and button */
-#overlay p {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    color: white;
-    text-shadow: 1px 1px black;
-    font-weight: bold;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-
-}
-
-#overlay .btn {
-
-    position: absolute;
-    top: 56%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: rebeccapurple;
-    color: white;
-    border: none;
-    max-width: 10em;
-    font-weight: bold;
-    letter-spacing: .05em;
-
-    box-shadow: 0px 0px 20px 0 rgb(0, 0, 0), 0 0px 20px 0 rgb(0, 0, 0);
-
-}
-
-#overlay .btn:hover {
-    background-color: white;
-    border-color: rebeccapurple;
-    color: rebeccapurple;
-}
-
-/* Span in Memberships page - emphasizes $ cost of gym membership */
-span {
-    color: rebeccapurple;
-    font-weight: bold;
-}
-
-/* Account page styles */
-/* remove margin bottom and top for p */
-.account {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-/* footer styles */
+/* Footer styles */
 .footer h5 {
     font-family: "Arial Black", serif;
 }
+
 .footer, .footer a{
     background-color: #E3E3E3;
     text-decoration: none;
     font-family: "Courier New", monospace;
 }
 
-/* About page carousel styles */
-/* fixed height for carousel images */
-.carousel-item {
-    height: 370px;
-    overflow: hidden;
-    width: 100%;
+
+
+/* Account Page styles */
+/* remove margin bottom and top for p */
+.account {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
-.carousel-item img {
-    width: 100%;
+
+/* change password and change membership plan styles */
+.change {
+    color: rebeccapurple;
+    text-decoration: underline;
 }
+
+/* Membership level and Join Date header font */
+.account-details {
+    font-family: Courier New, monospace;
+}
+
+/* Profile and Account details header letter spacing */
+.profile-header{
+    letter-spacing: .1rem;
+}
+
+
+
+
+
+
 

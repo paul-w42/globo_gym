@@ -7,14 +7,9 @@
  * Description: css styles for Globo Gym website - main pages.
  */
 
-
-/*body p, ul, li, span, div {*/
-/*    !*font-family: 'Montserrat', sans-serif;*!*/
-/*    font-family: 'Domaine Display', sans-serif;*/
-/*}*/
-
-/* font for content on pages - Courier New */
-body p, span, .col div, .col ul, .col li, table {
+/* General Styles */
+/* font for content on pages - courier new */
+body p, span, .col div, .col ul, .col li, table, .chosen {
     font-family: "Courier New", monospace;
 }
 
@@ -27,8 +22,9 @@ h1, h2, h3, h4, h5, label {
 }
 
 a.disabled {
-    pointer-events: none;
     color: rebeccapurple !important;
+    pointer-events: none;
+
 }
 
 div.gray {
@@ -41,27 +37,36 @@ div.darker_gray {
 
 img.full {
     border-radius: 35px;
-    max-height: 1024px;
-    width: auto;
     margin-left: auto;
     margin-right: auto;
+    max-height: 1024px;
+    width: auto;
+
 }
 
-/*button[type=submit] {
-    background-color: #92C24A;
-    border-color: #A8DB5C;
+.btn-primary{
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
+    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
+    helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+    max-width: 7em;
+
 }
 
-button[type=submit]:hover {
-    background-color: #86B144;
-    border-color: #8DB352;
+/* prevents button from turning blue when active / clicked on */
+.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
+.account-buttons:not(:disabled):not(:disabled):active{
+    background-color: rebeccapurple;
+    border-color: rebeccapurple;
 }
 
-input[type=button]:hover {
-    background-color: #86B144;
-    border-color: #8DB352;
-}*/
+.btn-primary:hover {
+    background-color: white;
+    border-color: rebeccapurple;
+    color: rebeccapurple;
+}
 
+/* Nav Bar Styles */
 .navbar-nav > li.right-border {
     border-right: 1px solid white;
 }
@@ -69,9 +74,9 @@ input[type=button]:hover {
 .nav-link {
     color:white;
     font-size: 1.5em;
-    font-weight: bold;
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
     helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+    font-weight: bold;
 }
 
 .nav-link:hover {
@@ -86,50 +91,36 @@ input[type=button]:hover {
     max-height: 100px;
 }
 
-.btn-primary{
-    background-color: rebeccapurple;
-    border-color: rebeccapurple;
-    max-width: 7em;
-    font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
-    helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+/* Footer styles */
+.footer h5 {
+    font-family: "Arial Black", serif;
 }
-
-/* prevents button from turning blue when active / clicked on */
-.my-button:not(:disabled):not(:disabled):active,.admin-buttons:not(:disabled):not(:disabled):active,
-.account-buttons:not(:disabled):not(:disabled):active{
-    background-color: rebeccapurple;
-    border-color: rebeccapurple;
+.footer, .footer a{
+    background-color: #E3E3E3;
+    text-decoration: none;
 }
 
 
-
-.btn-primary:hover {
-    background-color: white;
-    border-color: rebeccapurple;
-    color: rebeccapurple;
-}
-
-/* home page image overlay and button */
+/* Home Page Styles */
+/* image overlay and button */
 #overlay p {
+    border: none;
+    border-radius: 5px;
+    color: white;
     position: absolute;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    color: white;
     text-shadow: 1px 1px black;
     font-weight: bold;
     padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
     helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
-
 }
 
 #overlay .btn {
-
     position: absolute;
     top: 56%;
     left: 50%;
@@ -144,9 +135,7 @@ input[type=button]:hover {
     font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
     helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
 
-
     box-shadow: 0px 0px 20px 0 rgb(0, 0, 0), 0 0px 20px 0 rgb(0, 0, 0);
-
 }
 
 #overlay .btn:hover {
@@ -155,31 +144,6 @@ input[type=button]:hover {
     color: rebeccapurple;
 }
 
-/* Span in Memberships page - emphasizes $ cost of gym membership */
-span {
-    color: rebeccapurple;
-    font-weight: 900;
-    /*font-size: 1.5em;*/
-    font-family: Georgia, sans-serif;
-}
-
-/* Account page styles */
-/* remove margin bottom and top for p */
-.account {
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-
-/* footer styles */
-.footer h5 {
-    font-family: "Arial Black", serif;
-}
-.footer, .footer a{
-    background-color: #E3E3E3;
-    text-decoration: none;
-}
-
-/* About page carousel styles */
 /* fixed height for carousel images */
 .carousel-item {
     height: 370px;
@@ -190,11 +154,44 @@ span {
     width: 100%;
 }
 
-/* admin dashboard styles */
+/* Memberships Page Styles */
+/* Span in Memberships page - emphasizes $ cost of gym membership */
+span {
+    color: rebeccapurple;
+    font-weight: 900;
+    /*font-size: 1.5em;*/
+    font-family: Georgia, sans-serif;
+}
+
+
+
+/* Admin Dashboard Styles */
+/* admin menu*/
+.menu h5 {
+    font-family: Courier New, monospace;
+}
+
+.menu h6 {
+    letter-spacing: .1rem;
+}
+
+/* new members button */
+#b4 {
+    max-width: 8em;
+}
+
+/* admin dashboard chart */
+#globogym_chart{
+    height:400px;
+    width:100%;
+    max-width:700px
+}
+
 .no_underline {
-    text-decoration: none !important;
     color: black;
     font-family: "Courier New", monospace;
+    text-decoration: none !important;
+
 }
 
 .no_underline:hover, a:hover {
@@ -206,9 +203,9 @@ span {
     font-weight: bold;
 }
 
-
 table a {
     color: rebeccapurple;
 }
+
 
 
