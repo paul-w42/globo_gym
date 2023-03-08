@@ -140,6 +140,7 @@ class Member extends User
             $this->setMembershipPriceMonth(120);
             $this->setMembershipLevelName("Gold");
         }
+        $this->setBalance($this->getMembershipPriceMonth());
         $this->setMembershipPriceYear($this->getMembershipPriceMonth() * 10);
         $this->setMembershipPayPeriod(0);
     }
