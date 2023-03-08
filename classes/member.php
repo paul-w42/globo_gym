@@ -120,4 +120,28 @@ class Member extends User
         $this->_membershipPayPeriod = $membershipPayPeriod;
     }
 
+    public function upgradeMember($user, $membershipLevel) {
+        $this->setMemberID($user->getMemberID());
+        $this->setFName($user->getFName());
+        $this->setLName($user->getLName());
+        $this->setPassword($user->getPassword());
+        $this->setEmail($user->getEmail());
+        $this->setPhone($user->getPhone());
+        $this->setBalance($user->getBalance());
+        $this->setJoinDate($user->getJoinDate());
+
+        if ($membershipLevel == 1) {
+            $this->setMembershipPriceMonth(70);
+            $this->setMembershipLevelName("Bronze");
+        } else if ($membershipLevel == 2) {
+            $this->setMembershipPriceMonth(90);
+            $this->setMembershipLevelName("Silver");
+        } else {
+            $this->setMembershipPriceMonth(120);
+            $this->setMembershipLevelName("Gold");
+        }
+        $this->setMembershipPriceYear($this->getMembershipPriceMonth() * 10);
+        $this->setMembershipPayPeriod(0);
+    }
+
 }

@@ -28,6 +28,16 @@ class Controller
 
     function account(): void
     {
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // check which form was posted
+            if (isset($_POST['membership_level'])) {
+                $account = new Member($_POST['membership_level']);
+                $account->upgradeMember($_SESSION['member_info']);
+                $_SESSION['member_info'] = $account;
+                $GLOBALS['dataLayer']->addCustomerMembership($account);
+            }
+        }
         // Load account information
         // We have $_SESSION['username'] and $_SESSION['member_id']
 

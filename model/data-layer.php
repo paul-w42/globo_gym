@@ -76,7 +76,7 @@ class DataLayer
     }
 
     // TODO - TEST - Update to use PDO
-    function addCustomerMembership($memberID, $memberLevel)
+    function addCustomerMembership($member)
     {
 
         $sql = "update members set membership_level = ?, balance = " .
@@ -86,9 +86,9 @@ class DataLayer
         $stmt = $this->_dbh->prepare($sql);
 
         // 3. bind the parameters
-        $stmt->bindValue(1, $memberLevel);
-        $stmt->bindValue(2, $memberLevel);
-        $stmt->bindValue(2, $memberID);
+        $stmt->bindValue(1, $member->getMembershipLevel());
+        $stmt->bindValue(2, $member->getMembershipLevel());
+        $stmt->bindValue(2, $member->getMemberID());
         //$memberLevel, $memberLevel, $memberID
 
         // 4. Execute the query
