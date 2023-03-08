@@ -20,14 +20,14 @@
     <!-- Member Join Date -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
-            <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">Member Since {{ @SESSION['member_info']->getJoinDate()}}</h4>
+            <h4 class="account-details text-secondary">Member Since {{ @SESSION['member_info']->getJoinDate()}}</h4>
         </div>
     </div>
 
     <!-- Membership Level -->
     <div class="row">
         <div class="col-12 col-md-4 mx-auto text-center">
-            <h4 style="font-weight: normal; font-family: Courier New, monospace" class="text-secondary">
+            <h4 class="account-details text-secondary">
                 <check if="{{ method_exists(@SESSION['member_info'], 'getAdminID') }}"><exclude><!-- IS AN ADMIN --></exclude>
                     <true>Administrator Account</true>
                     <false>
@@ -51,7 +51,7 @@
         <!-- Member Profile Info -->
         <div class="row">
             <div class="col-6 col-md-6 px-5 mx-auto">
-                <h4 style="letter-spacing: .1rem;" class="mb-3 text-center">Profile</h4>
+                <h4 class="profile-header mb-3 text-center">Profile</h4>
                 <div class="row mb-3">
                     <!-- Member Username -->
                     <p class="account">USERNAME</p>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <!-- Member Password -->
                     <p class="account">PASSWORD</p>
-                    <p style="color: rebeccapurple;" data-bs-toggle="collapse" data-bs-target="#change_password"><u>(edit)</u></p>
+                    <p class="change" data-bs-toggle="collapse" data-bs-target="#change_password"><u>(edit)</u></p>
                     <!-- collapsible for CHANGE password -->
                     <div id="change_password" class="collapse mb-3">
                         <form action="#" method="post">
@@ -89,9 +89,9 @@
 
             <!-- Membership Details -->
             <div class="col-6 col-md-5 mx-auto">
-                <h4 style="letter-spacing: .1rem;" class="mb-3 text-center">Account Details</h4>
+                <h4 class="profile-header mb-3 text-center">Account Details</h4>
                 <div class="row">
-                    <p style="color: rebeccapurple;" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
+                    <p class="change" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
                     <!-- collapsible for CHANGE membership plan -->
                     <div id="change_plan" class="collapse mb-3">
                         <form action="#" method="post">

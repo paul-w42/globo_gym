@@ -32,11 +32,11 @@
         <div class="col-12 col-md-2 mx-auto ">
             <div class="row position-fixed rounded-2 shadow p-4 text-center border border-light rounded-5">
 
-                <div class="h-100">
-                    <h5 style="font-family: Courier New, monospace;">Menu</h5>
+                <div class="menu h-100">
+                    <h5>Menu</h5>
                     <hr class="my-2">
-                    <h6><a style="letter-spacing: .1rem;" href="admin_dashboard" class="active no_underline p-2">Dashboard</a></h6>
-                    <h6><a style="letter-spacing: .1rem;" href="admin_members" class="no_underline p-2">Members</a></h6>
+                    <h6><a href="admin_dashboard" class="active no_underline p-2">Dashboard</a></h6>
+                    <h6><a href="admin_members" class="no_underline p-2">Members</a></h6>
                 </div>
             </div>
         </div>
@@ -70,13 +70,12 @@
                     <div class="col-12 my-3">
                         <!-- admin dashboard chart buttons - toggles through diff charts-->
                         <input class="admin-buttons btn btn-primary" type='button' id='b1' value='Members' />
-                        <input style="max-width: 8em" class="admin-buttons btn btn-primary mx-auto" type='button' id='b4' value='New Members' />
+                        <input class="admin-buttons btn btn-primary mx-auto" type='button' id='b4' value='New Members' />
                         <input class="admin-buttons btn btn-primary" type='button' id='b2' value='Visits' />
                         <input class="admin-buttons btn btn-primary" type='button' id='b3' value='Revenue' />
                     </div>
                     <!-- admin dashboard chart -->
-                    <div class="img-responsive mx-auto" id="globogym_chart" style="height:400px;width:100%;max-width:700px"></div>
-
+                    <div class="img-responsive mx-auto" id="globogym_chart"></div>
 
                     <!-- admin dashboard chart script -->
                     <script>
