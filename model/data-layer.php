@@ -88,7 +88,7 @@ class DataLayer
         // 3. bind the parameters
         $stmt->bindValue(1, $member->getMembershipLevel());
         $stmt->bindValue(2, $member->getMembershipLevel());
-        $stmt->bindValue(2, $member->getMemberID());
+        $stmt->bindValue(3, $member->getMemberID());
         //$memberLevel, $memberLevel, $memberID
 
         // 4. Execute the query
