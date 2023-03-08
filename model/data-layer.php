@@ -75,19 +75,47 @@ class DataLayer
 
     }
 
+    // TODO - TEST - Update to use PDO
     function addCustomerMembership($memberID, $memberLevel)
     {
-
-        global $cnxn;
 
         $sql = "update members set membership_level = ?, balance = " .
             "(select level_price_month from membership_levels where membership_levels_id = ?) where member_id = ?";
 
-        $stmt = $cnxn->prepare($sql);
+        // 2. prepare statement
+        $stmt = $this->_dbh->prepare($sql);
 
-        $stmt->bind_param("iii", $memberLevel, $memberLevel, $memberID);
+        // 3. bind the parameters
+        $stmt->bindValue(1, $memberLevel);
+        $stmt->bindValue(2, $memberLevel);
+        $stmt->bindValue(2, $memberID);
+        //$memberLevel, $memberLevel, $memberID
 
+        // 4. Execute the query
         $stmt->execute();
+
+
+/*
+
+        // 2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        $food = $orderObj->getFood();
+        $meal = $orderObj->getMeal();
+        $conds = $orderObj->getCondiments();
+
+        // 3. Bind the parameters
+        $statement->bindParam(':food', $food);
+        $statement->bindParam(':meal', $meal);
+        $statement->bindParam(':conds', $conds);
+
+        // 4. Execute the query
+        $statement->execute();
+
+        // 5. Process the result
+        $id = $this->_dbh->lastInsertId();
+        return $id;
+ */
     }
 
     /*
@@ -195,6 +223,7 @@ class DataLayer
      * Returns the result/row back to the calling function, packaged as an associative array.
      * i.e. $firstName = $row['first_name'];
      */
+    /*
     function loadMemberInformation($memberID)
     {
 
@@ -214,7 +243,8 @@ class DataLayer
 
         // $firstName = $row['first_name'];
     }
-
+*/
+    /*
     function loadMembershipLevel($membershipID)
     {
         global $cnxn;
@@ -232,7 +262,7 @@ class DataLayer
         // https://www.php.net/manual/en/mysqli-result.fetch-assoc.php
         return $result->fetch_assoc();
     }
-
+*/
 
     /*
      * Example function from prior project using prepared statement
