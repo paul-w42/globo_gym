@@ -10,6 +10,10 @@ class Controller
         $this->_f3 = $f3;
     }
 
+    /**
+     * Loads default view / home page
+     * @return void
+     */
     function default(): void
     {
 
@@ -20,30 +24,23 @@ class Controller
         echo $view->render('views/home.html');
     }
 
+    /**
+     * Loads home page (non-default)
+     * @return void
+     */
     function home(): void
     {
         $view = new Template();
         echo $view->render('views/home.html');
     }
 
+    /**
+     * Loads account page.  If member_info is not present
+     * inside SESSION, redirects to the login page
+     */
     function account(): void
     {
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // check which form was posted
-            if (isset($_POST['membership_level'])) {
-                $account = new Member($_POST['membership_level']);
-                $account->upgradeMember($_SESSION['member_info'], $_POST['membership_level']);
-                $_SESSION['member_info'] = $account;
-                $GLOBALS['dataLayer']->addCustomerMembership($account);
-            }
-        }
         // Load account information
-        // We have $_SESSION['username'] and $_SESSION['member_id']
-
-        // TODO: Remove loadMemberInformation from data-layer.php
-        //$result = DataLayer::loadMemberInformation($_SESSION['member_id']);
-
         if (!isset($_SESSION['member_info'])) {
             $this->_f3->reroute('login');
         }
@@ -52,6 +49,11 @@ class Controller
         echo $view->render('views/account.html');
     }
 
+    /**
+     * Loads and processes data from the join page
+     * Calls data layer method to add user to database
+     * @return void
+     */
     function join(): void
     {
         //echo 'PHP Version ' . phpversion() . '<br>';
@@ -115,6 +117,12 @@ class Controller
         echo $view->render('views/join.html');
     }
 
+    /**
+     * Loads the membersips page.  If a POST is received,
+     * saves that selected membership level to the SESSION
+     * for use on the join page called immediately afterwards
+     * @return void
+     */
     function memberships(): void
     {
         // If the form has been posted
@@ -128,30 +136,25 @@ class Controller
         echo $view->render('views/memberships.html');
     }
 
+    /**
+     * Displays the about us page
+     * @return void
+     */
     function aboutUs(): void
     {
         $view = new Template();
         echo $view->render('views/about.html');
     }
 
+    /**
+     * Presents and processes the login page.  Calls the
+     * validateLogin() method from the DataLayer to process
+     * the users login credentials.
+     * @return void
+     */
     function login(): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            /*if (isset($_SESSION['member_info'])) {
-                unset($_SESSION['member_info']);
-            }
-
-            if (isset($_SESSION['membership_level'])) {
-                unset($_SESSION['membership_level']);
-            }
-
-            // Remove the welcome message after 1st creating an account if set
-            if (isset($_SESSION['account_created'])) {
-                unset($_SESSION['account_created']);
-            }*/
-
-            //$_SESSION['username'] = $_POST['username'];
 
             $valid = $GLOBALS['dataLayer']->validateLogin($_POST['username'], $_POST['password']);
 
@@ -164,21 +167,25 @@ class Controller
 
         }
 
-        // Add meals to F3 hive
-        //$f3->set('condiments', getCondiments());
-
         // instantiate a view
         $view = new Template();
         echo $view->render('views/login.html');
     }
 
-
+    /**
+     * Loads the admin dashboard
+     * @return void
+     */
     function dashboard(): void
     {
         $view = new Template();
         echo $view->render('views/admin_dashboard.html');
     }
 
+    /**
+     * Loads the admin members page
+     * @return void
+     */
     function members(): void
     {
         $view = new Template();
