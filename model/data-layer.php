@@ -1,6 +1,7 @@
 <?php
 
 require_once ($_SERVER['DOCUMENT_ROOT'].'/../pdo-globogym.php');
+//require ($_SERVER['DOCUMENT_ROOT'].'/../pdo-config.php'); // Jasmine's pdo
 
 /*
  * SQL Insert to add member as Admin
@@ -265,4 +266,24 @@ class DataLayer
             return $customerID;
         }
     */
+
+    /**
+     * returns all Globo Gym members from database
+     * @return array
+     */
+    function getMembers () {
+        //1. Define the query
+        $sql = "SELECT * FROM members ORDER BY member_id ASC";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+
+        //4. Execute the query
+        $statement->execute();
+
+        //5. Process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

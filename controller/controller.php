@@ -188,6 +188,11 @@ class Controller
      */
     function members(): void
     {
+        // Get the data from the model
+        $members = $GLOBALS['dataLayer']->getMembers();
+        $this->_f3->set('members',$members);
+
+        // instantiate a view
         $view = new Template();
         echo $view->render('views/admin_members.html');
     }
