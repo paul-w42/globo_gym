@@ -32,10 +32,10 @@
                 <check if="{{ method_exists(@SESSION['member_info'], 'getAdminID') }}"><exclude><!-- IS AN ADMIN --></exclude>
                     <true>Administrator Account</true>
                     <false>
-                    <check if="{{ method_exists(@SESSION['member_info'], 'getMembershipLevelName') &&  @SESSION['member_info']->getMembershipLevelName() != null }}">
-                        <true>{{ @SESSION['member_info']->getMembershipLevelName() }} Level</true>
-                        <false>Not currently a Paying Member</false>
-                    </check>
+                        <check if="{{ method_exists(@SESSION['member_info'], 'getMembershipLevelName') &&  @SESSION['member_info']->getMembershipLevelName() != null }}">
+                            <true>{{ @SESSION['member_info']->getMembershipLevelName() }} Level</true>
+                            <false>Not currently a Paying Member</false>
+                        </check>
                     </false>
                 </check>
             </h4>
@@ -48,10 +48,10 @@
         </div>
     </div>
 
-    <div class="container fluid w-75 mt-5">
+    <div class="account container-fluid w-75 mt-5">
         <!-- Member Profile Info -->
         <div class="row">
-            <div class="col-6 col-md-6 px-5 mx-auto">
+            <div class="col-6 col-md-6 px-md-5 mx-auto">
                 <h4 class="profile-header mb-3 text-center">Profile</h4>
                 <div class="row mb-3">
                     <!-- Member Username -->
@@ -63,11 +63,15 @@
                     <p class="account">PASSWORD</p>
                     <p class="change" data-bs-toggle="collapse" data-bs-target="#change_password"><u>(edit)</u></p>
                     <!-- collapsible for CHANGE password -->
-                    <div id="change_password" class="collapse mb-3">
+                    <div id="change_password" class="collapse px-0 mb-3">
                         <form action="#" method="post">
-                            <label for=“new_password”>New Password</label><br>
-                            <input type="password" name=“password” id=“new_password”>
-                            <button class="account-buttons btn btn-primary" type="submit">Change</button>
+                            <label for=“current_password”><b>Current Password</b></label><br>
+                            <input class="mt-1 mb-2" type="password" name=“current_password” id=“current_password”><br>
+                            <label for=“new_password”><b>New Password</b></label><br>
+                            <input class="mt-1 mb-2" type="password" name=“new_password” id=“new_password”><br>
+                            <label for=“new_password_confirm”><b>Confirm New Password</b></label><br>
+                            <input class="mt-1 mb-2" type="password" name=“new_password_confirm” id=“new_password_confirm”><br>
+                            <button class="account-buttons btn btn-primary mt-1" type="submit">Change</button>
                         </form>
                     </div>
                 </div>
@@ -90,6 +94,7 @@
 
             <!-- Membership Details -->
             <div class="col-6 col-md-5 mx-auto">
+                <hr class="hr w-100">
                 <h4 class="profile-header mb-3 text-center">Account Details</h4>
                 <div class="row">
                     <p class="change" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
@@ -110,14 +115,14 @@
                 <check if="{{ (method_exists(@SESSION['member_info'], 'getMembershipLevel')) && (@SESSION['member_info']->getMembershipLevel() > 0) }} ">
                     <div class="row">
                         <p>Your payment is <check if="{{ @SESSION['member_info']->getMembershipPayPeriod() == 0 }} ">
-                                <true>${{ @SESSION['member_info']->getMembershipPriceMonth() }} per month</true>
-                                <false>${{ @SESSION['member_info']->getMembershipPriceYear() }} per year</false></check></p>
+                            <true>${{ @SESSION['member_info']->getMembershipPriceMonth() }} per month</true>
+                            <false>${{ @SESSION['member_info']->getMembershipPriceYear() }} per year</false></check></p>
                     </div>
                     <div class="row">
                         <!-- Member Balance -->
                         <p>Your Balance is: <u>${{ @SESSION['member_info']->getBalance() }}</u></p>
                     </div>
-                    </check>
+                </check>
             </div>
         </div>
     </div>

@@ -108,6 +108,29 @@ img.full {
     letter-spacing: .1rem;
 }
 
+/* desktop responsive styles - account page */
+@media screen and (min-width: 600px) {
+    /* remove horizontal line with desktop */
+    .hr {
+        display: none;
+    }
+}
+
+/* mobile responsive styles - account page */
+@media screen and (max-width: 600px) {
+    /* remove vertical line with mobile */
+    .vr {
+        display: none;
+    }
+    /* center text with mobile */
+    .account {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+
+
 
 
 
