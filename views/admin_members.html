@@ -16,7 +16,6 @@
 
            @ PAUL AND STEWART ----------
            * Issues with the Members Table:
-            - The Membership Level displays a number (not Bronze, Silver, Gold)
             - The Status of all members is currently hardcoded as Active
             - Member visits are blank (which is because we don’t have a Visits column in the members table)
             - The Add/Suspend action doesn’t work - we need to add functions for this
@@ -55,7 +54,6 @@
                         <th scope="col">Member Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Level</th>
-
                         <th scope="col">Join Date</th>
                         <th scope="col">Balance</th>
                         <th scope="col">Visits</th>
@@ -65,16 +63,42 @@
                     <tbody class="align-middle">
                     <repeat group="{{ @members }}" value="{{ @member }}">
                         <tr>
+                            <!-- Member ID #-->
                             <td>{{ @member['member_id'] }}</td>
+                            <!-- Member Name -->
                             <td>{{ @member['first_name'] }} {{ @member['last_name'] }}</td>
+                            <!-- Membership Status -->
                             <!-- TODO: @paul/stewart - all members are currently hardcoded as active... need to change this?-->
                             <td>Active</td>
-                            <!-- TODO: @paul/stewart - membership level displays numbers - need to fix this-->
-                            <td>{{ @member['membership_level'] }}</td>
+                            <!-- Membership Level -->
+                            <check if="{{ @member['membership_level']=='1' }}">
+                                <true>
+                                    <td>Bronze</td>
+                                </true>
+                            </check>
+                            <check if="{{ @member['membership_level']=='2' }}">
+                                <true>
+                                    <td>Silver</td>
+                                </true>
+                            </check>
+                            <check if="{{ @member['membership_level']=='3' }}">
+                                <true>
+                                    <td>Gold</td>
+                                </true>
+                            </check>
+                            <check if="{{ @member['membership_level']=='-1' }}">
+                                <true>
+                                    <td></td>
+                                </true>
+                            </check>
+                            <!-- Member join date -->
                             <td>{{ @member['join_date'] }}</td>
+                            <!-- Member balance -->
                             <td>{{ @member['balance'] }}</td>
+                            <!-- Member visits -->
                             <!-- TODO: @paul/stewart - visits are currently blank -->
                             <td>{{ @member['visits'] }}</td>
+                            <!-- Add/Suspend member feature -->
                             <!-- TODO: @paul/stewart - add/suspend members doesn't work bc we don't have functions for this -->
                             <td>
                                 <u><a href="#">Add</a></u> <br>
