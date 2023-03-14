@@ -199,10 +199,11 @@ class Controller
 
     /**
      * This route changes the users password by taking in the current password,
-     * the new password, and new password confirmation.
-     * @return void
+     * the new password, and new password confirmation.  Returns an encoded
+     * json string indicating success/failure w/ message.
+     * @return string
      */
-    function changePassword()
+    function changePassword() : string
     {
         global $f3;
 
@@ -214,13 +215,24 @@ class Controller
         if ($f3->get("errors['password']")) {
             $memberID = $_SESSION['member_info']->getMemberID();
             $oldPass = $_POST['current_password'];
+
             //function changePassword($memberID, $currentPassword, $newPassword)
-            $GLOBALS['dataLayer']->changePassword($memberID, $oldPass, $_POST['new_password']);
+
+            // if successful update ...
+            if ($GLOBALS['dataLayer']->changePassword($memberID,
+                $oldPass, $_POST['new_password'])) {
+                return json_encode(array("status" => "updated", "error" => null));
+            }
+            // unsuccessful update, return update error
+            else {
+                return json_encode(array("status" => "error", "error" => 'database update error'));
+            }
+
         }
         // if passwords are not valid, return error
         else {
-            $f3->get("errors['password']");
-            json_encode(array("status" => "invalid"));
+            // password validation error in ---> $f3->get("errors['password']");
+            return json_encode(array("status" => "invalid", "error" => $f3->get("errors['password']")));
         }
 
     }
