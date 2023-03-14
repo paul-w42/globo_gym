@@ -68,5 +68,11 @@ $f3->route('GET /admin_members', function ($f3) {
     $GLOBALS['con']->members();
 });
 
+$f3->route('POST /change_password', function ($f3) {
+    $GLOBALS['con']->changePassword();
+});
+
+
+
 // Run Fat-Free
 $f3->run();                 // -> is the object operator, equiv to . in java

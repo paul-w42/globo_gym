@@ -95,7 +95,6 @@ class Validate
 
         if (strlen($password) < 9) {
             $f3->set("errors['password']", "Password must be at least 9 characters.");
-            //return;
         }
 
     }

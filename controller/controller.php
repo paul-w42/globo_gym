@@ -118,7 +118,7 @@ class Controller
     }
 
     /**
-     * Loads the membersips page.  If a POST is received,
+     * Loads the memberships page.  If a POST is received,
      * saves that selected membership level to the SESSION
      * for use on the join page called immediately afterwards
      * @return void
@@ -196,4 +196,33 @@ class Controller
         $view = new Template();
         echo $view->render('views/admin_members.html');
     }
+
+    /**
+     * This route changes the users password by taking in the current password,
+     * the new password, and new password confirmation.
+     * @return void
+     */
+    function changePassword()
+    {
+        global $f3;
+
+        // current_password
+        $GLOBALS['dataLayer']->validPassword($_POST['new_password'],
+            $_POST['new_password_confirm']);
+
+        // If passwords are valid, update inside database
+        if ($f3->get("errors['password']")) {
+            $memberID = $_SESSION['member_info']->getMemberID();
+            $oldPass = $_POST['current_password'];
+            //function changePassword($memberID, $currentPassword, $newPassword)
+            $GLOBALS['dataLayer']->changePassword($memberID, $oldPass, $_POST['new_password']);
+        }
+        // if passwords are not valid, return error
+        else {
+            $f3->get("errors['password']");
+            json_encode(array("status" => "invalid"));
+        }
+
+    }
+
 }

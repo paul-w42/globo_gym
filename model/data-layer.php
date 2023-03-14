@@ -76,6 +76,13 @@ class DataLayer
 
     }
 
+    /**
+     * Update the membership level inside the members table.  Also as a result
+     * udpates the members balance owed - charges for the 1st pay period
+     * @param $memberID
+     * @param $memberLevel
+     * @return void
+     */
     function addCustomerMembership($memberID, $memberLevel)
     {
 
@@ -190,6 +197,44 @@ class DataLayer
 
         return false;
     }
+
+
+    /**
+     * This function takes a member_id, current_password, and new_password,
+     * and updates the member table with that new password for that
+     * member_id if the old_password is correct.
+     *
+     * @param $memberID
+     * @param $currentPassword
+     * @param $newPassword
+     * @return bool
+     */
+    function changePassword($memberID, $currentPassword, $newPassword)
+    {
+
+        $newPassword = sha1($newPassword);
+        $currentPassword = sha1($currentPassword);
+
+        $sql = "UPDATE members SET login_password = :newPass WHERE " .
+            "member_id = :memberID AND login_password = :oldPass";
+
+
+        $stmt = $this->_dbh->prepare($sql);
+
+        $stmt->bindParam(':newPass', $newPassword);
+        $stmt->bindParam(':memberID', $memberID);
+        $stmt->bindParam(':oldPass', $currentPassword);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     /*
      * Loads user information from the database when visiting the account page.
