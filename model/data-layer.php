@@ -83,19 +83,18 @@ class DataLayer
      * @param $memberLevel
      * @return void
      */
-    function addCustomerMembership($memberID, $memberLevel)
+    function addCustomerMembership($member)
     {
 
-        $sql = "update members set membership_level = :memberLevel, balance = " .
-            "(select level_price_month from membership_levels where membership_levels_id = :memberLevel2) where member_id = :memberId";
+        $sql = "update members set membership_level = ?, balance = " .
+            "(select level_price_month from membership_levels where membership_levels_id = ?) where member_id = ?";
 
         $stmt = $this->_dbh->prepare($sql);
 
         //$stmt->bind_param("iii", $memberLevel, $memberLevel, $memberID);
-
-        $stmt->bindParam(':memberLevel', $memberLevel);
-        $stmt->bindParam(':memberLevel2', $memberLevel);
-        $stmt->bindParam(':memberId', $memberID);
+        $stmt->bindValue(1, $member->getMembershipLevel());
+        $stmt->bindValue(2, $member->getMembershipLevel());
+        $stmt->bindValue(3, $member->getMemberID());
 
         $stmt->execute();
 

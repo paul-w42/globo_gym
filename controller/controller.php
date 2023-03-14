@@ -45,26 +45,15 @@ class Controller
             $this->_f3->reroute('login');
         }
 
-        if (isset($_POST['membership_level'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['membership_level'])) {
+                $account = new Member($_POST['membership_level']);
+                $account->upgradeMember($_SESSION['member_info'], $_POST['membership_level']);
+                $_SESSION['member_info'] = $account;
+                $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_info']);
 
-            $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], $_POST['membership_level']);
-            /*
-            if ($_POST['membership_level'] == 'Bronze')
-            {
-                $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], 1);
+                //$this->_f3->reroute('account');
             }
-            else if ($_POST['membership_level'] == 'Silver')
-            {
-                $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], 2);
-                //DataLayer::addCustomerMembership($_SESSION['member_id'], 2);
-            }
-            else if ($_POST['membership_level'] == 'Gold')
-            {
-                $GLOBALS['dataLayer']->aaddCustomerMembership($_SESSION['member_id'], 3);
-            }
-            */
-
-            $this->_f3->reroute('account');
         }
 
         $view = new Template();
