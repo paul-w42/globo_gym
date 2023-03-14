@@ -98,30 +98,6 @@ class DataLayer
 
         $stmt->execute();
 
-        /*
-         *
-        $newPassword = sha1($newPassword);
-        $currentPassword = sha1($currentPassword);
-
-        $sql = "UPDATE members SET login_password = :newPass WHERE " .
-            "member_id = :memberID AND login_password = :oldPass";
-
-
-        $stmt = $this->_dbh->prepare($sql);
-
-        $stmt->bindParam(':newPass', $newPassword);
-        $stmt->bindParam(':memberID', $memberID);
-        $stmt->bindParam(':oldPass', $currentPassword);
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() == 1) {
-            return true;
-        }
-        else {
-            return false;
-        }
-         */
     }
 
     /*
@@ -220,7 +196,6 @@ class DataLayer
             return true;
         }
 
-
         return false;
     }
 
@@ -261,84 +236,6 @@ class DataLayer
         }
     }
 
-
-    /*
-     * Loads user information from the database when visiting the account page.
-     * Returns the result/row back to the calling function, packaged as an associative array.
-     * i.e. $firstName = $row['first_name'];
-     */
-    /*
-    function loadMemberInformation($memberID)
-    {
-        // TODO - Convert to use PDO
-
-        global $cnxn;
-
-        $memberID = intval($memberID);
-
-        $sql = "SELECT first_name, last_name, join_date, email, phone, balance, membership_level FROM members WHERE member_id = ?";
-
-        $stmt = $cnxn->prepare($sql);
-
-        $stmt->bind_param("i", $memberID);   // can change values and re-do this line x times
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-        return $result->fetch_assoc();
-
-        // $firstName = $row['first_name'];
-    }
-    */
-
-    function loadMembershipLevel($membershipID)
-    {
-        // TODO - Convert to use PDO
-        global $cnxn;
-
-        $sql = "SELECT level_name, level_price_month, level_price_year FROM membership_levels 
-                       WHERE membership_levels_id = ?";
-
-        $stmt = $cnxn->prepare($sql);
-
-        $stmt->bind_param("i", $membershipID);   // can change values and re-do this line x times
-
-        $stmt->execute();
-        $result = $stmt->get_result();
-        //return $result;     // cycle through each row to gather required info
-        // https://www.php.net/manual/en/mysqli-result.fetch-assoc.php
-        return $result->fetch_assoc();
-    }
-
-
-    /*
-     * Example function from prior project using prepared statement
-     */
-    /*
-        function customerExists($fname, $email, $phone) {
-
-            global $cnxn;
-
-            $sql = "SELECT max(customer_id) AS customer_id FROM customers WHERE
-                    first_name=? AND (email=? OR phone=?)";
-
-            $stmt = $cnxn->prepare($sql);
-            $stmt->bind_param("sss", $fname, $email, $phone);   // can change values and re-do this line n times
-
-            $stmt->execute();
-
-            $customerID = 0;
-
-            $stmt->bind_result($customer_id);
-
-            if ($stmt->fetch()) {
-                $customerID = $customer_id;
-            }
-
-            //echo "customerExists(), returning customerID: " . $customerID . "<br>\n";
-
-            return $customerID;
-        }
-    */
 
     /**
      * returns all Globo Gym members from database
