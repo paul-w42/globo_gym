@@ -45,6 +45,28 @@ class Controller
             $this->_f3->reroute('login');
         }
 
+        if (isset($_POST['membership_level'])) {
+
+            $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], $_POST['membership_level']);
+            /*
+            if ($_POST['membership_level'] == 'Bronze')
+            {
+                $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], 1);
+            }
+            else if ($_POST['membership_level'] == 'Silver')
+            {
+                $GLOBALS['dataLayer']->addCustomerMembership($_SESSION['member_id'], 2);
+                //DataLayer::addCustomerMembership($_SESSION['member_id'], 2);
+            }
+            else if ($_POST['membership_level'] == 'Gold')
+            {
+                $GLOBALS['dataLayer']->aaddCustomerMembership($_SESSION['member_id'], 3);
+            }
+            */
+
+            $this->_f3->reroute('account');
+        }
+
         $view = new Template();
         echo $view->render('views/account.html');
     }

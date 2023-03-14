@@ -86,16 +86,43 @@ class DataLayer
     function addCustomerMembership($memberID, $memberLevel)
     {
 
-        global $cnxn;
+        $sql = "update members set membership_level = :memberLevel, balance = " .
+            "(select level_price_month from membership_levels where membership_levels_id = :memberLevel2) where member_id = :memberId";
 
-        $sql = "update members set membership_level = ?, balance = " .
-            "(select level_price_month from membership_levels where membership_levels_id = ?) where member_id = ?";
+        $stmt = $this->_dbh->prepare($sql);
 
-        $stmt = $cnxn->prepare($sql);
+        //$stmt->bind_param("iii", $memberLevel, $memberLevel, $memberID);
 
-        $stmt->bind_param("iii", $memberLevel, $memberLevel, $memberID);
+        $stmt->bindParam(':memberLevel', $memberLevel);
+        $stmt->bindParam(':memberLevel2', $memberLevel);
+        $stmt->bindParam(':memberId', $memberID);
 
         $stmt->execute();
+
+        /*
+         *
+        $newPassword = sha1($newPassword);
+        $currentPassword = sha1($currentPassword);
+
+        $sql = "UPDATE members SET login_password = :newPass WHERE " .
+            "member_id = :memberID AND login_password = :oldPass";
+
+
+        $stmt = $this->_dbh->prepare($sql);
+
+        $stmt->bindParam(':newPass', $newPassword);
+        $stmt->bindParam(':memberID', $memberID);
+        $stmt->bindParam(':oldPass', $currentPassword);
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+         */
     }
 
     /*
@@ -241,6 +268,7 @@ class DataLayer
      * Returns the result/row back to the calling function, packaged as an associative array.
      * i.e. $firstName = $row['first_name'];
      */
+    /*
     function loadMemberInformation($memberID)
     {
         // TODO - Convert to use PDO
@@ -261,6 +289,7 @@ class DataLayer
 
         // $firstName = $row['first_name'];
     }
+    */
 
     function loadMembershipLevel($membershipID)
     {
