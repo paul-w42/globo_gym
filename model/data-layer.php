@@ -369,6 +369,7 @@ class DataLayer
 
         //3. Bind the parameters
         $statement->bindParam(':date', $date);
+        $statement->bindParam(':id', $id);
 
         //4. Execute the statement
         $statement->execute();
