@@ -45,7 +45,7 @@ a POST method to the specified server URL
     5. (this took a while to figure out) Setup a POST route URL in the 
 controller, and that specified function acts as any other.  It works by 
 echoing data that is to be returned to the client. i.e. **`echo "{\"data\": \"value\"}`**
-    6. This function both calls the necessary functions to validate
+    6. This function calls both necessary functions to validate
 the input fields and update the database.
 
 
