@@ -26,12 +26,15 @@ $dataLayer = new DataLayer();
 $f3->route('GET /', function () {
     $GLOBALS['con']->default();
 });
-
 // Login page
 $f3->route('GET|POST /login', function ($f3) {      // pass in f3 so is visible in function
     $GLOBALS['con']->login();
 });
 
+// Login page
+$f3->route('GET|POST /logout', function ($f3) {      // pass in f3 so is visible in function
+    $GLOBALS['con']->logout();
+});
 
 // Define Home page route
 $f3->route('GET /home', function () {
