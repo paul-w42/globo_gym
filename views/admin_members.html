@@ -97,8 +97,27 @@
                             <td>{{ @member['balance'] }}</td>
                             <!-- Member visits -->
                             <!-- TODO: @paul/stewart - visits are currently blank -->
+                            <!--
+                            visits should just run a select query to grab and display this customer's
+                            number of visits from the visits table, probably very simple \-->
                             <td>{{ @member['visits'] }}</td>
                             <!-- Add/Suspend member feature -->
+                            <!-- Two ideas, either suspends just deletes that person's information
+                                 from the database (probably not great to go this route),
+                                 or we change their account from a member back into a user, "suspending"
+                                 their membership (updates their account in the database, changing their
+                                 membership_level back to 0)
+
+                                 Add would be for if the admin ever needs to manually
+                                 give an account membership they can (promotion etc in the case of a real gym)
+                                 admin clicks on "add", the three membership levels pop up,
+                                 they pick one and that user account becomes a member account with that specific
+                                 membership tied to it.
+                                 we will need a way to grab that account's information from the table
+                                 and use it to run the update query on their account.
+                                 (function that grabs {{ @member['member_id'] }} when add/suspend are clicked?)
+                                 ^ will this work with each table row having the "same" add/suspend buttons?
+                                 -->
                             <!-- TODO: @paul/stewart - add/suspend members doesn't work bc we don't have functions for this -->
                             <td>
                                 <u><a href="#">Add</a></u> <br>

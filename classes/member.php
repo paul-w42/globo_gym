@@ -23,7 +23,7 @@ class Member extends User
      * @param $_lName
      * @param $_uName
      * @param $_password
-     * @param $_email
+     * @param $_email\\
      * @param $_phone
      * @param $_balance
      */
