@@ -62,4 +62,5 @@ UML Diagram
 ### Admin Login & Password
 
 There is currently no admin login/password required, the 
-page is viewable at [admin page](https://paulwoods.greenriverdev.com/328/globo_gym/admin_dashboard)
+page is viewable at <a href="https://paulwoods.greenriverdev.com/328/globo_gym/admin_dashboard"
+  target="_blank">admin page</a>
