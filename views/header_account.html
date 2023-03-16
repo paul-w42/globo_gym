@@ -57,7 +57,10 @@
                             </li>
                             <!-- log in page-->
                             <li class="nav-item">
-                                <a class="mx-auto my-button nav-link btn btn-primary rounded-pill" href="login">LOGIN</a>
+                                <check if="{{ @SESSION['member_info'] != null }}">
+                                    <true><a class="mx-auto my-button nav-link btn btn-primary rounded-pill" href="logout">LOGOUT</a></true>
+                                    <false><a class="mx-auto my-button nav-link btn btn-primary rounded-pill" href="login">LOGIN</a></false>
+                                </check>
                             </li>
                         </ul>
                     </div>
