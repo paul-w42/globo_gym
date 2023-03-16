@@ -362,7 +362,7 @@ class DataLayer
     {
         //1. Define the query
         $date = date('yyyy-mm-dd');
-        $sql = "select * from visits where member_id = :id AND visit_date like :date";
+        $sql = "select * from visits where member_id = :id AND visit_date = :date";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
