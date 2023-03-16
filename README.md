@@ -52,7 +52,8 @@ the input fields and update the database.
 
 ### Current UML Diagram
 
-[UML Diagram](class-diagram-2.png)
+<img src="class-diagram-2.png" alt="uml diagram">
+UML Diagram
 
 ### Most recent ER database diagram
 
