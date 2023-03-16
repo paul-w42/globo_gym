@@ -86,6 +86,10 @@ function drawMemberChart(chartType) {
     chart.setChartType(chartType);
     chart.setDataTable(data);
     chart.draw();
+
+    window.addEventListener('resize', function() {
+        chart.draw()
+    }, false);
 }
 
 // code for new members chart
@@ -141,6 +145,10 @@ function drawNewMemberChart(chartType) {
     chart.setChartType(chartType);
     chart.setDataTable(data);
     chart.draw();
+
+    window.addEventListener('resize', function() {
+        chart.draw()
+    }, false);
 }
 
 // code for visits chart
@@ -196,6 +204,10 @@ function drawVisitsChart(chartType) {
     chart.setChartType(chartType);
     chart.setDataTable(data);
     chart.draw();
+
+    window.addEventListener('resize', function() {
+        chart.draw()
+    }, false);
 }
 
 // code for revenue chart
@@ -251,4 +263,8 @@ function drawRevenueChart(chartType) {
     chart.setChartType(chartType);
     chart.setDataTable(data);
     chart.draw();
+
+    window.addEventListener('resize', function() {
+        chart.draw()
+    }, false);
 }

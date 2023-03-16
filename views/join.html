@@ -37,11 +37,11 @@ also prevent user from selecting date in the future)?
 </div> <!-- end container -->
 
 <!--- container for Join membership form  --->
-<div class="container-fluid mx-auto w-50 mb-4">
+<div class="form w-md-50 container-fluid mx-auto mb-4">
     <div class="row my-3 <check if="{{ !isset(@SESSION['package']) }}"> mt-5</check>">
     <!-- First Name field -->
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating">
+        <div class="form-floating my-2 my-md-0">
             <input type="text" class="form-control" name="first" id="first"
             <check if="{{ isset(@SESSION['first']) }}">
                 value="{{ @SESSION['first'] }}"
@@ -54,7 +54,7 @@ also prevent user from selecting date in the future)?
     </div>
     <!-- Last Name field -->
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating">
+        <div class="form-floating mt-2 my-md-0">
             <input type="text" class="form-control" name="last" id="last"
             <check if="{{ isset(@SESSION['last']) }}">
                 value="{{ @SESSION['last'] }}"
@@ -84,7 +84,7 @@ also prevent user from selecting date in the future)?
 <div class="row my-3">
     <!-- Phone field -->
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating">
+        <div class="form-floating my-md-0">
             <input type="text" class="form-control" name="phone" id="phone"
             <check if="{{ isset(@SESSION['phone']) }}">
                 value="{{ @SESSION['phone'] }}"
@@ -98,7 +98,7 @@ also prevent user from selecting date in the future)?
     <!-- Birthdate field -->
     <!-- TODO: NEED TO ADD BIRTHDATE INTO THE DATABASE AND ALSO MAYBE VALIDATION (ie: member needs to be 18+ and prevent user from selecting date in future)? -->
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating">
+        <div class="form-floating mt-3 my-md-0">
             <input type="date" class="form-control" name="bday" id="bday"
             <check if="{{ isset(@SESSION['bday']) }}">
                 value="{{ @SESSION['bday'] }}"
@@ -134,7 +134,7 @@ also prevent user from selecting date in the future)?
         </div>
     </div>
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating">
+        <div class="form-floating mt-3 my-md-0">
             <input type="password" class="form-control" name="password2" id="password2">
             <label class="control-label" for="password2">Confirm Password</label>
         </div>
