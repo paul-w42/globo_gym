@@ -7,7 +7,9 @@ the PHP Fat Free Framework and MySQL, Bootstrap for client side layout, and jQue
 
 ## Authors
 
-Jasmine David, Stewart Lovell, and Paul Woods
+- Jasmine David
+- Stewart Lovell
+- Paul Woods
 
 ## Project Requirements and Implementation
 
