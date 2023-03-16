@@ -214,14 +214,40 @@ class Controller
      * json string indicating success/failure w/ message.
      * @return string
      */
-    function changePassword() : string
+    function changePassword() : void
     {
-        global $f3;
+        //global $f3;
 
         // TESTING CODE - HARD-CODING VALUES, NOT USING SESSION
-        Validate::validPassword($_POST['new_password'], $_POST['new_password_confirm']);
+        $newPass = $_POST['new_password'];
+        $newPassConfirm = $_POST['new_password_confirm'];
 
+        echo $newPass;
+        var_dump($_POST);
+        return;
 
+        Validate::validPassword($newPass, $newPassConfirm);
+/*
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // TESTING
+            //$newPass = $_POST['new_password'];
+            //var_dump($_POST);
+            //echo "POST request";
+            $response = json_encode(array("status" => "success", "error" => "no error"));
+            echo $response;
+            //return "";
+            return;
+        }
+        else {
+            // TESTING
+            //$newPass = $_GET['new_password'];
+            var_dump($_GET);
+            //echo $newPass;
+            echo "GET request";
+            //return "";
+            return;
+        }
+*/
         // If passwords are valid, update inside database
         $dbError = $this->_f3->get('errors');
 
@@ -231,7 +257,7 @@ class Controller
             $oldPass = $_POST['current_password'];
 
             // if successful update ...
-            if ($GLOBALS['dataLayer']->changePassword($memberID, $oldPass, $_POST['new_password'])) {
+            if ($GLOBALS['dataLayer']->changePassword($memberID, $oldPass, $newPass)) {
                 $output = json_encode(array("status" => "updated", "error" => NULL));
                 echo $output;
             }
@@ -247,50 +273,13 @@ class Controller
             // password validation error in ---> $f3->get("errors['password']");
             $dbError = $this->_f3->get('errors');
             $dbError = $dbError['password'];
-            $output = json_encode(array("status" => "invalid", "error" => "$dbError"));
+            $output = json_encode(array("status" => "invalid", "error" => "$dbError, password $newPass"));
             echo $output;
         }
 
 
 
-        /*
-        // THIS WORKS!!!
-        $response = "{\"status\", \"d\"}";
-        echo $response;
-        return "";
-        */
-
-        /*
-        // current_password
-        Validate::validPassword($_POST['new_password'],
-            $_POST['new_password_confirm']);
-
-        // If passwords are valid, update inside database
-        if ($f3->get("errors['password']")) {
-            $memberID = $_SESSION['member_info']->getMemberID();
-            $oldPass = $_POST['current_password'];
-
-            //function changePassword($memberID, $currentPassword, $newPassword)
-
-            // if successful update ...
-            if ($GLOBALS['dataLayer']->changePassword($memberID,
-                $oldPass, $_POST['new_password'])) {
-                echo "json_encode(array(\"status\" => \"updated\", \"error\" => null))";
-            }
-            // unsuccessful update, return update error
-            else {
-                echo "json_encode(array(\"status\" => \"error\", \"error\" => \"database update error\"))";
-            }
-
-        }
-        // if passwords are not valid, return error
-        else {
-            // password validation error in ---> $f3->get("errors['password']");
-            echo "json_encode(array(\"status\" => \"invalid\", \"error\" => $f3->get(\"errors['password']\")))";
-        }
-        */
-
-        return "";      // For some reason required for a JSON response
+        //return "";      // For some reason required for a JSON response
     }
 
 }

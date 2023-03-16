@@ -64,14 +64,14 @@
                     <p class="change" data-bs-toggle="collapse" data-bs-target="#change_password"><u>(edit)</u></p>
                     <!-- collapsible for CHANGE password -->
                     <div id="change_password" class="collapse px-0 mb-3">
-                        <form action="#" method="post">
+                        <form id="passwordForm" name="passwordForm" method="post">
                             <label for=“current_password”><b>Current Password</b></label><br>
                             <input class="mt-1 mb-2" type="password" name=“current_password” id=“current_password”><br>
                             <label for=“new_password”><b>New Password</b></label><br>
                             <input class="mt-1 mb-2" type="password" name=“new_password” id=“new_password”><br>
                             <label for=“new_password_confirm”><b>Confirm New Password</b></label><br>
                             <input class="mt-1 mb-2" type="password" name=“new_password_confirm” id=“new_password_confirm”><br>
-                            <button class="account-buttons btn btn-primary mt-1" type="submit">Change</button>
+                            <button id="submitPassword" class="account-buttons btn btn-primary mt-1" type="submit">Change</button>
                         </form>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                     <p class="change" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
                     <!-- collapsible for CHANGE membership plan -->
                     <div id="change_plan" class="collapse mb-3">
-                        <form action="#" method="post">
+                        <form name="membershipForm" id="membershipForm" action="#" method="post">
                             <input type="radio" name="membership_level" id="bronze" value="1">
                             <label for="bronze">Bronze</label><br>
                             <input type="radio" name="membership_level" id="silver" value="2">
@@ -130,6 +130,43 @@
 
 <!-- footer -->
 <include href="views/footer.html"></include>
+
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script>
+
+    console.log("test");
+
+    // http://ZiptasticAPI.com/ZIPCODE, returns json object w/ country, state, city values
+
+    // with jquery
+
+    $("#submitPassword").on("click", function() {
+
+        let url = "https://paulwoods.greenriverdev.com/328/globo_gym/change_password";
+        let currentPass = $("#current_password").val();
+        console.log(currentPass);
+        let newPass = $("#new_password").val();
+        let newPassConfirm = $("#new_password_confirm").val();
+        const obj = {current_password: currentPass, new_password: newPass, new_password_confirm: newPassConfirm};
+        const json = JSON.stringify(obj);
+
+        $.post(url, json, function(result) {
+            console.log(result);
+            console.log('results logged');
+            //console.log(result);
+            //console.log(result['city']);
+        });
+    });
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
