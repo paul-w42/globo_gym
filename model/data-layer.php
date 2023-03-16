@@ -387,8 +387,6 @@ class DataLayer
 
             //2. Prepare the statement
             $statement=$this->_dbh->prepare($sql);
-
-            $date = date('m/d/y h:i:s a', time());
             //3. Bind the parameters
             $statement->bindParam(':id', $id);
             $statement->bindParam(':date', $date);
