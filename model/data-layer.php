@@ -236,6 +236,190 @@ class DataLayer
         }
     }
 
+    /**
+     * Given a month, this function returns all accounts that were created
+     * during that month for the year 2023 (current year)
+     * @param $month
+     * @return array
+     */
+    function getAccountsCreatedMonth($month)
+    {
+        //1. Define the query (does like even exist in sql? am I losing it?)
+        $sql = 'select count(*) from members where join_date like :month/?/23';
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind params
+        $statement->bindParam(':month', $month);
+
+        //4. Execute the query
+        $statement->execute();
+
+        //5. Process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * @todo - sort the results by the month so that they are returned in order and can be iterated on by month
+     * Given a year, this function returns all accounts that were created
+     * during that year
+     * @param $year
+     * @return array|false
+     *
+     */
+    function getAccountsCreatedYear($year)
+    {
+        //1. Define the query (not sure about like, using anyway to get pseudocode at least)
+        $sql = "select count(*) from members where join_date like ?/?/:year";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':year', $year);
+
+        //4. Execute the query
+        $statement->execute();
+
+        //5. Process the results
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Grabs all member information for subscribed accounts
+     * @return int
+     */
+    function getRevenue()
+    {
+        //1. Define the query
+        $sql = "select * from members where membership_level > 0";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //4. Execute the query
+        $statement->execute();
+
+        //5. Process the results
+        $revenue = 0;
+        while($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+            if ($row['membership_pay_period'] == 0) {
+                if ($row['membership_level'] == 1) {
+                    $revenue += 70;
+                } else if ($row['membership_level'] == 2) {
+                    $revenue += 90;
+                } else {
+                    $revenue += 120;
+                }
+            }else {
+                if ($row['membership_level'] == 1) {
+                    $revenue += 700 / 12;
+                } else if ($row['membership_level'] == 2) {
+                    $revenue += 900 / 12;
+                } else {
+                    $revenue += 1200 / 12;
+                }
+            }
+        }
+        return $revenue;
+    }
+
+    /**
+     * Will be used when an admin needs to manually suspend
+     * an acount.
+     *
+     * Downgrades an account from a member to a user,
+     * effectively suspending their membership
+     */
+    function downgradeMember($id)
+    {
+        //1. Define the query
+        $sql = "update members set membership_level = 0 where member_id = :id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':id', $id);
+
+        //4. Execute the query
+        $statement->execute();
+    }
+
+    /**
+     * If the user has not visited today, runs a query on
+     * the database inserting a new row into visits table
+     * with a given member id, grabbing the current date/time
+     * and time stamping the visit, returns an error message if
+     * the user has already visited or a success message
+     * if the visit was entered successfully
+     * @param $id
+     * @return string
+     */
+    function visit($id)
+    {
+        //1. Define the query
+        $date = date('m/d/y');
+        $sql = "select * from visits where member_id = :id AND visit_date like :date";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        //3. Bind the parameters
+        $statement->bindParam(':date', $date);
+
+        //4. Execute the statement
+        $statement->execute();
+
+        //5. Process the results
+        $hasVisited = false;
+        if ($statement->rowCount() > 0) {
+            $hasVisited = true;
+        }
+
+        if (!$hasVisited) {
+            //1. Define the query
+            $sql = "insert into visits (member_id, visit_date)
+             values (:id, :date)";
+
+            //2. Prepare the statement
+            $statement=$this->_dbh->prepare($sql);
+
+            $date = date('m/d/y h:i:s a', time());
+            //3. Bind the parameters
+            $statement->bindParam(':id', $id);
+            $statement->bindParam(':date', $date);
+
+            //4. Execute the statement
+            $statement->execute();
+
+            return "Visit successful";
+        } else {
+            return "You have already visited today, come back tomorrow!";
+        }
+    }
+
+    /**
+     * Runs a query on the database given a member id
+     * to return that member's number of visits to the gym
+     * @param $id
+     * @return array
+     */
+    function getVisits($id)
+    {
+        //1. Define the query
+        $sql = "select count(*) from visis where member_id = $id";
+
+        //2. Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // 4. Execute the query (no params to bind)
+        $statement->execute();
+
+        //5. Process the results
+        return $statement->fetch();
+    }
 
     /**
      * returns all Globo Gym members from database
