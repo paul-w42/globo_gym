@@ -261,12 +261,12 @@ class Controller
 
             // if successful update ...
             if ($GLOBALS['dataLayer']->changePassword($memberID, $oldPass, $newPass)) {
-                $output = json_encode(array("status" => "updated", "error" => NULL));
+                $output = json_encode(array("status" => "updated", "success" => true));
                 echo $output;
             }
             // unsuccessful update, return update error
             else {
-                $output = json_encode(array("status" => "error", "error" => "database update error"));
+                $output = json_encode(array("status" => "error", "error" => "database update error, please check current password"));
                 echo $output;
             }
 
@@ -276,7 +276,7 @@ class Controller
             // password validation error in ---> $f3->get("errors['password']");
             $dbError = $this->_f3->get('errors');
             $dbError = $dbError['password'];
-            $output = json_encode(array("status" => "invalid", "error" => "$dbError, password $newPass"));
+            $output = json_encode(array("status" => "invalid", "error" => "$dbError"));
             echo $output;
         }
 

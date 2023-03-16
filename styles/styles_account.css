@@ -108,6 +108,16 @@ img.full {
     letter-spacing: .1rem;
 }
 
+#ajaxSuccess {
+    color: limegreen;
+    display: none;
+}
+
+#ajaxError {
+    color: red;
+    display: none;
+}
+
 /* desktop responsive styles - account page */
 @media screen and (min-width: 600px) {
     /* remove horizontal line with desktop */

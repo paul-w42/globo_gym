@@ -73,6 +73,8 @@
                             <input class="mt-1 mb-2" type="password" name=“new_password_confirm” id=“new_password_confirm”><br>
                             <button id="submitPassword" class="account-buttons btn btn-primary mt-1" type="submit">Change</button>
                         </form>
+                        <span id="ajaxSuccess">Password successfully changed</span>
+                        <span id="ajaxError"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -143,6 +145,10 @@
 
     $("#passwordForm").on("submit", function(e) {
 
+        // clear out any prior set error/success messages
+        $("#ajaxSuccess").css("display", "none");
+        $("#ajaxError").css("display", "none");
+
         e.preventDefault(e);        // prevent page from re-loading
 
         let url = "https://paulwoods.greenriverdev.com/328/globo_gym/change_password";
@@ -159,6 +165,25 @@
 
         $.post(url, obj, function(result) {
             console.log("result: " + result);
+            const data = JSON.parse(result);
+
+            if (data["success"]) {
+                // display success message
+                $("#ajaxSuccess").css("display", "block");
+            } else {
+
+                // if error msg in result, present that, otherwise present default msg
+                let error = "Error changing password, please try again.  Minimum of 9 characters, and they must match."
+                if (data["error"]) {
+                    error = data["error"];
+                }
+
+                $("#ajaxError").text(error);
+
+                // display fail msg
+                $("#ajaxError").css("display", "block");
+            }
+
             console.log('results logged');
             //console.log(result);
             //console.log(result['city']);
