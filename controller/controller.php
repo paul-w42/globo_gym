@@ -216,40 +216,11 @@ class Controller
      */
     function changePassword() : void
     {
-        //global $f3;
-
-        // TESTING CODE - HARD-CODING VALUES, NOT USING SESSION
         $newPass = $_POST['new_password'];
         $newPassConfirm = $_POST['new_password_confirm'];
 
-
-        //echo $newPass;
-        //echo "PHP: changePassword() function:<br>";
-        //echo "NewPassword: $newPass";
-        //return;
-
         Validate::validPassword($newPass, $newPassConfirm);
-/*
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // TESTING
-            //$newPass = $_POST['new_password'];
-            //var_dump($_POST);
-            //echo "POST request";
-            $response = json_encode(array("status" => "success", "error" => "no error"));
-            echo $response;
-            //return "";
-            return;
-        }
-        else {
-            // TESTING
-            //$newPass = $_GET['new_password'];
-            var_dump($_GET);
-            //echo $newPass;
-            echo "GET request";
-            //return "";
-            return;
-        }
-*/
+
         // If passwords are valid, update inside database
         $dbError = $this->_f3->get('errors');
 
@@ -269,7 +240,6 @@ class Controller
                 $output = json_encode(array("status" => "error", "error" => "database update error, please check current password"));
                 echo $output;
             }
-
         }
         // if passwords are not valid, return error
         else {
@@ -279,10 +249,5 @@ class Controller
             $output = json_encode(array("status" => "invalid", "error" => "$dbError"));
             echo $output;
         }
-
-
-
-        //return "";      // For some reason required for a JSON response
     }
-
 }

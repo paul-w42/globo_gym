@@ -158,13 +158,8 @@
         let newPassConfirm = $("input[id=“new_password_confirm”]").val();
 
         const obj = {current_password: currentPass, new_password: newPass, new_password_confirm: newPassConfirm};
-        //const json = JSON.stringify(obj);
-
-        //console.log("obj: " + obj);
-        //console.log("json: " + json);
 
         $.post(url, obj, function(result) {
-            console.log("result: " + result);
             const data = JSON.parse(result);
 
             if (data["success"]) {
@@ -185,8 +180,6 @@
             }
 
             console.log('results logged');
-            //console.log(result);
-            //console.log(result['city']);
         });
     });
 
