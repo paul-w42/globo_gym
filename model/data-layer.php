@@ -271,7 +271,8 @@ class DataLayer
     function getAccountsCreatedYear($year)
     {
         //1. Define the query (not sure about like, using anyway to get pseudocode at least)
-        $sql = "select count(*) from members where join_date like ?/?/:year";
+        $sql = "select count(*) from members where join_date like :year-__-__";
+        // might have to put the date in quotes
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -283,7 +284,7 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
