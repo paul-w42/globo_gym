@@ -76,7 +76,7 @@ $f3->route('POST /change_password', function () {
 });
 
 $f3->route('GET /test', function () {
-    $GLOBALS['con']->visit(6);
+    $GLOBALS['dataLayer']->visit(6);
 });
 
 
