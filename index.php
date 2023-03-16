@@ -68,7 +68,7 @@ $f3->route('GET /admin_members', function ($f3) {
     $GLOBALS['con']->members();
 });
 
-$f3->route('GET|POST /change_password', function () {
+$f3->route('POST /change_password', function () {
     $GLOBALS['con']->changePassword();
 });
 
