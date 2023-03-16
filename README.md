@@ -1,15 +1,15 @@
 # Globo Gym
-### "Because we're better than you, and we know it"
+## "Because we're better than you, and we know it"
 
 This is the website for Globo Gym, a project for our SDEV328 class at Green River.  It contains a home page, a 
 memberships page, an about us page, pages for joining and logging into the website, and an admin page.  This project utilizes 
 the PHP Fat Free Framework and MySQL, Bootstrap for client side layout, and jQuery for some form handling on the account page..
 
-### Authors
+## Authors
 
 Jasmine David, Stewart Lovell, and Paul Woods
 
-### Project Requirements and Implementation
+## Project Requirements and Implementation
 
 1. Separates all database/business logic using the MVC pattern.
    1. Control / Routing is performed inside the /controller/control.php file
@@ -48,18 +48,18 @@ echoing data that is to be returned to the client. i.e. **`echo "{\"data\": \"va
     6. This function calls both necessary functions to validate
 the input fields and update the database.
 
-### 
+## 
 
-### Current UML Diagram
+## Current UML Diagram
 
 <img src="class-diagram-2.png" alt="uml diagram">
 UML Diagram
 
-### Most recent ER database diagram
+## Most recent ER database diagram
 
 *insert diagram here*
 
-### Admin Login & Password
+## Admin Login & Password
 
 There is currently no admin login/password required, the 
 page is viewable at <a href="https://paulwoods.greenriverdev.com/328/globo_gym/admin_dashboard"
