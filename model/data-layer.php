@@ -361,7 +361,7 @@ class DataLayer
     function visit($id)
     {
         //1. Define the query
-        $date = date('yyyy-mm-dd');
+        $date = date('Y-m-d');
         $sql = "select * from visits where member_id = :id AND visit_date = :date";
 
         //2. Prepare the statement
