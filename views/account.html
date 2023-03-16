@@ -141,18 +141,24 @@
 
     // with jquery
 
-    $("#submitPassword").on("click", function() {
+    $("#passwordForm").on("submit", function(e) {
+
+        e.preventDefault(e);        // prevent page from re-loading
 
         let url = "https://paulwoods.greenriverdev.com/328/globo_gym/change_password";
-        let currentPass = $("#current_password").val();
-        console.log(currentPass);
-        let newPass = $("#new_password").val();
-        let newPassConfirm = $("#new_password_confirm").val();
-        const obj = {current_password: currentPass, new_password: newPass, new_password_confirm: newPassConfirm};
-        const json = JSON.stringify(obj);
+        //let currentPass = $("#current_password").val();
+        let currentPass = $('input[id=“current_password”]').val();
+        let newPass = $("input[id=“new_password”]").val();
+        let newPassConfirm = $("input[id=“new_password_confirm”]").val();
 
-        $.post(url, json, function(result) {
-            console.log(result);
+        const obj = {current_password: currentPass, new_password: newPass, new_password_confirm: newPassConfirm};
+        //const json = JSON.stringify(obj);
+
+        //console.log("obj: " + obj);
+        //console.log("json: " + json);
+
+        $.post(url, obj, function(result) {
+            console.log("result: " + result);
             console.log('results logged');
             //console.log(result);
             //console.log(result['city']);

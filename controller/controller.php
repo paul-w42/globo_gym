@@ -222,9 +222,11 @@ class Controller
         $newPass = $_POST['new_password'];
         $newPassConfirm = $_POST['new_password_confirm'];
 
-        echo $newPass;
-        var_dump($_POST);
-        return;
+
+        //echo $newPass;
+        //echo "PHP: changePassword() function:<br>";
+        //echo "NewPassword: $newPass";
+        //return;
 
         Validate::validPassword($newPass, $newPassConfirm);
 /*
@@ -253,7 +255,8 @@ class Controller
 
         if (!isset($dbError)) {
         //if ($f3->get("errors['password']")) {
-            $memberID = 10;             // ID 10, username 'joe', current pwd 'password1'
+            //$memberID = 10;             // ID 10, username 'joe', current pwd 'password1'
+            $memberID = $_SESSION['member_info']->getMemberID();
             $oldPass = $_POST['current_password'];
 
             // if successful update ...
