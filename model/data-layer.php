@@ -361,7 +361,7 @@ class DataLayer
     function visit($id)
     {
         //1. Define the query
-        $date = date('m/d/y');
+        $date = date('yyyy-mm-dd');
         $sql = "select * from visits where member_id = :id AND visit_date like :date";
 
         //2. Prepare the statement

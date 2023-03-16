@@ -75,6 +75,10 @@ $f3->route('POST /change_password', function () {
     $GLOBALS['con']->changePassword();
 });
 
+$f3->route('GET /test', function () {
+    $GLOBALS['con']->visit(6);
+});
+
 
 
 // Run Fat-Free
