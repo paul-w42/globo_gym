@@ -48,6 +48,7 @@ echoing data that is to be returned to the client. i.e. **`echo "{\"data\": \"va
     6. This function calls both necessary functions to validate
 the input fields and update the database.
 
+### 
 
 ### Current UML Diagram
 
@@ -59,5 +60,5 @@ the input fields and update the database.
 
 ### Admin Login & Password
 
-*insert admin login & Password if applicable*
-
+There is currently no admin login/password required, the 
+page is viewable at [admin page](https://paulwoods.greenriverdev.com/328/globo_gym/admin_dashboard)
