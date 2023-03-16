@@ -245,7 +245,7 @@ class DataLayer
     function getAccountsCreatedMonth($month)
     {
         //1. Define the query (does like even exist in sql? am I losing it?)
-        $sql = 'select count(*) from members where join_date like :month/?/23';
+        $sql = 'select count(*) from members where join_date like 2023-:month-__';
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -257,7 +257,7 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
