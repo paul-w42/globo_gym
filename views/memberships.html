@@ -1,11 +1,11 @@
 <!--
     Team: Step 3
     Authors: Paul Woods, Stewart Lovell, and Jasmine David
-    SDEV 328: Final Project v1
+    SDEV 328: Final Project
     File: memberships.html
 
-    Description: Globo Gym Website Memberships page that lists gym membership tiers and allows
-    guest to select which tier to sign up for - leads to sign up (join) page.
+    Description: Globo Gym Website Memberships page that lists gym membership tiers, fitness
+    classes offered at our gym, and allows guest to select which tier to sign up for - leads to sign up (join) page.
 -->
 
 
@@ -72,10 +72,41 @@
     </div>
 
     <!-- JOIN NOW BUTTON -->
-    <div class="container text-center my-5">
+    <div class="container text-center mt-5">
         <button type="submit" class="col-12 my-button btn btn-primary btn-lg rounded-pill"><b>JOIN NOW</b></button>
     </div>
 </form>
+
+<!-- Fitness Classes offered at globo gym -->
+<div class="container text-center mx-auto mb-5">
+    <div class="col pb-3 mx-auto pb-md-0">
+        <hr class="w-75 mx-auto my-5">
+        <h4 class="mb-1 mb-md-4"><b>Classes Offered</b></h4>
+        <!-- images of classes -->
+        <div class="row mt-4 mb-3 mx-auto w-75 px-1 px-md-5 text-center">
+            <img class="img-fluid img-classes col-12 col-md-4 px-1 py-2 py-md-0 mx-auto" src="https://clubsolutionsmagazine.com/wp-content/uploads/2018/11/shutterstock_530500384.jpg" alt="kickboxing class">
+            <img class="img-fluid img-classes col-12 col-md-4 px-1 py-2 py-md-0 mx-auto" src="https://media.newyorker.com/photos/5e6c0822bc1cd90008923a42/master/w_2560%2Cc_limit/Lane-YogaStudioCOVID-19.jpg" alt="yoga class">
+            <img class="img-fluid img-classes col-12 col-md-4 px-1 py-2 py-md-0 mx-auto" src="https://www.phillymag.com/wp-content/uploads/sites/3/2018/07/indoor-cycling-istock-Bojan89-900x600.jpg" alt="cycling class">
+        </div>
+        <!-- list of classes -->
+        <div class="row mt-4 mb-3 mx-auto w-75 text-center">
+            <p class="col-4">Yoga</p>
+            <p class="col-4">Barre</p>
+            <p class="col-4">Cycling</p>
+        </div>
+        <div class="row my-3 mx-auto w-75 text-center">
+            <p class="col-4">Pilates</p>
+            <p class="col-4">Boxing</p>
+            <p class="col-4">Dance</p>
+        </div>
+        <div class="row my-3 mx-auto w-75 text-center">
+            <p class="col-4">Aerobics</p>
+            <p class="col-4">Strength</p>
+            <p class="col-4">Cardio</p>
+        </div>
+    </div>
+
+</div>
 
 <!-- footer -->
 <include href="views/footer.html"></include>
