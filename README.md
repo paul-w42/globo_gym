@@ -64,7 +64,8 @@ UML Diagram
 
 ## Most recent ER database diagram
 
-*insert diagram here*
+<img src="er_diagram_2.png" alt="uml diagram">
+UML Diagram
 
 ## Admin Login & Password
 
