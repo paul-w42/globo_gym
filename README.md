@@ -18,22 +18,32 @@ the PHP Fat Free Framework and MySQL, Bootstrap for client side layout, and jQue
    * Data Validation is done inside the /model/validate.php file
    * Database Access is done through the /model/data-layer file
    * View pages (.html f3 templates) are inside the /views folder
+   
 :heavy_check_mark: 2. Routes all URLs and leverages a templating language using the Fat-Free framework.
+
 :heavy_check_mark: 3. Has a clearly defined database layer using PDO and prepared statements.
    * The data-layer.php file uses PDO and prepared statements for all database access
+
 :heavy_check_mark: 4. Data can be added and viewed.
    * database access (reads/writes/updates) are performed on account creation, login, password changes, and account level updates.
+
 :heavy_check_mark: 5. Has a history of commits from both team members to a Git repository. Commits are clearly commented.
    * done.
+
 :heavy_check_mark: 6. Uses OOP, and utilizes multiple classes, including at least one inheritance relationship.
    * Classes include the User base class, and Admin and Member are subclasses of that
+
 :heavy_check_mark: 7. Contains full Docblocks for all PHP files and follows PEAR standards.
    * All (we believe) PHP code is commented, and we attempted to follow PEAR
+
 :heavy_check_mark: 8. Has full validation on the client side through JavaScript and server side through PHP.
    * Server side validation is complete
    * Client/js side validation is less so ... 
+
 :heavy_check_mark: 9. All code is clean, clear, and well-commented. DRY (Don't Repeat Yourself) is practiced.
+
 :heavy_check_mark: 10. Your submission shows adequate effort for a final project in a full-stack web development course.
+
 :heavy_check_mark: 11. BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
     * We used AJAX to allow for the user to udpate their password from the account page. 
     * It takes in three inputs, current-password, new-password, and verify-new-password.  
