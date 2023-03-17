@@ -13,15 +13,15 @@ the PHP Fat Free Framework and MySQL, Bootstrap for client side layout, and jQue
 
 ## Project Requirements and Implementation
 
-:heavy_check_mark:1. Separates all database/business logic using the MVC pattern.
+:heavy_check_mark: 1. Separates all database/business logic using the MVC pattern.
    1. Control / Routing is performed inside the /controller/control.php file
    2. Data Validation is done inside the /model/validate.php file
    3. Database Access is done through the /model/data-layer file
    4. View pages (.html f3 templates) are inside the /views folder
-:heavy_check_mark:2. Routes all URLs and leverages a templating language using the Fat-Free framework.
-:heavy_check_mark:3. Has a clearly defined database layer using PDO and prepared statements.
+:heavy_check_mark: 2. Routes all URLs and leverages a templating language using the Fat-Free framework.
+:heavy_check_mark: 3. Has a clearly defined database layer using PDO and prepared statements.
   1. The data-layer.php file uses PDO and prepared statements for all database access
-:heavy_check_mark:4. Data can be added and viewed.
+:heavy_check_mark: 4. Data can be added and viewed.
    1. database access (reads/writes/updates) are performed on account creation, login, password 
 changes, and account level updates.
 5. Has a history of commits from both team members to a Git repository. Commits are clearly commented.
