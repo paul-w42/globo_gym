@@ -85,7 +85,7 @@ also prevent user from selecting date in the future)?
     <!-- Phone field -->
     <div class="col-12 col-md-6 mx-auto">
         <div class="form-floating my-md-0">
-            <input type="text" class="form-control" name="phone" id="phone"
+            <input type="text" class="form-control" name="phone" id="phone" onkeydown="formatPhoneNumber1()"
             <check if="{{ isset(@SESSION['phone']) }}">
                 value="{{ @SESSION['phone'] }}"
             </check>>
@@ -150,6 +150,8 @@ also prevent user from selecting date in the future)?
 
 <!-- footer -->
 <include href="views/footer.html"></include>
+<!-- script -->
+<script src="scripts/script.js"></script>
 
 </body>
 </html>
