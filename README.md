@@ -1,5 +1,4 @@
 # Globo Gym
-## "Because we're better than you, and we know it"
 
 This is the website for Globo Gym, a project for our SDEV328 class at Green River.  It contains a home page, a 
 memberships page, an about us page, pages for joining and logging into the website, and an admin page.  This project utilizes 
