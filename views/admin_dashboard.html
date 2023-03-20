@@ -85,6 +85,7 @@
 <script src="scripts/script.js"></script>
 <h1>testtestestestestestestestes</h1>
 <script>
+    <exclude>
 
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
     var totalMembersData = google.visualization.arrayToDataTable([
@@ -110,6 +111,7 @@
         ['Current Month', 'Members'],
         [month,{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(month) }}]
     ]);
+    </exclude>
 </script>
 
 </body>
