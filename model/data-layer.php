@@ -244,7 +244,7 @@ class DataLayer
     function getAccountsCreatedMonth($month)
     {
         //1. Define the query (does like even exist in sql? am I losing it?)
-        $sql = 'select count(*) from members where join_date like :month/?/23';
+        $sql = 'select count(*) as count from members where join_date like :month/?/23';
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -269,7 +269,7 @@ class DataLayer
     function getAccountsCreatedYear($year)
     {
         //1. Define the query (not sure about like, using anyway to get pseudocode at least)
-        $sql = "select count(*) from members where join_date like ?/?/:year";
+        $sql = "select count(*) as count from members where join_date like ?/?/:year";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
