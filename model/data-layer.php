@@ -253,10 +253,9 @@ class DataLayer
         $statement->bindParam(':month', $month);
 
         //4. Execute the query
-        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-        //5. Process the results
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result['count'];
     }
 
     /**
@@ -281,8 +280,9 @@ class DataLayer
         //4. Execute the query
         $statement->execute();
 
-        //5. Process the results
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
     }
 
     /**
