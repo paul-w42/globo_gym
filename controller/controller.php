@@ -40,7 +40,7 @@ class Controller
         if (!isset($_SESSION['member_info'])) {
             $this->_f3->reroute('login');
         }
-
+3
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (isset($_POST['membership_level'])) {
                 $account = new Member($_POST['membership_level']);

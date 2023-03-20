@@ -73,7 +73,6 @@ class DataLayer
         $stmt->bindParam(':membershipLevel', $membershipLevel);
 
         $stmt->execute();
-
     }
 
     /**
@@ -245,7 +244,7 @@ class DataLayer
     function getAccountsCreatedMonth($month)
     {
         //1. Define the query (does like even exist in sql? am I losing it?)
-        $sql = 'select count(*) from members where join_date like 2023-:month-__';
+        $sql = 'select count(*) from members where join_date like :month/?/23';
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -257,7 +256,7 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -271,8 +270,7 @@ class DataLayer
     function getAccountsCreatedYear($year)
     {
         //1. Define the query (not sure about like, using anyway to get pseudocode at least)
-        $sql = "select count(*) from members where join_date like :year-__-__";
-        // might have to put the date in quotes
+        $sql = "select count(*) from members where join_date like ?/?/:year";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -284,7 +282,7 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -361,15 +359,14 @@ class DataLayer
     function visit($id)
     {
         //1. Define the query
-        $date = date('Y-m-d');
-        $sql = "select * from visits where member_id = :id AND visit_date = :date";
+        $date = date('m/d/y');
+        $sql = "select * from visits where member_id = :id AND visit_date like :date";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
         //3. Bind the parameters
         $statement->bindParam(':date', $date);
-        $statement->bindParam(':id', $id);
 
         //4. Execute the statement
         $statement->execute();
@@ -387,6 +384,8 @@ class DataLayer
 
             //2. Prepare the statement
             $statement=$this->_dbh->prepare($sql);
+
+            $date = date('m/d/y h:i:s a', time());
             //3. Bind the parameters
             $statement->bindParam(':id', $id);
             $statement->bindParam(':date', $date);
