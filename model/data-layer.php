@@ -417,7 +417,9 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
-        return $statement->fetch();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
     }
 
     function getTotalVisits()
@@ -431,7 +433,9 @@ class DataLayer
         //4. Execute the query
         $statement->execute();
 
-        return $statement->fetch();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
     }
 
     /**
