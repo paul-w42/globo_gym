@@ -39,13 +39,7 @@ function drawMemberChart(chartType) {
         containerId: 'globogym_chart'
     });
 
-    // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-    var data = google.visualization.arrayToDataTable([
-        ['Month', 'Members'],
-        ['Mar',7],['Apr',8],['May',8],['Jun',9],['Jul',9],
-        ['Aug',9],['Sept',10],['Oct',11],
-        ['Nov',14],['Dec',14],['Jan',9],['Feb',10]
-    ]);
+
 
     // chart title/headers and styling
     var options = {
