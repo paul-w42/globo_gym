@@ -438,11 +438,25 @@ class DataLayer
         return $result['count'];
     }
 
+    function getTotalMembers()
+    {
+        $sql = "select count(*) as count from members";
+
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+
     /**
      * returns all Globo Gym members from database
      * @return array
      */
-    function getMembers () {
+    function getMembers ()
+    {
         //1. Define the query
         $sql = "SELECT * FROM members ORDER BY member_id ASC";
 
