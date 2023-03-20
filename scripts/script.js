@@ -39,7 +39,22 @@ function drawMemberChart(chartType) {
         containerId: 'globogym_chart'
     });
 
-
+// chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
+    var data = google.visualization.arrayToDataTable([
+        ['Month', 'Members'],
+        ['Mar',{{ $GLOBALS['dataLayer']->getMembersMonth(3) }}],
+        ['Apr',{{ $GLOBALS['dataLayer']->getMembersMonth(4) }}],
+        ['May',{{ $GLOBALS['dataLayer']->getMembersMonth(5) }}],
+        ['Jun',{{ $GLOBALS['dataLayer']->getMembersMonth(6) }}],
+        ['Jul',{{ $GLOBALS['dataLayer']->getMembersMonth(7) }}],
+        ['Aug',{{ $GLOBALS['dataLayer']->getMembersMonth(8) }}],
+        ['Sept',{{ $GLOBALS['dataLayer']->getMembersMonth(9) }}],
+        ['Oct',{{ $GLOBALS['dataLayer']->getMembersMonth(10) }}],
+        ['Nov',{{ $GLOBALS['dataLayer']->getMembersMonth(11) }}],
+        ['Dec',{{ $GLOBALS['dataLayer']->getMembersMonth(12) }}],
+        ['Jan',{{ $GLOBALS['dataLayer']->getMembersMonth(1) }}],
+        ['Feb',{{ $GLOBALS['dataLayer']->getMembersMonth(2) }}]
+]);
 
     // chart title/headers and styling
     var options = {
@@ -92,13 +107,22 @@ function drawNewMemberChart(chartType) {
         containerId: 'globogym_chart'
     });
 
-    // chart data -- TODO: need to add database monthly NEW MEMBERS data here (put database data in the number, not the month)
+    // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
     var data = google.visualization.arrayToDataTable([
-        ['Month', 'New Members'],
-        ['Mar',7],['Apr',8],['May',8],['Jun',9],['Jul',9],
-        ['Aug',9],['Sept',10],['Oct',11],
-        ['Nov',14],['Dec',14],['Jan',9],['Feb',10]
-    ]);
+        ['Month', 'Members'],
+        ['Mar',{{ $GLOBALS['dataLayer']->getMembersMonth(3) }}],
+        ['Apr',{{ $GLOBALS['dataLayer']->getMembersMonth(4) }}],
+        ['May',{{ $GLOBALS['dataLayer']->getMembersMonth(5) }}],
+        ['Jun',{{ $GLOBALS['dataLayer']->getMembersMonth(6) }}],
+        ['Jul',{{ $GLOBALS['dataLayer']->getMembersMonth(7) }}],
+        ['Aug',{{ $GLOBALS['dataLayer']->getMembersMonth(8) }}],
+        ['Sept',{{ $GLOBALS['dataLayer']->getMembersMonth(9) }}],
+        ['Oct',{{ $GLOBALS['dataLayer']->getMembersMonth(10) }}],
+        ['Nov',{{ $GLOBALS['dataLayer']->getMembersMonth(11) }}],
+        ['Dec',{{ $GLOBALS['dataLayer']->getMembersMonth(12) }}],
+        ['Jan',{{ $GLOBALS['dataLayer']->getMembersMonth(1) }}],
+        ['Feb',{{ $GLOBALS['dataLayer']->getMembersMonth(2) }}]
+]);
 
     // chart title/headers and styling
     var options = {
