@@ -106,7 +106,7 @@
 
     var newMembersMonth = google.visualization.arrayToDataTable([
         ['Current Month', 'Members'],
-        ['month',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(month) }}]
+        [month,{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(month) }}]
     ]);
 </script>
 
