@@ -255,6 +255,8 @@ class DataLayer
         //4. Execute the query
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
+        $statement->debugDumpParams();
+
         return $result['count'];
     }
 
