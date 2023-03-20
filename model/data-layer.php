@@ -321,7 +321,7 @@ class DataLayer
                 }
             }
         }
-        return $revenue;
+        return numfmt_format_currency('en_US', $revenue, '$');
     }
 
     /**
