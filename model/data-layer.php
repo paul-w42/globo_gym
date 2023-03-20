@@ -408,7 +408,7 @@ class DataLayer
     function getVisits($id)
     {
         //1. Define the query
-        $sql = "select count(*) from visits where member_id = $id";
+        $sql = "select count(*) as count from visits where member_id = $id";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
@@ -425,7 +425,7 @@ class DataLayer
     function getTotalVisits()
     {
         //1. Define the query
-        $sql = "select count(*) from visits";
+        $sql = "select count(*) as count from visits";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
