@@ -40,21 +40,7 @@ function drawMemberChart(chartType) {
     });
 
 // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-    var data = google.visualization.arrayToDataTable([
-        ['Month', 'Members'],
-        ['Mar',{{ $GLOBALS['dataLayer']->getMembersMonth(3) }}],
-        ['Apr',{{ $GLOBALS['dataLayer']->getMembersMonth(4) }}],
-        ['May',{{ $GLOBALS['dataLayer']->getMembersMonth(5) }}],
-        ['Jun',{{ $GLOBALS['dataLayer']->getMembersMonth(6) }}],
-        ['Jul',{{ $GLOBALS['dataLayer']->getMembersMonth(7) }}],
-        ['Aug',{{ $GLOBALS['dataLayer']->getMembersMonth(8) }}],
-        ['Sept',{{ $GLOBALS['dataLayer']->getMembersMonth(9) }}],
-        ['Oct',{{ $GLOBALS['dataLayer']->getMembersMonth(10) }}],
-        ['Nov',{{ $GLOBALS['dataLayer']->getMembersMonth(11) }}],
-        ['Dec',{{ $GLOBALS['dataLayer']->getMembersMonth(12) }}],
-        ['Jan',{{ $GLOBALS['dataLayer']->getMembersMonth(1) }}],
-        ['Feb',{{ $GLOBALS['dataLayer']->getMembersMonth(2) }}]
-]);
+    var data = newMembersMonth
 
     // chart title/headers and styling
     var options = {

@@ -100,6 +100,14 @@
         ['Jan',{{ $GLOBALS['dataLayer']->getMembersMonth(1) }}],
         ['Feb',{{ $GLOBALS['dataLayer']->getMembersMonth(2) }}]
     ]);
+
+    var date = new Date();
+    let month = date.getMonth()+1;
+
+    var newMembersMonth = google.visualization.arrayToDataTable([
+        ['Current Month', 'Members'],
+        ['month',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(month) }}],
+    ]);
 </script>
 
 </body>
