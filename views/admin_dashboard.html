@@ -61,7 +61,7 @@
             <div class="row mt-3">
                 <div class="col-12 text-center p-3 rounded-2 shadow border-secondary">
                     <!-- google chart script -->
-                    <script src="https://www.gstatic.com/charts/loader.js"></script>
+                    <exclude><script src="https://www.gstatic.com/charts/loader.js"></script></exclude>
                     <div class="col-12 my-3">
                         <!-- admin dashboard chart buttons - toggles through diff charts-->
                         <input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b1' value='Members' />
@@ -82,54 +82,46 @@
 <!-- footer -->
 <include href="views/footer.html"></include>
 <!-- script -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="scripts/script.js"></script>
 <exclude><h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1></exclude>
 <script>
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
+    <exclude>
     let newMembersYear = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
-        ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
-        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
-        ['May',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
-        ['Jun',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
-        ['Jul',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
-        ['Aug',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
-        ['Sept',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
-        ['Oct',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
-        ['Nov',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
-        ['Dec',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
-        ['Jan',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-        ['Feb',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
+        ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+        ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
+        ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
+        ['Jul', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
+        ['Aug', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
+        ['Sept', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
+        ['Oct', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
+        ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
+        ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
+        ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
     ]);
-
-
-    //var date = new Date();
-    //let month = date.getMonth()+1;
 
     let newMembersMonth = google.visualization.arrayToDataTable([
         ['Current Month', 'Members'],
-        ['Jan',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-        ['Feb',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
-        ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
-        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
-        ['May',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
-        ['Jun',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
-        ['Jul',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
-        ['Aug',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
-        ['Sept',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
-        ['Oct',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
-        ['Nov',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
-        ['Dec',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}]
+        ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
+        ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+        ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
+        ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
+        ['Jul', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
+        ['Aug', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
+        ['Sept', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
+        ['Oct', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
+        ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
+        ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}]
     ]);
 
 
-
-
-
-
-
-
-
+    </exclude>
     /* Admin Dashboard Script */
     google.charts.load('current', {
         packages: ['corechart']
@@ -138,7 +130,6 @@
         var visitButton = document.getElementById('b2');
         var revenueButton = document.getElementById('b3');
         var newMemberButton = document.getElementById('b4');
-
 
 
         // switch to total members chart when clicked
@@ -171,8 +162,23 @@
             containerId: 'globogym_chart'
         });
 
-// chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-        var data = newMembersMonth;
+        // chart data
+        //var data = newMembersMonth;
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Members'],
+            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
+            ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+            ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
+            ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
+            ['Jul', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
+            ['Aug', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
+            ['Sept', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
+            ['Oct', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
+            ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
+            ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
+            ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+        ]);
 
         // chart title/headers and styling
         var options = {
@@ -226,7 +232,22 @@
         });
 
         // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-        var data = newMembersYear;
+        //var data = newMembersYear;
+        var data = google.visualization.arrayToDataTable([
+            ['Month', 'Members'],
+            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
+            ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+            ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
+            ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
+            ['Jul', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
+            ['Aug', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
+            ['Sept', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
+            ['Oct', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
+            ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
+            ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
+            ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+        ]);
 
         // chart title/headers and styling
         var options = {
