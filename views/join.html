@@ -68,7 +68,7 @@ also prevent user from selecting date in the future)?
 </div>
 <div class="row my-3">
     <!-- Email field -->
-    <div class="col-12 col-md-12 mx-auto">
+    <div class="col-12 col-md-6 mx-auto">
         <div class="form-floating">
             <input type="email" class="form-control" name="email" id="email"
             <check if="{{ isset(@SESSION['email']) }}">
@@ -80,11 +80,9 @@ also prevent user from selecting date in the future)?
             <label class="control-label" for="last">Email</label>
         </div>
     </div>
-</div>
-<div class="row my-3">
     <!-- Phone field -->
     <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating my-md-0">
+        <div class="form-floating mt-3 my-md-0">
             <input type="text" class="form-control" name="phone" id="phone" onkeydown="formatPhoneNumber1()"
             <check if="{{ isset(@SESSION['phone']) }}">
                 value="{{ @SESSION['phone'] }}"
@@ -93,17 +91,6 @@ also prevent user from selecting date in the future)?
                 <span class="danger">{{ @errors['phone'] }}</span>
             </check>
             <label class="control-label" for="last">Phone</label>
-        </div>
-    </div>
-    <!-- Birthdate field -->
-    <!-- TODO: NEED TO ADD BIRTHDATE INTO THE DATABASE AND ALSO MAYBE VALIDATION (ie: member needs to be 18+ and prevent user from selecting date in future)? -->
-    <div class="col-12 col-md-6 mx-auto">
-        <div class="form-floating mt-3 my-md-0">
-            <input type="date" class="form-control" name="bday" id="bday"
-            <check if="{{ isset(@SESSION['bday']) }}">
-                value="{{ @SESSION['bday'] }}"
-            </check>>
-            <label class="control-label" for="last">Birth Date</label>
         </div>
     </div>
 </div>
