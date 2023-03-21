@@ -83,14 +83,13 @@
 <include href="views/footer.html"></include>
 <!-- script -->
 <script src="scripts/script.js"></script>
-<h1>hello</h1>
+<h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1>
 <script>
-<exclude>
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
     var totalMembersData = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
         ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
-        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],;
         ['May',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
         ['Jun',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
         ['Jul',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
@@ -103,6 +102,7 @@
         ['Feb',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
     ]);
 
+<exclude>
     var date = new Date();
     let month = date.getMonth()+1;
 
