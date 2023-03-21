@@ -23,6 +23,11 @@ function formatPhoneNumber2(value) {
     // set phone number length
     let phoneNumberLength = phoneNumber.length;
 
+    // if 11 chars long and begins w/ US Country Code '1', remove
+    if (phoneNumberLength == 11 && phoneNumber.slice(0,1) == "1") {
+        phoneNumber = phoneNumber.slice(1,11);  // remove 1st '1'
+    }
+
     // return the value with no formatting if its less than four digits
     if (phoneNumberLength < 4) return phoneNumber;
 
@@ -36,5 +41,6 @@ function formatPhoneNumber2(value) {
     return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
         3,
         6
-    )}-${phoneNumber.slice(6, 9)}`;
+    )}-${phoneNumber.slice(6, 10)}`;        // changed 9 to 10, was truncating 10-digit numbers
+
 }
