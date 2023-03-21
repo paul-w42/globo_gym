@@ -86,7 +86,7 @@
 <exclude><h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1></exclude>
 <script>
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-    let totalMembersData = google.visualization.arrayToDataTable([
+    let newMembersYear = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
         ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
         ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],

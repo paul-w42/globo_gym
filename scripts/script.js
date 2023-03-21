@@ -94,7 +94,7 @@ function drawNewMemberChart(chartType) {
     });
 
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-    var data = totalMembersData;
+    var data = newMembersYear;
 
     // chart title/headers and styling
     var options = {
