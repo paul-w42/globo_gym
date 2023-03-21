@@ -41,12 +41,22 @@
             </h4>
         </div>
     </div>
+
     <!-- Check In Button -->
-    <div class="row">
-        <div class="col-12 col-md-4 mx-auto mt-2 text-center">
-            <button class="account-buttons btn btn-primary">Check-In</button>
-        </div>
-    </div>
+    <!-- if Admin account - remove check-in button-->
+    <check if="{{ method_exists(@SESSION['member_info'], 'getAdminID') }}"><exclude><!-- IS AN ADMIN --></exclude>
+        <true>
+        </true>
+        <!-- if Member account - display check-in button-->
+        <false>
+            <div class="row">
+                <div class="col-12 col-md-4 mx-auto mt-2 text-center">
+                    <button class="account-buttons btn btn-primary">Check-In</button>
+                </div>
+            </div>
+        </false>
+    </check>
+
 
     <div class="account container-fluid w-75 mt-5">
         <!-- Member Profile Info -->
