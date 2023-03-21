@@ -83,13 +83,13 @@
 <include href="views/footer.html"></include>
 <!-- script -->
 <script src="scripts/script.js"></script>
-<h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1>
+<exclude><h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1></exclude>
 <script>
     // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
-    var totalMembersData = google.visualization.arrayToDataTable([
+    let totalMembersData = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
         ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
-        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],;
+        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
         ['May',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
         ['Jun',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
         ['Jul',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
@@ -102,15 +102,26 @@
         ['Feb',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
     ]);
 
-<exclude>
-    var date = new Date();
-    let month = date.getMonth()+1;
 
-    var newMembersMonth = google.visualization.arrayToDataTable([
+    //var date = new Date();
+    //let month = date.getMonth()+1;
+
+    let newMembersMonth = google.visualization.arrayToDataTable([
         ['Current Month', 'Members'],
-        [month,{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(month) }}]
+        ['Jan',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+        ['Feb',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+        ['Mar',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
+        ['Apr',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
+        ['May',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
+        ['Jun',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
+        ['Jul',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(7) }}],
+        ['Aug',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(8) }}],
+        ['Sept',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
+        ['Oct',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
+        ['Nov',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
+        ['Dec',{{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}]
     ]);
-</exclude>
+    <exclude></exclude>
 </script>
 
 </body>
