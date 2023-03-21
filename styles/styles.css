@@ -153,6 +153,7 @@ img.full {
     .form {
         width: 50%;
     }
+
 }
 
 /* mobile responsive */
@@ -211,6 +212,11 @@ img.full {
 
     .form {
         width: 90%;
+    }
+
+    /* remove nav bar right border */
+    .navbar-nav > li.right-border {
+        border-right: none;
     }
 
 }
