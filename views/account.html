@@ -97,34 +97,48 @@
             <!-- Membership Details -->
             <div class="col-6 col-md-5 mx-auto">
                 <hr class="hr w-100">
-                <h4 class="profile-header mb-3 text-center">Account Details</h4>
-                <div class="row">
-                    <p class="change" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
-                    <!-- collapsible for CHANGE membership plan -->
-                    <div id="change_plan" class="collapse mb-3">
-                        <form name="membershipForm" id="membershipForm" action="#" method="post">
-                            <input type="radio" name="membership_level" id="bronze" value="1">
-                            <label for="bronze">Bronze</label><br>
-                            <input type="radio" name="membership_level" id="silver" value="2">
-                            <label for="silver">Silver</label><br>
-                            <input type="radio" name="membership_level" id="gold" value="3">
-                            <label for="gold">Gold</label><br>
-                            <button class="account-buttons btn btn-primary" type="submit">Change</button>
-                        </form>
-                    </div>
-                </div>
+                <check if="{{ method_exists(@SESSION['member_info'], 'getAdminID') }}"><exclude><!-- IS AN ADMIN --></exclude>
+                    <true>
+                        <h4 class="profile-header mb-3 text-center">Administrator Links</h4>
+                        <div class="row">
+                            <a class="change" href="admin_dashboard">Admin Dashboard Page</a><br>
+                        </div>
+                        <div class="row">
+                            <a class="change pt-2" href="admin_members">Admin Members Page</a><br>
+                        </div>
+                    </true>
+                    <false>
+                        <h4 class="profile-header mb-3 text-center">Account Details</h4>
+                        <div class="row">
+                            <p class="change" data-bs-toggle="collapse" data-bs-target="#change_plan"><u>Change Membership Plan</u></p>
+                            <!-- collapsible for CHANGE membership plan -->
+                            <div id="change_plan" class="collapse mb-3">
+                                <form name="membershipForm" id="membershipForm" action="#" method="post">
+                                    <input type="radio" name="membership_level" id="bronze" value="1">
+                                    <label for="bronze">Bronze</label><br>
+                                    <input type="radio" name="membership_level" id="silver" value="2">
+                                    <label for="silver">Silver</label><br>
+                                    <input type="radio" name="membership_level" id="gold" value="3">
+                                    <label for="gold">Gold</label><br>
+                                    <button class="account-buttons btn btn-primary" type="submit">Change</button>
+                                </form>
+                            </div>
+                        </div>
 
-                <check if="{{ (method_exists(@SESSION['member_info'], 'getMembershipLevel')) && (@SESSION['member_info']->getMembershipLevel() > 0) }} ">
-                    <div class="row">
-                        <p>Your payment is <check if="{{ @SESSION['member_info']->getMembershipPayPeriod() == 0 }} ">
-                            <true>${{ @SESSION['member_info']->getMembershipPriceMonth() }} per month</true>
-                            <false>${{ @SESSION['member_info']->getMembershipPriceYear() }} per year</false></check></p>
-                    </div>
-                    <div class="row">
-                        <!-- Member Balance -->
-                        <p>Your Balance is: <u>${{ @SESSION['member_info']->getBalance() }}</u></p>
-                    </div>
+                        <check if="{{ (method_exists(@SESSION['member_info'], 'getMembershipLevel')) && (@SESSION['member_info']->getMembershipLevel() > 0) }} ">
+                            <div class="row">
+                                <p>Your payment is <check if="{{ @SESSION['member_info']->getMembershipPayPeriod() == 0 }} ">
+                                    <true>${{ @SESSION['member_info']->getMembershipPriceMonth() }} per month</true>
+                                    <false>${{ @SESSION['member_info']->getMembershipPriceYear() }} per year</false></check></p>
+                            </div>
+                            <div class="row">
+                                <!-- Member Balance -->
+                                <p>Your Balance is: <u>${{ @SESSION['member_info']->getBalance() }}</u></p>
+                            </div>
+                        </check>
+                    </false>
                 </check>
+
             </div>
         </div>
     </div>

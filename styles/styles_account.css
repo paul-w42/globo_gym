@@ -101,6 +101,10 @@ img.full {
     text-decoration: underline;
 }
 
+.change:hover{
+    color: dimgrey;
+}
+
 /* Membership level and Join Date header font */
 .account-details {
     font-family: Courier New, monospace;
