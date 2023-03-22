@@ -259,4 +259,12 @@ class Controller
             echo $output;
         }
     }
+
+    function visit() : void
+    {
+        $memberID = $_SESSION['member_info']->getMemberID();
+        $GLOBALS['dataLayer']->visit($memberID);
+        $output = json_encode(array("status" => "updated", "success" => true));
+        echo $output;
+    }
 }

@@ -170,7 +170,7 @@ class DataLayer
                 $account = new User();
             }
 
-            echo 'setting user values now.<br>';
+            //echo 'setting user values now.<br>';
 
             $account->setMemberID($result['id']);
             $account->setFName($result['fname']);
@@ -182,7 +182,16 @@ class DataLayer
             $account->setUName($username);
             $account->setPassword($password);
 
-            echo 'finished setting user values.<br>';
+            //echo 'finished setting user values.<br>';
+
+            // Retrieve number of visits for this user
+            // Should be in original query
+            $sql = "select count(member_id) AS count from visits where member_id = ?";
+            $stmt = $this->_dbh->prepare($sql);
+            $stmt->bindValue(1, $account->getMemberID());
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $account->setVisits($result['count']);
 
             $_SESSION['member_info'] = $account;
 
@@ -381,25 +390,21 @@ class DataLayer
     function visit($id)
     {
         //1. Define the query
-        $date = date('m/d/y');
+        $date = date('Y-m-d');
         $sql = "select * from visits where member_id = :id AND visit_date like :date";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
 
         //3. Bind the parameters
+        $statement->bindParam(':id', $id);
         $statement->bindParam(':date', $date);
 
         //4. Execute the statement
         $statement->execute();
 
         //5. Process the results
-        $hasVisited = false;
-        if ($statement->rowCount() > 0) {
-            $hasVisited = true;
-        }
-
-        if (!$hasVisited) {
+        if ($statement->rowCount() == 0) {
             //1. Define the query
             $sql = "insert into visits (member_id, visit_date)
              values (:id, :date)";
@@ -407,7 +412,7 @@ class DataLayer
             //2. Prepare the statement
             $statement=$this->_dbh->prepare($sql);
 
-            $date = date('m/d/y h:i:s a', time());
+            //$date = date('Y-m-d h:i:s a', time());
             //3. Bind the parameters
             $statement->bindParam(':id', $id);
             $statement->bindParam(':date', $date);

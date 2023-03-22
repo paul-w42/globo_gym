@@ -17,6 +17,9 @@ class User
     private $_balance;
     private $_joinDate;
 
+    private $_visits;
+
+
     /**
      * Constructor for the User class
      * @param $_fName
@@ -200,4 +203,22 @@ class User
     {
         $this->_uName = $uName;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVisits()
+    {
+        return $this->_visits;
+    }
+
+    /**
+     * @param mixed $visits
+     */
+    public function setVisits($visits): void
+    {
+        $this->_visits = $visits;
+    }
+
+
 }
