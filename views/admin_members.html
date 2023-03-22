@@ -69,7 +69,11 @@
                             <td>{{ @member['first_name'] }} {{ @member['last_name'] }}</td>
                             <!-- Membership Status -->
                             <!-- TODO: @paul/stewart - all members are currently hardcoded as active... need to change this?-->
-                            <td>Active</td>
+                            <td><check if="{{ @member['membership_level'] > 0 }}">
+                                <true>Active</true>
+                                <false>Inactive</false>
+                            </check>
+                            </td>
                             <!-- Membership Level -->
                             <check if="{{ @member['membership_level']=='1' }}">
                                 <true>
