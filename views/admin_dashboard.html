@@ -90,7 +90,6 @@
     <exclude>
     let newMembersYear = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
-        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
         ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
         ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
         ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
@@ -101,14 +100,12 @@
         ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
         ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
         ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}]
     ]);
 
     let newMembersMonth = google.visualization.arrayToDataTable([
         ['Current Month', 'Members'],
-        ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
-        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
         ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
         ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
         ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
@@ -117,7 +114,10 @@
         ['Sept', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(9) }}],
         ['Oct', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(10) }}],
         ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
-        ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}]
+        ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
+        ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
+        ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+        ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}]
     ]);
 
 
@@ -166,7 +166,6 @@
         //var data = newMembersMonth;
         var data = google.visualization.arrayToDataTable([
             ['Month', 'Members'],
-            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
             ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
             ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
             ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
@@ -177,7 +176,8 @@
             ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
             ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
             ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}]
         ]);
 
         // chart title/headers and styling
@@ -235,7 +235,6 @@
         //var data = newMembersYear;
         var data = google.visualization.arrayToDataTable([
             ['Month', 'Members'],
-            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}],
             ['Apr', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(4) }}],
             ['May', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(5) }}],
             ['Jun', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(6) }}],
@@ -246,7 +245,8 @@
             ['Nov', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(11) }}],
             ['Dec', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(12) }}],
             ['Jan', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(1) }}],
-            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}]
+            ['Feb', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(2) }}],
+            ['Mar', {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}]
         ]);
 
         // chart title/headers and styling
