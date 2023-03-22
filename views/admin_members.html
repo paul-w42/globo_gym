@@ -57,7 +57,7 @@
                         <th scope="col">Join Date</th>
                         <th scope="col">Balance</th>
                         <th scope="col">Visits</th>
-                        <th scope="col">Action</th>
+                        <!--<th scope="col">Action</th> This is a feature we prototyped but did not complete -->
                     </tr>
                     </thead>
                     <tbody class="align-middle">
@@ -118,11 +118,13 @@
                                  (function that grabs {{ @member['member_id'] }} when add/suspend are clicked?)
                                  ^ will this work with each table row having the "same" add/suspend buttons?
                                  -->
-                            <!-- TODO: @paul/stewart - add/suspend members doesn't work bc we don't have functions for this -->
+
+                            <exclude><!-- This was prototyped but not completed -->
                             <td>
                                 <u><a href="#">Add</a></u> <br>
                                 <u><a href="#">Suspend</a></u>
                             </td>
+                            </exclude>
                         </tr>
                     </repeat>
                     </tbody>

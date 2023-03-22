@@ -480,7 +480,14 @@ class DataLayer
     function getMembers ()
     {
         //1. Define the query
-        $sql = "SELECT * FROM members ORDER BY member_id ASC";
+        //$sql = "SELECT * FROM members ORDER BY member_id ASC";
+        $sql = "SELECT members.member_id, members.first_name, members.last_name, " .
+            "members.user_name, members.join_date, members.email, members.phone, " .
+            "members.balance, members.membership_level, " .
+            "members.membership_pay_period, count(visits.member_id) AS visits " .
+            "FROM members LEFT JOIN visits ON members.member_id = " .
+            "visits.member_id GROUP BY members.member_id " .
+            "ORDER BY members.member_id ASC";
 
         //2. Prepare the statement
         $statement = $this->_dbh->prepare($sql);
