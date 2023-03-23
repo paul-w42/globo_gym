@@ -190,7 +190,7 @@
         //let currentPass = $("#current_password").val();
         let currentPass = $('input[id=“current_password”]').val();
         //let currentPass = $("#current_password").val();
-        //alert(currentPass);
+
         let newPass = $("input[id=“new_password”]").val();
         let newPassConfirm = $("input[id=“new_password_confirm”]").val();
 
@@ -229,7 +229,7 @@
         let url = "https://paulwoods.greenriverdev.com/328/globo_gym/visit";
 
         //const obj = {current_password: currentPass, new_password: newPass, new_password_confirm: newPassConfirm};
-        alert('going to POST');
+
         $.post(url, null, function(result) {
             const data = JSON.parse(result);
 
