@@ -46,12 +46,12 @@ the PHP Fat Free Framework and MySQL, Bootstrap for client side layout, and jQue
 :heavy_check_mark: 11. BONUS:  Incorporates Ajax that access data from a JSON file, PHP script, or API. If you implement Ajax, be sure to include how you did so in your readme file.
     
 1. Changing Password
-    * We used AJAX to allow for the user to udpate their password from the account page. 
+    * We used AJAX to allow for the user to update their password from the account page. 
     * It takes in three inputs, current-password, new-password, and verify-new-password.  
     * When the user clicks on the 'Update Password' button, the appropriate msg is displayed depending on the result sent back from the server.
     * jQuery is used on the client side to read/submit the data using a POST method to the specified server URL
     * (this took a while to figure out) Setup a POST route URL in the controller, and that specified function acts as any other.  It works by echoing data that is to be returned to the client. i.e. **`echo "{\"data\": \"value\"}`**
-    * This function calls both necessary functions to validatethe input fields and update the database.
+    * This function calls both necessary functions to validate the input fields and update the database.
 2. User Check-In
     * Ajax is used to update the database indicating a user visit when the check-in button is clicked
     * on user page load, visits is set in a javascript variable
