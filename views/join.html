@@ -11,14 +11,13 @@
 <include href="views/header.html" with="title='Join - Globo Gym', four='current'"></include>
 
 
-<!--- container for Join membership header and membership selection  --->
+<form action="#" method="post" class="form-horizontal">
+
+<!-- container for Join membership header and membership selection -->
 <div class="container-fluid mt-5">
     <div class="row text-center">
         <h1><b>Become A Member</b></h1>
     </div>
-    <form action="#" method="post" class="form-horizontal">
-
-
         <!-- Print user membership selection -->
         <check if="{{ isset(@SESSION['package']) }}">
             <div class="row mt-3">
@@ -29,7 +28,7 @@
         </check>
 </div> <!-- end container -->
 
-<!--- container for Join membership form  --->
+<!-- container for Join membership form  -->
 <div class="form w-md-50 container-fluid mx-auto mb-4">
     <div class="row my-3 <check if="{{ !isset(@SESSION['package']) }}"> mt-5</check>">
     <!-- First Name field -->
@@ -123,9 +122,8 @@
 <div class="container text-center my-5">
     <button type="submit" class="col-12 my-button btn btn-primary btn-lg rounded-pill"><b>JOIN NOW</b></button>
 </div>
-</form>
-
 </div>
+</form>
 
 
 <!-- footer -->

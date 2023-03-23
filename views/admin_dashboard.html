@@ -9,16 +9,6 @@
 
 <include href="views/header.html" with="title='Admin - Dashboard'"></include>
 
-<!---
-       NOTES:
-       * not sure what other stats to feature on Admin Dashboard Stats??? - stats are hardcoded in, need to change to actual
-         database stats later
-       * admin menu looks messed up on mobile because of fixed position - not sure how to fix this...
-       * the charts need actual data from the database - added a "to-do" in the places where we need to insert
-         the data for the charts
-       * script for the chart is currently inline (will put code in separate file when we're done testing)
---->
-
 <div class="container my-5 w-50">
     <!--- Admin Dashboard -->
     <div class="row">
@@ -86,7 +76,7 @@
 <script src="scripts/script.js"></script>
 <exclude><h1>hello {{ $GLOBALS['dataLayer']->getAccountsCreatedMonth(3) }}</h1></exclude>
 <script>
-    // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
+    // chart data
     <exclude>
     let newMembersYear = google.visualization.arrayToDataTable([
         ['Month', 'Members'],
@@ -232,7 +222,7 @@
             containerId: 'globogym_chart'
         });
 
-        // chart data -- TODO: need to add database monthly TOTAL MEMBERS data here (put database data in the number, not the month)
+        // chart data
         //var data = newMembersYear;
         var data = google.visualization.arrayToDataTable([
             ['Month', 'Members'],
@@ -424,8 +414,6 @@
     }
 
      */
-
-    <exclude></exclude>
 </script>
 
 </body>

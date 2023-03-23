@@ -31,14 +31,14 @@
 
 <div class="container mb-5 px-2 px-md-5">
     <div class="row mx-5">
-        <!-- Admin Menu - position-fixed, scrolls with page / looks messed up on mobile due to this? -->
+        <!-- Admin Menu -->
         <div class="col-12 col-md-2 mb-4 mx-auto">
             <div class="row position-md-fixed rounded-2 shadow p-4 text-center border border-light rounded-5">
                 <div class="menu h-100">
                     <h5>Menu</h5>
                     <hr class="my-2">
-                    <h6><a href="admin_dashboard" class="no_underline p-2">Dashboard</a></h6>
-                    <h6><a href="admin_members" class="active no_underline p-2">Members </a></h6>
+                    <h6><a href="admin_dashboard" class="no_underline p-2" target="_blank">Dashboard</a></h6>
+                    <h6><a href="admin_members" class="active no_underline p-2" target="_blank">Members </a></h6>
                 </div>
             </div>
         </div>
@@ -49,7 +49,6 @@
                 <table class="table table-secondary shadow table-bordered table-striped text-center">
                     <thead>
                     <tr>
-                        <!-- TODO: @jasmine - make members sortable -->
                         <th>ID #</th>
                         <th scope="col">Member Name</th>
                         <th scope="col">Status</th>
@@ -68,10 +67,9 @@
                             <!-- Member Name -->
                             <td>{{ @member['first_name'] }} {{ @member['last_name'] }}</td>
                             <!-- Membership Status -->
-                            <!-- TODO: @paul/stewart - all members are currently hardcoded as active... need to change this?-->
                             <td><check if="{{ @member['membership_level'] > 0 }}">
                                 <true>Active</true>
-                                <false>Inactive</false>
+                                <false><i>Inactive</i></false>
                             </check>
                             </td>
                             <!-- Membership Level -->
