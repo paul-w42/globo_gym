@@ -64,10 +64,10 @@
                     <exclude><script src="https://www.gstatic.com/charts/loader.js"></script></exclude>
                     <div class="col-12 my-3">
                         <!-- admin dashboard chart buttons - toggles through diff charts-->
-                        <input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b1' value='Members' />
+                        <exclude><input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b1' value='Members' /></exclude>
                         <input class="admin-buttons btn btn-primary my-1 my-md-0 mx-auto" type='button' id='b4' value='New Members' />
                         <input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b2' value='Visits' />
-                        <input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b3' value='Revenue' />
+                        <exclude><input class="admin-buttons btn btn-primary my-1 my-md-0" type='button' id='b3' value='Revenue' /></exclude>
                     </div>
                     <!-- admin dashboard chart -->
                     <div class="img-responsive mx-auto" id="globogym_chart"></div>
@@ -126,16 +126,16 @@
     google.charts.load('current', {
         packages: ['corechart']
     }).then(function() {
-        var memberButton = document.getElementById('b1');
+        //var memberButton = document.getElementById('b1');
         var visitButton = document.getElementById('b2');
-        var revenueButton = document.getElementById('b3');
+        //var revenueButton = document.getElementById('b3');
         var newMemberButton = document.getElementById('b4');
 
 
         // switch to total members chart when clicked
-        memberButton.onclick = function() {
-            drawMemberChart('LineChart');
-        }
+        // memberButton.onclick = function() {
+        //     drawMemberChart('LineChart');
+        // }
 
         // switch to total new members chart when clicked
         newMemberButton.onclick = function() {
@@ -148,15 +148,16 @@
         }
 
         // switch to total revenue chart when clicked
-        revenueButton.onclick = function() {
-            drawRevenueChart('LineChart');
-        }
+        // revenueButton.onclick = function() {
+        //     drawRevenueChart('LineChart');
+        // }
 
         // default/active chart
-        drawMemberChart('LineChart');
+        drawNewMemberChart('ColumnChart');
     });
 
     // code for member chart
+    /*
     function drawMemberChart(chartType) {
         var chart = new google.visualization.ChartWrapper({
             containerId: 'globogym_chart'
@@ -224,7 +225,7 @@
             chart.draw()
         }, false);
     }
-
+*/
     // code for new members chart
     function drawNewMemberChart(chartType) {
         var chart = new google.visualization.ChartWrapper({
@@ -300,12 +301,21 @@
             containerId: 'globogym_chart'
         });
 
-        // chart data -- TODO: need to add database monthly TOTAL VISITS data here (put database data in the number, not the month)
+        // chart data
         var data = google.visualization.arrayToDataTable([
             ['Month', 'Visits'],
-            ['Mar',7],['Apr',8],['May',8],['Jun',9],['Jul',9],
-            ['Aug',9],['Sept',10],['Oct',11],
-            ['Nov',14],['Dec',14],['Jan',9],['Feb',10]
+            ['Apr', {{ $GLOBALS['dataLayer']->getVisitsMonth(4) }}],
+            ['May', {{ $GLOBALS['dataLayer']->getVisitsMonth(5) }}],
+            ['Jun', {{ $GLOBALS['dataLayer']->getVisitsMonth(6) }}],
+            ['Jul', {{ $GLOBALS['dataLayer']->getVisitsMonth(7) }}],
+            ['Aug', {{ $GLOBALS['dataLayer']->getVisitsMonth(8) }}],
+            ['Sept', {{ $GLOBALS['dataLayer']->getVisitsMonth(9) }}],
+            ['Oct', {{ $GLOBALS['dataLayer']->getVisitsMonth(10) }}],
+            ['Nov', {{ $GLOBALS['dataLayer']->getVisitsMonth(11) }}],
+            ['Dec', {{ $GLOBALS['dataLayer']->getVisitsMonth(12) }}],
+            ['Jan', {{ $GLOBALS['dataLayer']->getVisitsMonth(1) }}],
+            ['Feb', {{ $GLOBALS['dataLayer']->getVisitsMonth(2) }}],
+            ['Mar', {{ $GLOBALS['dataLayer']->getVisitsMonth(3) }}]
         ]);
 
         // chart title/headers and styling
@@ -354,6 +364,7 @@
     }
 
     // code for revenue chart
+    /*
     function drawRevenueChart(chartType) {
         var chart = new google.visualization.ChartWrapper({
             containerId: 'globogym_chart'
@@ -411,6 +422,8 @@
             chart.draw()
         }, false);
     }
+
+     */
 
     <exclude></exclude>
 </script>

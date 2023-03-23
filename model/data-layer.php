@@ -253,13 +253,21 @@ class DataLayer
     function getAccountsCreatedMonth($month)
     {
 
+        $currentMonth = date('m');  // i.e. 03 for March
+        $currentYear = date('Y');   // i.e. 2023
+        $year = $currentYear;
+
+        if ($month > $currentMonth) {
+            $year = $currentYear - 1;
+        }
+
         $month = strval($month);
         if (strlen($month) < 2) {
             $month = "0$month";
         }
 
         //1. Define the query (does like even exist in sql? am I losing it?)
-        $month = "2023-$month-%";
+        $month = "$year-$month-%";
         $sql = 'select count(*) as count from members where join_date like ?';
         //$sql = 'select ? AS count';
 
@@ -444,6 +452,32 @@ class DataLayer
         $statement->execute();
 
         //5. Process the results
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
+    }
+
+    function getVisitsMonth($month)
+    {
+
+        $currentMonth = date('m');  // i.e. 03 for March
+        $currentYear = date('Y');   // i.e. 2023
+        $year = $currentYear;
+
+        if ($month > $currentMonth) {
+            $year = $currentYear - 1;
+        }
+
+        $month = strval($month);
+        if (strlen($month) < 2) {
+            $month = "0$month";
+        }
+
+        $sql = "select count(visits_id) AS count from visits where visit_date LIKE '$year-$month-%'";
+        $statement = $this->_dbh->prepare($sql);
+
+        $statement->execute();
+
         $result = $statement->fetch(PDO::FETCH_ASSOC);
 
         return $result['count'];
