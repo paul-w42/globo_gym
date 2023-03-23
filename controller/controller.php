@@ -56,7 +56,8 @@ class Controller
     }
 
     /**
-     * Loads and processes data from the join page
+     * Loads and processes data from the join page.  Validates user data
+     * and also checks for existing username prior to creating account.
      * Calls data layer method to add user to database
      * @return void
      */

@@ -3,6 +3,14 @@
 class Validate
 {
 
+    /**
+     * Checks for a valid name, can be used for any field that checks
+     * for a minimum length of 3 chars.
+     * @param $name
+     * @param $fieldName
+     * @param $fullFieldName
+     * @return void
+     */
     static function validName($name, $fieldName, $fullFieldName) {
 
         global $f3;
@@ -17,6 +25,11 @@ class Validate
         //return true;
     }
 
+    /**
+     * Checks for a valid username.  Minimum size is 2 characters
+     * @param $name
+     * @return void
+     */
     static function validUsername($name) {
 
         global $f3;
@@ -31,7 +44,11 @@ class Validate
         //return true;
     }
 
-    // required field, validing as legal email address
+    /**
+     * Validates the entered email address
+     * @param $email
+     * @return void
+     */
     static function validEmail($email) {
 
         global $f3;
@@ -45,11 +62,21 @@ class Validate
         }
     }
 
+    /**
+     * Verifies that a valid package was selected/submitted.
+     * @param $package
+     * @return bool
+     */
     static function validPackage($package)
     {
         return (in_array($package, array("bronze", "silver", "gold")));
     }
 
+    /**
+     * Check for a valid phone number.  Validates north american numbers only.
+     * @param $phone
+     * @return void
+     */
     static function validPhone($phone)
     {
 
@@ -84,6 +111,14 @@ class Validate
     }
 
 
+    /**
+     * Checks that the entered passwords are valid, i.e. correct length,
+     * and that they both match each other.  Return appropriate errors
+     * if either test fails.
+     * @param $password
+     * @param $password2
+     * @return void
+     */
     static function validPassword($password, $password2) {
 
         global $f3;

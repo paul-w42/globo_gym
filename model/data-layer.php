@@ -207,6 +207,12 @@ class DataLayer
         return false;
     }
 
+    /**
+     * Check if a given username already exists inside the database.  If so,
+     * then return true, or false otherwise.
+     * @param $username
+     * @return bool
+     */
     function usernameExists($username) : bool {
         // Should be in original query
         $sql = "select count(user_name) AS count from members where user_name = ?";
