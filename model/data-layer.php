@@ -207,6 +207,16 @@ class DataLayer
         return false;
     }
 
+    function usernameExists($username) : bool {
+        // Should be in original query
+        $sql = "select count(user_name) AS count from members where user_name = ?";
+        $stmt = $this->_dbh->prepare($sql);
+        $stmt->bindValue(1, $username);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }
+
 
     /**
      * This function takes a member_id, current_password, and new_password,

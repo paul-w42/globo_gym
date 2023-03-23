@@ -64,6 +64,8 @@ class Controller
     {
         //echo 'PHP Version ' . phpversion() . '<br>';
 
+        global $f3;
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $fname = $_POST['first'];
@@ -81,6 +83,9 @@ class Controller
             Validate::validPhone($phone);
             Validate::validPassword($password, $password2);
 
+            if ($GLOBALS['dataLayer']->usernameExists($username)) {
+                $f3->set("errors['username']", "Entered username already exists");
+            }
 
             // TODO: Test for existing customer username / email
             // 1st test password, 'password1'
